@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<load>
+	<binocular>1</binocular>
+	<classified>0</classified>
+</load>
+<show>
+	<realtime>0</realtime>
+	<clustering>0</clustering>
+	<peekthrough>0</peekthrough>
+	<contours>0</contours>
+	<eyes>1</eyes>
+	<heatmap>1</heatmap>
+	<meanbinocular>1</meanbinocular>
+	<movie>1</movie>
+	<normalizedheatmap>1</normalizedheatmap>
+	<radialblur>0</radialblur>
+	<histogram>0</histogram>
+	<saccades>0</saccades>
+	<subjectnames>0</subjectnames>
+	<framerate>29.97</framerate>
+</show>
+<save>
+	<movie>0</movie>
+	<images>0</images>
+</save>
+<presentation>
+	<screenwidth>800</screenwidth>
+	<screenheight>600</screenheight>
+	<centermovie>1</centermovie>
+	<movieoffsetx>0</movieoffsetx>
+	<movieoffsety>0</movieoffsety>
+</presentation>
+<movie>
+	<framerate>29.97</framerate>
+	<file>/Users/pkmital/Research/abstract-scenes/video/abstract_2x2_norm.mov</file>
+</movie>
+<eyemovements>
+	<framerate>1000</framerate>
+	<sigma>50</sigma>
+	<path>/Users/pkmital/Research/abstract-scenes/event_data/abstract_2x2/audio</path>
+	<path>/Users/pkmital/Research/abstract-scenes/event_data/abstract_2x2/mute</path>
+</eyemovements>
