@@ -46,6 +46,7 @@ void testApp::update() {
     
     if (bShowFlow) {
         flow.update(moviePlayer.getPixelsRef());
+        flow.computeHistogramOfOrientedMotionGradients();
     }
 
     movieFrameNumber+=frameIncrement;
