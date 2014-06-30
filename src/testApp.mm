@@ -19,8 +19,12 @@ void testApp::setup() {
 //--------------------------------------------------------------
 void testApp::close() {
     saveUserSettings();
-    recorder.flushToFile();
-    recorder.releaseRecording();
+    
+    if(bSaveMovie)
+    {
+        recorder.flushToFile();
+        recorder.releaseRecording();
+    }
 }
 
 //--------------------------------------------------------------
@@ -39,6 +43,10 @@ void testApp::update() {
     
     moviePlayer.setFrame(movieFrameNumber);
     eyeMovements.setTime(movieFrameNumber / (float)movieFrameRate);
+    
+    if (bShowFlow) {
+        flow.update(moviePlayer.getPixelsRef());
+    }
 
     movieFrameNumber+=frameIncrement;
     
@@ -56,13 +64,25 @@ void testApp::draw()
     recorderFbo.begin();
     moviePlayer.draw(0, 0);
     ofEnableAlphaBlending();
+    
+    if (bShowFlow) {
+        ofSetColor(255,255,255,150);
+        flow.drawMagnitude(0, 0, moviePlayer.getWidth(), moviePlayer.getHeight());
+    }
+    
+    ofSetColor(255,255,255,255);
+    
     eyeMovements.draw(true);
     ofDisableAlphaBlending();
     recorderFbo.end();
     recorderFbo.draw(0, 0);
     
-    recorderFbo.readToPixels(readbackPixels);
-    recorder.addFrame(readbackPixels, movieFrameRate);
+    
+    if(bSaveMovie)
+    {
+        recorderFbo.readToPixels(readbackPixels);
+        recorder.addFrame(readbackPixels, movieFrameRate);
+    }
 }
 
 //--------------------------------------------------------------
@@ -112,8 +132,6 @@ void testApp::saveUserSettings()
     
 }
 
-
-
 //--------------------------------------------------------------
 void testApp::loadUserSettings()
 {
@@ -133,6 +151,7 @@ void testApp::loadUserSettings()
     ofxXmlSettings settings;
     settings.loadFile(xmlURL);
     
+    string saveMovieURL;
     
     settings.pushTag("show");
     {
@@ -144,6 +163,7 @@ void testApp::loadUserSettings()
         bShowHeatmap = settings.getValue("heatmap", true);
         bShowMeanBinocular = settings.getValue("meanbinocular", true);
         bShowMovie = settings.getValue("movie", true);
+        bShowFlow = settings.getValue("visualsaliency", false);
         bShowNormalized = settings.getValue("normalizedheatmap", true);
         bShowRadialBlur = settings.getValue("radialblur", false);
         bShowHistogram = settings.getValue("histogram", false);
@@ -165,7 +185,8 @@ void testApp::loadUserSettings()
     
     settings.pushTag("save");
     {
-        //bSaveMovie = settings.getValue("movie", true);
+        saveMovieURL = settings.getValue("location", "");
+        bSaveMovie = settings.getValue("movie", true);
         bSaveMovieImages = settings.getValue("images", false);
     }
     settings.popTag();
@@ -199,9 +220,20 @@ void testApp::loadUserSettings()
     }
     settings.popTag();
     
-    initializeRecording();
+    if(bShowFlow)
+        initializeVisualSaliency();
+    
+    if(bSaveMovie)
+        initializeRecording(saveMovieURL);
     
     
+}
+
+
+//--------------------------------------------------------------
+void testApp::initializeVisualSaliency()
+{
+    flow.allocate(moviePlayer.getWidth(), moviePlayer.getHeight());
 }
 
 //--------------------------------------------------------------
@@ -209,7 +241,7 @@ void testApp::initializeMovie(string movieURL)
 {
 	//////////////////////////////////////////////////////
     // load the movie file
-    if (!moviePlayer.loadMovie(movieURL, OF_QTKIT_DECODE_TEXTURE_ONLY)) {
+    if (!moviePlayer.loadMovie(movieURL, OF_QTKIT_DECODE_PIXELS_AND_TEXTURE)) {
         cout << "[ERROR]: Could not load movie: " << movieURL << endl;
         OF_EXIT_APP(0);
         return;
@@ -239,7 +271,7 @@ void testApp::initializeMovie(string movieURL)
 }
 
 //--------------------------------------------------------------
-void testApp::initializeRecording()
+void testApp::initializeRecording(string location)
 {
 	//////////////////////////////////////////////////////
     // set codec
@@ -257,28 +289,28 @@ void testApp::initializeRecording()
 		stringstream str;
 		// format the filename here
 		if(fileno == 1)
-            str << "output/" << movieName << "_output" << ".mov";
+            str << location << "/" << movieName << "_output" << ".mov";
         //str << "output/" << movieName << "/" << movieName << "_output" << ".mov";
 		else
-            str << "output/" << movieName << "_output" << "(" << (fileno-1) << ").mov";
+            str << location << "/" << movieName << "_output" << "(" << (fileno-1) << ").mov";
         //str << "output/" << movieName << "/" << movieName << "_output" << "(" << (fileno-1) << ").mov";
 		filename = str.str();
 		++fileno;
 		// attempt to open for read
-		in.open( ofToDataPath(filename).c_str() );
+		in.open( filename.c_str() );
 	} while( in.is_open() );
 	in.close();
 	// found a file that does not exists
     
 	//////////////////////////////////////////////////////
 	// now create the file so that we can start adding frames to it:
-	ofstream tmpptr( ofToDataPath(filename).c_str() );
+	ofstream tmpptr( filename.c_str() );
 	tmpptr.close();
     
 	//////////////////////////////////////////////////////
     // setup recorder
 	string out_movie_audio = "audio/" + movieName + ".wav";
-    recorder.setup(ofToDataPath(filename, true));
+    recorder.setup(filename);
     //recorder.addAudioTrack(ofToDataPath(out_movie_audio, true).c_str());
     //recorder.loadAudioTrack(ofToDataPath(out_movie_audio, true).c_str());
     //cout << "Adding audio track: " << ofToDataPath(out_movie_audio) << endl;

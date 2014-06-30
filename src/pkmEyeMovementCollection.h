@@ -488,9 +488,14 @@ public:
                                                                         subject->binocularMeanEye[currentFrame].y - offsetY),
                                                                 sigma,
                                                                 weight);
-                        ofCircle(subject->binocularMeanEye[currentFrame].x - offsetX,
-                                 subject->binocularMeanEye[currentFrame].y - offsetY,
-                                 4.0);
+                        
+                        // no idea why ofCircle stopped working, changed to a bitmapstring...
+//                        ofCircle(subject->binocularMeanEye[currentFrame].x - offsetX,
+//                                 subject->binocularMeanEye[currentFrame].y - offsetY, 0,
+//                                 4.0);
+                        ofDrawBitmapString("+",
+                                           subject->binocularMeanEye[currentFrame].x - offsetX,
+                                           subject->binocularMeanEye[currentFrame].y - offsetY);
                     }
                     else
                     {
@@ -499,18 +504,18 @@ public:
                                                                 sigma,
                                                                 weight);
                         
-                        ofCircle(subject->binocularLEye[currentFrame].x - offsetX,
-                                 subject->binocularLEye[currentFrame].y - offsetY,
-                                 4.0);
+                        ofDrawBitmapString("+",
+                                           subject->binocularLEye[currentFrame].x - offsetX,
+                                           subject->binocularLEye[currentFrame].y - offsetY);
                         
                         multipleHeatmaps[condition_i]->addPoint(ofVec2f(subject->binocularREye[currentFrame].x - offsetX,
                                                                         subject->binocularREye[currentFrame].y - offsetY),
                                                                 sigma,
                                                                 weight);
                         
-                        ofCircle(subject->binocularREye[currentFrame].x - offsetX,
-                                 subject->binocularREye[currentFrame].y - offsetY,
-                                 4.0);
+                        ofDrawBitmapString("+",
+                                           subject->binocularREye[currentFrame].x - offsetX,
+                                           subject->binocularREye[currentFrame].y - offsetY);
                     }
                 }
                 subject++;

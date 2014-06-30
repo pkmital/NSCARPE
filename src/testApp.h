@@ -6,7 +6,8 @@
 #include "ofxXmlSettings.h"
 #include "ofxQTKitRecorder.h"
 #include "pkmEyeMovementCollection.h"
-//#include "pkmHeatmap.h"
+#include "pkmOpticalFlow.h"
+
 
 //--------------------------------------------------------------
 class testApp : public ofxNSWindowApp {
@@ -25,8 +26,9 @@ public:
     //--------------------------------------------------------------
     
     //--------------------------------------------------------------
+    void initializeVisualSaliency();
     void initializeMovie(string movieURL);
-    void initializeRecording();
+    void initializeRecording(string saveURL);
     void initializeEyeTrackingData(vector<string> paths);
     //--------------------------------------------------------------
     
@@ -59,17 +61,24 @@ private:
     float                           movieFrameRate;
     int                             movieOffsetX, movieOffsetY;                 // offset of movie within monitor
     
+    
     //--------------------------------------------------------------
     // Recording 
     ofxQTKitRecorder                recorder;
     bool                            bDoneRecording;
     ofFbo                           recorderFbo;
     
+    
+    //--------------------------------------------------------------
+    // Optical Flow Map
+    pkmOpticalFlow                  flow;
+    
+    
     //--------------------------------------------------------------
     // Eye-Data
     pkmEyeMovementCollection        eyeMovements;
     float                           eyeMovementFrameRate;
-//    pkmHeatmap                      heatmap;
+    
     
     //--------------------------------------------------------------
     // Screen 
@@ -83,6 +92,7 @@ private:
     unsigned char                   *readbackPixelsBuffer;
     int                             asyncReadingIndex, asyncCopyingIndex;
     
+    
     //--------------------------------------------------------------
     // Control variables
     bool                            bLoadBinocular, 
@@ -95,6 +105,8 @@ private:
                                     bShowHeatmap,
                                     bShowMeanBinocular,
                                     bShowMovie,
+                                    bShowFlow,
+                                    bSaveMovie,
                                     bSaveMovieImages,
                                     bShowNormalized,
                                     bShowRadialBlur,
