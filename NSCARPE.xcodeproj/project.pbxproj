@@ -3,10 +3,46 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		890866DC19619B7700462E97 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 890866DB19619B7700462E97 /* QTKit.framework */; };
+		890866DE19619B9200462E97 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 890866DD19619B9200462E97 /* Accelerate.framework */; };
+		890866DF19619DA900462E97 /* subtract.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29EA1771FDD000BDD593 /* subtract.frag */; };
+		890866E019619DA900462E97 /* subtract.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29EB1771FDD000BDD593 /* subtract.vert */; };
+		890866E119619DA900462E97 /* add.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29E61771FDB500BDD593 /* add.frag */; };
+		890866E219619DA900462E97 /* add.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29E71771FDB500BDD593 /* add.vert */; };
+		890866E319619DA900462E97 /* gaussianMixtureModel3D.frag in Resources */ = {isa = PBXBuildFile; fileRef = 897AADDD17773FF200CD8E10 /* gaussianMixtureModel3D.frag */; };
+		890866E419619DA900462E97 /* gaussianMixtureModel3D.vert in Resources */ = {isa = PBXBuildFile; fileRef = 897AADDE17773FF200CD8E10 /* gaussianMixtureModel3D.vert */; };
+		890866E519619DA900462E97 /* gaussianMixtureModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29A8176FC75900BDD593 /* gaussianMixtureModel.frag */; };
+		890866E619619DA900462E97 /* gaussianMixtureModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29A9176FC75900BDD593 /* gaussianMixtureModel.vert */; };
+		890866E719619DA900462E97 /* norm.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29CC1771272000BDD593 /* norm.frag */; };
+		890866E819619DA900462E97 /* norm.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29CD1771272000BDD593 /* norm.vert */; };
+		890866E919619DA900462E97 /* diffheatmap2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29D01771335700BDD593 /* diffheatmap2.frag */; };
+		890866EA19619DA900462E97 /* diffheatmap2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29D31771335700BDD593 /* diffheatmap2.vert */; };
+		890866EB19619DA900462E97 /* diffheatmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29D11771335700BDD593 /* diffheatmap.frag */; };
+		890866EC19619DA900462E97 /* diffheatmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29D21771335700BDD593 /* diffheatmap.vert */; };
+		890866ED19619DA900462E97 /* mix.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D4163AB0F700222F56 /* mix.frag */; };
+		890866EE19619DA900462E97 /* mix.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E4163AB0F700222F56 /* mix.vert */; };
+		890866EF19619DA900462E97 /* heatmap1.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D5163AB0F700222F56 /* heatmap1.frag */; };
+		890866F019619DA900462E97 /* heatmap2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D6163AB0F700222F56 /* heatmap2.frag */; };
+		890866F119619DA900462E97 /* jetmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D7163AB0F700222F56 /* jetmap.frag */; };
+		890866F219619DA900462E97 /* jetmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E2163AB0F700222F56 /* jetmap.vert */; };
+		890866F319619DA900462E97 /* cp.gaussian.2p.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D8163AB0F700222F56 /* cp.gaussian.2p.frag */; };
+		890866F419619DA900462E97 /* cp.gaussian.2p.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DC163AB0F700222F56 /* cp.gaussian.2p.vert */; };
+		890866F519619DA900462E97 /* hotmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D9163AB0F700222F56 /* hotmap.frag */; };
+		890866F619619DA900462E97 /* hotmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E1163AB0F700222F56 /* hotmap.vert */; };
+		890866F719619DA900462E97 /* coolmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DA163AB0F700222F56 /* coolmap.frag */; };
+		890866F819619DA900462E97 /* coolmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DD163AB0F700222F56 /* coolmap.vert */; };
+		890866F919619DA900462E97 /* doh.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DB163AB0F700222F56 /* doh.frag */; };
+		890866FA19619DA900462E97 /* doh.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E3163AB0F700222F56 /* doh.vert */; };
+		890866FB19619DA900462E97 /* heatmap1.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DF163AB0F700222F56 /* heatmap1.vert */; };
+		890866FC19619DA900462E97 /* heatmap2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E0163AB0F700222F56 /* heatmap2.vert */; };
+		890866FD19619DA900462E97 /* graymap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E6163AB0F700222F56 /* graymap.frag */; };
+		890866FE19619DA900462E97 /* graymap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DE163AB0F700222F56 /* graymap.vert */; };
+		890866FF19619DA900462E97 /* maxreduction.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E5163AB0F700222F56 /* maxreduction.frag */; };
+		8908670019619DA900462E97 /* maxreduction.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E7163AB0F700222F56 /* maxreduction.vert */; };
 		8928C60C16399D8D00222F56 /* ofxFileDialogOSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C60A16399D8D00222F56 /* ofxFileDialogOSX.cpp */; };
 		8928C6CA163A9ADC00222F56 /* pkmEyeMovementCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6C9163A9ADC00222F56 /* pkmEyeMovementCollection.cpp */; };
 		8928C6E8163AB0F700222F56 /* mix.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6D4163AB0F700222F56 /* mix.frag */; };
@@ -29,7 +65,6 @@
 		8928C6F9163AB0F700222F56 /* maxreduction.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E5163AB0F700222F56 /* maxreduction.frag */; };
 		8928C6FA163AB0F700222F56 /* graymap.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E6163AB0F700222F56 /* graymap.frag */; };
 		8928C6FB163AB0F700222F56 /* maxreduction.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E7163AB0F700222F56 /* maxreduction.vert */; };
-		8928C781163AB21500222F56 /* install.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6FD163AB21400222F56 /* install.xml */; };
 		8928C782163AB21500222F56 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8928C764163AB21500222F56 /* opencv.a */; };
 		8928C783163AB21500222F56 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C767163AB21500222F56 /* ofxCvColorImage.cpp */; };
 		8928C784163AB21500222F56 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C76A163AB21500222F56 /* ofxCvContourFinder.cpp */; };
@@ -42,14 +77,10 @@
 		8928C78B163AB21500222F56 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C77C163AB21500222F56 /* tinyxmlerror.cpp */; };
 		8928C78C163AB21500222F56 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C77D163AB21500222F56 /* tinyxmlparser.cpp */; };
 		8928C78D163AB21500222F56 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C77F163AB21500222F56 /* ofxXmlSettings.cpp */; };
-		892921BE1755CE8A00497C24 /* ofxQTKitAVScreenRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 892921AE1755CE8A00497C24 /* ofxQTKitAVScreenRecorder.mm */; };
 		892921BF1755CE8A00497C24 /* ofxQTKitRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 892921B11755CE8A00497C24 /* ofxQTKitRecorder.mm */; };
 		892921C01755CE8A00497C24 /* ofxQTKitVideoGrabber.mm in Sources */ = {isa = PBXBuildFile; fileRef = 892921B41755CE8A00497C24 /* ofxQTKitVideoGrabber.mm */; };
-		892921C31755CE8A00497C24 /* ofxQTKitVideoSaver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 892921BD1755CE8A00497C24 /* ofxQTKitVideoSaver.mm */; };
 		897AADDF17773FF200CD8E10 /* gaussianMixtureModel3D.frag in Sources */ = {isa = PBXBuildFile; fileRef = 897AADDD17773FF200CD8E10 /* gaussianMixtureModel3D.frag */; };
 		897AADE017773FF200CD8E10 /* gaussianMixtureModel3D.vert in Sources */ = {isa = PBXBuildFile; fileRef = 897AADDE17773FF200CD8E10 /* gaussianMixtureModel3D.vert */; };
-		899E1DB8163AB4C30088E6F4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899E1DB7163AB4C30088E6F4 /* QTKit.framework */; };
-		899E1DBA163AB4D40088E6F4 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899E1DB9163AB4D40088E6F4 /* Accelerate.framework */; };
 		899E1DC0163AC13E0088E6F4 /* ofxFbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 899E1DBE163AC13E0088E6F4 /* ofxFbo.cpp */; };
 		89AB8CCE1642E9830088E218 /* usersettings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89AB8CCD1642E9820088E218 /* usersettings.xml */; };
 		89DB29AA176FC75900BDD593 /* gaussianMixtureModel.frag in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29A8176FC75900BDD593 /* gaussianMixtureModel.frag */; };
@@ -123,6 +154,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		890866DB19619B7700462E97 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/QTKit.framework; sourceTree = DEVELOPER_DIR; };
+		890866DD19619B9200462E97 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		8928C60A16399D8D00222F56 /* ofxFileDialogOSX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFileDialogOSX.cpp; sourceTree = "<group>"; };
 		8928C60B16399D8D00222F56 /* ofxFileDialogOSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFileDialogOSX.h; sourceTree = "<group>"; };
 		8928C6C8163A9ACB00222F56 /* pkmEyeMovementCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkmEyeMovementCollection.h; sourceTree = "<group>"; };
@@ -255,18 +288,12 @@
 		8928C77D163AB21500222F56 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		8928C77F163AB21500222F56 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		8928C780163AB21500222F56 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
-		892921AD1755CE8A00497C24 /* ofxQTKitAVScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQTKitAVScreenRecorder.h; sourceTree = "<group>"; };
-		892921AE1755CE8A00497C24 /* ofxQTKitAVScreenRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxQTKitAVScreenRecorder.mm; sourceTree = "<group>"; };
 		892921B01755CE8A00497C24 /* ofxQTKitRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQTKitRecorder.h; sourceTree = "<group>"; };
 		892921B11755CE8A00497C24 /* ofxQTKitRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxQTKitRecorder.mm; sourceTree = "<group>"; };
 		892921B31755CE8A00497C24 /* ofxQTKitVideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQTKitVideoGrabber.h; sourceTree = "<group>"; };
 		892921B41755CE8A00497C24 /* ofxQTKitVideoGrabber.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxQTKitVideoGrabber.mm; sourceTree = "<group>"; };
-		892921BC1755CE8A00497C24 /* ofxQTKitVideoSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQTKitVideoSaver.h; sourceTree = "<group>"; };
-		892921BD1755CE8A00497C24 /* ofxQTKitVideoSaver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxQTKitVideoSaver.mm; sourceTree = "<group>"; };
 		897AADDD17773FF200CD8E10 /* gaussianMixtureModel3D.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel3D.frag; path = bin/data/gaussianMixtureModel3D.frag; sourceTree = "<group>"; };
 		897AADDE17773FF200CD8E10 /* gaussianMixtureModel3D.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel3D.vert; path = bin/data/gaussianMixtureModel3D.vert; sourceTree = "<group>"; };
-		899E1DB7163AB4C30088E6F4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
-		899E1DB9163AB4D40088E6F4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		899E1DBE163AC13E0088E6F4 /* ofxFbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFbo.cpp; sourceTree = "<group>"; };
 		899E1DBF163AC13E0088E6F4 /* ofxFbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFbo.h; sourceTree = "<group>"; };
 		89AB8CCD1642E9820088E218 /* usersettings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = usersettings.xml; path = bin/data/usersettings.xml; sourceTree = "<group>"; };
@@ -326,8 +353,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				899E1DBA163AB4D40088E6F4 /* Accelerate.framework in Frameworks */,
-				899E1DB8163AB4C30088E6F4 /* QTKit.framework in Frameworks */,
+				890866DE19619B9200462E97 /* Accelerate.framework in Frameworks */,
+				890866DC19619B7700462E97 /* QTKit.framework in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
 				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
@@ -700,15 +727,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		892921AC1755CE8A00497C24 /* ofxQTKitAVScreenRecorder */ = {
-			isa = PBXGroup;
-			children = (
-				892921AD1755CE8A00497C24 /* ofxQTKitAVScreenRecorder.h */,
-				892921AE1755CE8A00497C24 /* ofxQTKitAVScreenRecorder.mm */,
-			);
-			path = ofxQTKitAVScreenRecorder;
-			sourceTree = "<group>";
-		};
 		892921AF1755CE8A00497C24 /* ofxQTKitRecorder */ = {
 			isa = PBXGroup;
 			children = (
@@ -727,30 +745,11 @@
 			path = ofxQTKitVideoGrabber;
 			sourceTree = "<group>";
 		};
-		892921B51755CE8A00497C24 /* ofxQTKitVideoSaver */ = {
-			isa = PBXGroup;
-			children = (
-				892921BB1755CE8A00497C24 /* src */,
-			);
-			path = ofxQTKitVideoSaver;
-			sourceTree = "<group>";
-		};
-		892921BB1755CE8A00497C24 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				892921BC1755CE8A00497C24 /* ofxQTKitVideoSaver.h */,
-				892921BD1755CE8A00497C24 /* ofxQTKitVideoSaver.mm */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				892921AC1755CE8A00497C24 /* ofxQTKitAVScreenRecorder */,
 				892921AF1755CE8A00497C24 /* ofxQTKitRecorder */,
 				892921B21755CE8A00497C24 /* ofxQTKitVideoGrabber */,
-				892921B51755CE8A00497C24 /* ofxQTKitVideoSaver */,
 				8928C6FC163AB21400222F56 /* ofxOpenCv */,
 				8928C778163AB21500222F56 /* ofxXmlSettings */,
 				EE672EB61541E6F500229B52 /* ofxNSWindower */,
@@ -806,8 +805,8 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				899E1DB9163AB4D40088E6F4 /* Accelerate.framework */,
-				899E1DB7163AB4C30088E6F4 /* QTKit.framework */,
+				890866DD19619B9200462E97 /* Accelerate.framework */,
+				890866DB19619B7700462E97 /* QTKit.framework */,
 				8928C6D3163AB0DF00222F56 /* data */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
@@ -902,8 +901,11 @@
 /* Begin PBXProject section */
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
 			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "NSCARPE" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -943,8 +945,41 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890866DF19619DA900462E97 /* subtract.frag in Resources */,
+				890866E019619DA900462E97 /* subtract.vert in Resources */,
+				890866E119619DA900462E97 /* add.frag in Resources */,
+				890866E219619DA900462E97 /* add.vert in Resources */,
+				890866E319619DA900462E97 /* gaussianMixtureModel3D.frag in Resources */,
+				890866E419619DA900462E97 /* gaussianMixtureModel3D.vert in Resources */,
+				890866E519619DA900462E97 /* gaussianMixtureModel.frag in Resources */,
+				890866E619619DA900462E97 /* gaussianMixtureModel.vert in Resources */,
+				890866E719619DA900462E97 /* norm.frag in Resources */,
+				890866E819619DA900462E97 /* norm.vert in Resources */,
+				890866E919619DA900462E97 /* diffheatmap2.frag in Resources */,
+				890866EA19619DA900462E97 /* diffheatmap2.vert in Resources */,
+				890866EB19619DA900462E97 /* diffheatmap.frag in Resources */,
+				890866EC19619DA900462E97 /* diffheatmap.vert in Resources */,
+				890866ED19619DA900462E97 /* mix.frag in Resources */,
+				890866EE19619DA900462E97 /* mix.vert in Resources */,
+				890866EF19619DA900462E97 /* heatmap1.frag in Resources */,
+				890866F019619DA900462E97 /* heatmap2.frag in Resources */,
+				890866F119619DA900462E97 /* jetmap.frag in Resources */,
+				890866F219619DA900462E97 /* jetmap.vert in Resources */,
+				890866F319619DA900462E97 /* cp.gaussian.2p.frag in Resources */,
+				890866F419619DA900462E97 /* cp.gaussian.2p.vert in Resources */,
+				890866F519619DA900462E97 /* hotmap.frag in Resources */,
+				890866F619619DA900462E97 /* hotmap.vert in Resources */,
+				890866F719619DA900462E97 /* coolmap.frag in Resources */,
+				890866F819619DA900462E97 /* coolmap.vert in Resources */,
+				890866F919619DA900462E97 /* doh.frag in Resources */,
+				890866FA19619DA900462E97 /* doh.vert in Resources */,
+				890866FB19619DA900462E97 /* heatmap1.vert in Resources */,
+				890866FC19619DA900462E97 /* heatmap2.vert in Resources */,
+				890866FD19619DA900462E97 /* graymap.frag in Resources */,
+				890866FE19619DA900462E97 /* graymap.vert in Resources */,
+				890866FF19619DA900462E97 /* maxreduction.frag in Resources */,
+				8908670019619DA900462E97 /* maxreduction.vert in Resources */,
 				EE672EE31541E8D200229B52 /* MainMenu.xib in Resources */,
-				8928C781163AB21500222F56 /* install.xml in Resources */,
 				89AB8CCE1642E9830088E218 /* usersettings.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1014,10 +1049,8 @@
 				8928C78C163AB21500222F56 /* tinyxmlparser.cpp in Sources */,
 				8928C78D163AB21500222F56 /* ofxXmlSettings.cpp in Sources */,
 				899E1DC0163AC13E0088E6F4 /* ofxFbo.cpp in Sources */,
-				892921BE1755CE8A00497C24 /* ofxQTKitAVScreenRecorder.mm in Sources */,
 				892921BF1755CE8A00497C24 /* ofxQTKitRecorder.mm in Sources */,
 				892921C01755CE8A00497C24 /* ofxQTKitVideoGrabber.mm in Sources */,
-				892921C31755CE8A00497C24 /* ofxQTKitVideoSaver.mm in Sources */,
 				89F222F4176F43A400C65195 /* pkmMixtureOfGaussiansHeatmap.cpp in Sources */,
 				89DB29AA176FC75900BDD593 /* gaussianMixtureModel.frag in Sources */,
 				89DB29AB176FC75900BDD593 /* gaussianMixtureModel.vert in Sources */,
@@ -1051,7 +1084,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -1067,11 +1100,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
 				);
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1079,7 +1113,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -1101,13 +1135,15 @@
 					"-D__MACOSX_CORE__",
 					"-lpthread",
 				);
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		E4B69B600A3A1757003C02F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1135,7 +1171,7 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"";
 				PREBINDING = NO;
 				PRODUCT_NAME = NSCARPEDebug;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1143,6 +1179,8 @@
 		E4B69B610A3A1757003C02F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1169,7 +1207,7 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"";
 				PREBINDING = NO;
 				PRODUCT_NAME = NSCARPE;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

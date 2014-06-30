@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 
-#define MAXSIZE 80
+#define MAXSIZE 100
 #define STRINGIFY(A) #A
 
 class pkmMixtureOfGaussians
@@ -116,7 +116,7 @@ public:
     {
         
         ofLog(OF_LOG_NOTICE, "Loading Reduction Shader...");
-        reductionShader.load(ofToDataPath("maxreduction"));
+        reductionShader.load(ofToDataPath("maxreduction", true));
         
         width = w;
         height = h;
@@ -233,7 +233,7 @@ public:
         bNeedsUpdate = true;
         bNormalize = true;
         ofLog(OF_LOG_NOTICE, "Loading Mixture Model Shader...");
-        posteriorMap.load("gaussianMixtureModel");
+        posteriorMap.load(ofToDataPath("gaussianMixtureModel", true));
         setColorMap(heatmap_jet);
         maxValue = 1.0f;
     }
@@ -284,18 +284,18 @@ public:
     {
         if (c == heatmap_jet) {
             ofLog(OF_LOG_NOTICE, "Loading Jetmap Shader");
-            colormap.load(ofToDataPath("jetmap"));
+            colormap.load(ofToDataPath("jetmap", true));
         }
         else if (c == heatmap_hot) {
-            colormap.load(ofToDataPath("hotmap"));
+            colormap.load(ofToDataPath("hotmap", true));
             ofLog(OF_LOG_NOTICE, "Loading Hot Shader");
         }
         else if (c == heatmap_cool) {
-            colormap.load(ofToDataPath("coolmap"));
+            colormap.load(ofToDataPath("coolmap", true));
             ofLog(OF_LOG_NOTICE, "Loading Cool Shader");
         }
         else if (c == heatmap_gray) {
-            colormap.load(ofToDataPath("graymap"));
+            colormap.load(ofToDataPath("graymap", true));
             ofLog(OF_LOG_NOTICE, "Loading Gray Shader");
         }
         
@@ -315,11 +315,11 @@ public:
         
         mixture.scale(scale);
         
-//        float heatmapScalar = 0.0;
-//        for (int i = 0; i < mixture.length(); i++) {
-//            float a = 1.0 / (2.0 * PI * mixture.getSigmas()[2*i+0] * mixture.getSigmas()[2*i+0]);
-//            heatmapScalar = max(heatmapScalar,(a * mixture.getWeights()[i] * expf(0.0)));
-//        }
+        //        float heatmapScalar = 0.0;
+        //        for (int i = 0; i < mixture.length(); i++) {
+        //            float a = 1.0 / (2.0 * PI * mixture.getSigmas()[2*i+0] * mixture.getSigmas()[2*i+0]);
+        //            heatmapScalar = max(heatmapScalar,(a * mixture.getWeights()[i] * expf(0.0)));
+        //        }
         
         posteriorMapFBO.begin();
         {
@@ -331,7 +331,7 @@ public:
                 posteriorMap.setUniform2fv("sigmas", mixture.getSigmas(), MAXSIZE);
                 posteriorMap.setUniform1fv("weights", mixture.getWeights(), MAXSIZE);
                 posteriorMap.setUniform1i("totalGaussians", MIN(MAXSIZE,mixture.length()));
-//                posteriorMap.setUniform1f("scalar", 1.0);
+                //                posteriorMap.setUniform1f("scalar", 1.0);
                 posteriorMap.setUniformTexture("image", posteriorMap2FBO.getTextureReference(), 0);
                 
                 posteriorMap2FBO.draw(0, 0, width, height);
@@ -368,13 +368,13 @@ public:
         {
             mixture.setGaussians(means, sigmas, weights);
             
-//            for (int i = 0; i < totalGaussians; i++) {
-//                cout << mixture.getMeans()[i*2+0] << "," <<
-//                        mixture.getMeans()[i*2+1] << " " <<
-//                        mixture.getSigmas()[i*2+0] << "," <<
-//                        mixture.getSigmas()[i*2+1] << " " <<
-//                        mixture.getWeights()[i] << endl;
-//            }
+            //            for (int i = 0; i < totalGaussians; i++) {
+            //                cout << mixture.getMeans()[i*2+0] << "," <<
+            //                        mixture.getMeans()[i*2+1] << " " <<
+            //                        mixture.getSigmas()[i*2+0] << "," <<
+            //                        mixture.getSigmas()[i*2+1] << " " <<
+            //                        mixture.getWeights()[i] << endl;
+            //            }
             
             posteriorMap2FBO.begin();
             glClear( GL_COLOR_BUFFER_BIT );
@@ -411,10 +411,10 @@ public:
         
         float heatmapScalar = 0.0;
         int totalGaussians = means.size();
-//        for (int i = 0; i < totalGaussians; i++) {
-//            float a = 1.0 / (2.0 * PI * sigmas[i].x * sigmas[i].y);
-//            heatmapScalar = max(heatmapScalar,(a * weights[i] * expf(0.0)));
-//        }
+        //        for (int i = 0; i < totalGaussians; i++) {
+        //            float a = 1.0 / (2.0 * PI * sigmas[i].x * sigmas[i].y);
+        //            heatmapScalar = max(heatmapScalar,(a * weights[i] * expf(0.0)));
+        //        }
         
         mixture.setGaussians(means, sigmas, weights);
         
@@ -428,7 +428,7 @@ public:
                 posteriorMap.setUniform2fv("sigmas", mixture.getSigmas(), MAXSIZE);
                 posteriorMap.setUniform1fv("weights", mixture.getWeights(), MAXSIZE);
                 posteriorMap.setUniform1i("totalGaussians", MIN(totalGaussians, MAXSIZE));
-//                posteriorMap.setUniform1f("scalar", 1.0f);
+                //                posteriorMap.setUniform1f("scalar", 1.0f);
                 posteriorMap.setUniformTexture("image", posteriorMap2FBO.getTextureReference(), 0);
                 
                 posteriorMap2FBO.draw(0, 0, width, height);
@@ -482,7 +482,7 @@ public:
             posteriorMap.end();
         }
         posteriorMapFBO.end();
-
+        
         normalizeHeatmap();
         
         bNeedsUpdate = true;

@@ -1,14 +1,14 @@
 uniform sampler2DRect img1;
 uniform sampler2DRect img2;
 varying vec2 texcoordM;
-uniform float maxValue;
+uniform float maxValue1;
+uniform float maxValue2;
 //uniform float Opacity;
 
 void main (void)
 {
     
-    float dist = (texture2DRect(img1, texcoordM).a - texture2DRect(img2, texcoordM).a) / maxValue;
-    float max = 1.0;
+    float dist = (texture2DRect(img1, texcoordM).a - texture2DRect(img2, texcoordM).a) / (min(maxValue1,maxValue2) / 2.0);
     float max2 = 1.0 / 2.0;
     
     if(dist < (-1.0 * max2))

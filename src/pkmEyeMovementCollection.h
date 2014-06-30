@@ -18,15 +18,15 @@ public:
     vector<ofVec2f>     monocularEye;
     vector<ofVec2f>     binocularLEye;
     vector<ofVec2f>     binocularREye;
-//    vector<float>       dilationL;
-//    vector<float>       dilationR;
+    //    vector<float>       dilationL;
+    //    vector<float>       dilationR;
     vector<ofVec2f>     binocularMeanEye;
-//    vector<float>       binocularMeanDilation;
-//    vector<int>         eventL;
-//    vector<int>         eventR;
-//    vector<int>         classification;
+    //    vector<float>       binocularMeanDilation;
+    //    vector<int>         eventL;
+    //    vector<int>         eventR;
+    //    vector<int>         classification;
     vector<bool>        bFixation;
-//    vector<int>         frameNumber;
+    //    vector<int>         frameNumber;
     map<int,int>        msLookUp;
     vector<ofVec2f>     previousEye;
     string              subjectName;
@@ -46,6 +46,7 @@ public:
         bMultipleHeatmaps       = false;
         frameRate               = 0;
         sigmaInPixels           = 0;
+        maxValue1 = maxValue2   = 1.0;
     }
     
     void allocateHeatmap(int movieWidth, int movieHeight, int offsetX, int offsetY)
@@ -86,20 +87,20 @@ public:
         heatmap2.end();
         
         ofLog(OF_LOG_NOTICE, "Loading Mix Shader");
-        mixShader.load(ofToDataPath("mix"));
+        mixShader.load(ofToDataPath("mix", true));
         ofLog(OF_LOG_NOTICE, "Loading Difference of Heatmap Shader");
-        diffShader.load(ofToDataPath("diffheatmap"));
+        diffShader.load(ofToDataPath("diffheatmap", true));
         ofLog(OF_LOG_NOTICE, "Loading Norm Shader");
-        normShader.load(ofToDataPath("norm"));
+        normShader.load(ofToDataPath("norm", true));
         ofLog(OF_LOG_NOTICE, "Loading Add Shader");
-        addShader.load(ofToDataPath("add"));
+        addShader.load(ofToDataPath("add", true));
         ofLog(OF_LOG_NOTICE, "Loading Subtract Shader");
-        subtractShader.load(ofToDataPath("subtract"));
+        subtractShader.load(ofToDataPath("subtract", true));
         ofLog(OF_LOG_NOTICE, "Loading Jet Shader");
-        jetShader.load(ofToDataPath("jetmap"));
+        jetShader.load(ofToDataPath("jetmap", true));
     }
     
-    void loadArringtonFiles(string path)          
+    void loadArringtonFiles(string path)
     {
         // create new vector of subjects for condition
         vector<pkmEyeMovementSubject> a;
@@ -203,7 +204,7 @@ public:
     }
     
     void loadFiles(string path,                         // location of files
-                   string token = "",                   // token of the files in the directory to load
+                   //string token = "",                   // token of the files in the directory to load
                    bool bLoadBinocular = true,          // format of eye-data has twice as many columns for the second eye
                    int conditionNumber = 0)     // (for multiple heatmaps)
     {
@@ -211,18 +212,19 @@ public:
         
         ofDirectory eyeDir;
         eyeDir.allowExt("txt");
-        if (token.size() == 0) {
+        //if (token.size() == 0) {
             numSubjects = eyeDir.listDir(ofToDataPath(path, true));
-        }
-        else {
-            numSubjects = eyeDir.listDir(ofToDataPath(path, true), token);
-        }
+        //}
+        //else {
+        //    // added listDir(string, string) to ofDirectory.h
+        //    numSubjects = eyeDir.listDir(ofToDataPath(path, true), token);
+        //}
         if (numSubjects <= 0) {
             cout << "[ERROR]: No data found in " << ofToDataPath(path, true) << endl;
             OF_EXIT_APP(0);
             return;
         }
-
+        
         // create new vector of subjects for condition
         vector<pkmEyeMovementSubject> a;
         subjects.push_back(a);
@@ -234,7 +236,7 @@ public:
         h->setColorMap((pkmMixtureOfGaussiansHeatmap::colormode)(conditionNumber+1));
         multipleHeatmaps.push_back(h);
         totalClasses++;
-
+        
         
         ofLog(OF_LOG_NOTICE, "Loading Eye-Movement Files");
         for (int subject_i = 0; subject_i < numSubjects; subject_i++)
@@ -265,7 +267,7 @@ public:
                     int left_event, right_event;
                     if(bLoadBinocular)
                     {
-                        // [ms] [frame] [left_x] [left_y] [left_dil] [left_event] [right_x] [right_y] [right_dil] [right_event] 
+                        // [ms] [frame] [left_x] [left_y] [left_dil] [left_event] [right_x] [right_y] [right_dil] [right_event]
                         eyeFile >> msCounter >> one >> two >> three >> four >> five >> six >> seven >> eight >> nine;
                         
                         istringstream instr(two);	instr >> x;             instr.clear();
@@ -277,19 +279,19 @@ public:
                         instr.str(eight);			instr >> dil2; 			instr.clear();
                         instr.str(nine);			instr >> right_event;   instr.clear();
                         
-    //                    subjects[conditionNumber][i].classification.push_back(conditionNumber);                                                
+                        //                    subjects[conditionNumber][i].classification.push_back(conditionNumber);
                         subjects[conditionNumber][subject_i].binocularLEye.push_back(ofVec2f(x,y));
                         subjects[conditionNumber][subject_i].binocularREye.push_back(ofVec2f(x2,y2));
-    //                    subjects[conditionNumber][subject_i].eventL.push_back(left_event);
-    //                    subjects[conditionNumber][subject_i].eventR.push_back(right_event);
-    //                    subjects[conditionNumber][i].dilationL.push_back(dil);
-    //                    subjects[conditionNumber][i].dilationR.push_back(dil2);
+                        //                    subjects[conditionNumber][subject_i].eventL.push_back(left_event);
+                        //                    subjects[conditionNumber][subject_i].eventR.push_back(right_event);
+                        //                    subjects[conditionNumber][i].dilationL.push_back(dil);
+                        //                    subjects[conditionNumber][i].dilationR.push_back(dil2);
                         subjects[conditionNumber][subject_i].binocularMeanEye.push_back(ofVec2f((x + x2) / 2.0,
-                                                                       (y + y2) / 2.0));
-    //                    subjects[conditionNumber][i].binocularMeanDilation.push_back((dil + dil2) / 2.0);
+                                                                                                (y + y2) / 2.0));
+                        //                    subjects[conditionNumber][i].binocularMeanDilation.push_back((dil + dil2) / 2.0);
                         subjects[conditionNumber][subject_i].bFixation.push_back(right_event == 1 && left_event == 1);
                         subjects[conditionNumber][subject_i].msLookUp[msCounter] = subjects[conditionNumber][subject_i].binocularLEye.size();
-
+                        
                     }
                     else
                     {
@@ -318,7 +320,7 @@ public:
     {
         sigmaInPixels = varianceInPixels;
     }
-
+    
     
     void setFrameRate(float framesPerSecond)
     {
@@ -434,13 +436,15 @@ public:
         subtractShader.end();
         heatmap1.end();
         
-        float maxValue = reduction.getMaximumCPU(heatmap1.getTextureReference());
+        float maxValue1 = reduction.getMaximumCPU(heatmap1.getTextureReference());
+        float maxValue2 = reduction.getMaximumCPU(heatmap2.getTextureReference());
         heatmap2.begin();
         glClear(GL_COLOR_BUFFER_BIT);
         diffShader.begin();
         diffShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
         diffShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
-        diffShader.setUniform1f("maxValue", maxValue);
+        diffShader.setUniform1f("maxValue1", maxValue1);
+        diffShader.setUniform1f("maxValue2", maxValue2);
         multipleHeatmaps[0]->draw();
         diffShader.end();
         heatmap2.end();
@@ -462,7 +466,7 @@ public:
                 ofSetColor(0, 255, 255);
             else
                 ofSetColor(255, 255, 0);
-         
+            
             // reset heatmap
             multipleHeatmaps[condition_i]->resetMixture();
             
@@ -526,18 +530,18 @@ public:
         heatmapFBO.end();
         heatmapFBO.draw(0, 0);
         
-//        
-//        multipleHeatmaps[0]->buildMixture();
-//        multipleHeatmaps[0]->update();
-//        multipleHeatmaps[1]->buildMixture();
-//        multipleHeatmaps[1]->update();
-//        
-//        heatmapFBO.begin();
-//        glClear(GL_COLOR_BUFFER_BIT);
-//        multipleHeatmaps[0]->draw();
-//        multipleHeatmaps[1]->draw();
-//        heatmapFBO.end();
-//        heatmapFBO.draw(0, 0);
+        //
+        //        multipleHeatmaps[0]->buildMixture();
+        //        multipleHeatmaps[0]->update();
+        //        multipleHeatmaps[1]->buildMixture();
+        //        multipleHeatmaps[1]->update();
+        //
+        //        heatmapFBO.begin();
+        //        glClear(GL_COLOR_BUFFER_BIT);
+        //        multipleHeatmaps[0]->draw();
+        //        multipleHeatmaps[1]->draw();
+        //        heatmapFBO.end();
+        //        heatmapFBO.draw(0, 0);
         
 #else
         
@@ -546,24 +550,26 @@ public:
         multipleHeatmaps[1]->buildMixture();
         multipleHeatmaps[1]->update();
         
-        // first subtract and take abs, then find max of this map
-        // then do colormap difference using this maxvalue
-        heatmap1.begin();
-        glClear(GL_COLOR_BUFFER_BIT);
-        subtractShader.begin();
-        subtractShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
-        subtractShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
-        multipleHeatmaps[0]->draw();
-        subtractShader.end();
-        heatmap1.end();
+        //        // first subtract and take abs, then find max of this map
+        //        // then do colormap difference using this maxvalue
+        //        heatmap1.begin();
+        //        glClear(GL_COLOR_BUFFER_BIT);
+        //        subtractShader.begin();
+        //        subtractShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
+        //        subtractShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
+        //        multipleHeatmaps[0]->draw();
+        //        subtractShader.end();
+        //        heatmap1.end();
         
-        float maxValue = reduction.getMaximumCPU(heatmap1.getTextureReference());
+        maxValue1 = reduction.getMaximumCPU(multipleHeatmaps[0]->getTextureReference());
+        maxValue2 = reduction.getMaximumCPU(multipleHeatmaps[1]->getTextureReference());
         heatmap2.begin();
         glClear(GL_COLOR_BUFFER_BIT);
         diffShader.begin();
         diffShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
         diffShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
-        diffShader.setUniform1f("maxValue", maxValue);
+        diffShader.setUniform1f("maxValue1", maxValue1);
+        diffShader.setUniform1f("maxValue2", maxValue2);
         multipleHeatmaps[0]->draw();
         diffShader.end();
         heatmap2.end();
@@ -572,29 +578,31 @@ public:
         
 #endif
     }
-
+    
 private:
-    int                             movieWidth, movieHeight;
-    float                           offsetX, offsetY;
-    unsigned long                   currentFrame;
+    int                                                 movieWidth, movieHeight;
+    float                                               offsetX, offsetY;
+    unsigned long                                       currentFrame;
     
-    float                           frameRate;
+    float                                               maxValue1, maxValue2;
     
-    float                           sigmaInPixels;
+    float                                               frameRate;
     
-    int                             numConditions;
-    int                             numSubjects;
-    vector<vector<pkmEyeMovementSubject> >   subjects;
+    float                                               sigmaInPixels;
     
-    vector<ofPtr<pkmMixtureOfGaussiansHeatmap> >      multipleHeatmaps;
-//    pkmHeatmap                      heatmap;
-    ofShader                        mixShader, addShader, subtractShader, diffShader, normShader, jetShader;
-    ofFbo                           heatmap1, heatmap2, heatmapFBO;
-    pkmReductionChain               reduction;
+    int                                                 numConditions;
+    int                                                 numSubjects;
+    vector<vector<pkmEyeMovementSubject> >              subjects;
     
-    int                             totalClasses;
-    std::map<int, int>              classToVectorLUT;     
+    vector<ofPtr<pkmMixtureOfGaussiansHeatmap> >        multipleHeatmaps;
+
+    ofShader                                            mixShader, addShader, subtractShader, diffShader, normShader, jetShader;
+    ofFbo                                               heatmap1, heatmap2, heatmapFBO;
+    pkmReductionChain                                   reduction;
     
-    bool                            bMultipleHeatmaps;
+    int                                                 totalClasses;
+    std::map<int, int>                                  classToVectorLUT;
+    
+    bool                                                bMultipleHeatmaps;
     
 };

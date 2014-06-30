@@ -6,7 +6,9 @@
 void testApp::setup() {
     bSetup = false;
     
-    //ofSetLogLevel(OF_LOG_VERBOSE);
+    ofSetLogLevel(OF_LOG_ERROR);
+    ofEnableArbTex();
+    ofEnableDataPath();
     
     loadUserSettings();
 
@@ -314,7 +316,8 @@ void testApp::initializeEyeTrackingData(vector<string> paths)
         if(bLoadArringtonResearchFormat)
             eyeMovements.loadArringtonFiles(paths[i]);
         else
-            eyeMovements.loadFiles(paths[i], movieName, bLoadBinocular, i);
+            //eyeMovements.loadFiles(paths[i], movieName, bLoadBinocular, i);
+            eyeMovements.loadFiles(paths[i], bLoadBinocular, i);
     }
 }
 
