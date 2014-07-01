@@ -1095,6 +1095,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				890868501961B36F00462E97 /* pkmOpticalFlow */,
 				8908670B1961A90800462E97 /* ofxOpenCv2461 */,
 				892921AF1755CE8A00497C24 /* ofxQTKitRecorder */,
 				892921B21755CE8A00497C24 /* ofxQTKitVideoGrabber */,
@@ -1152,7 +1153,6 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				890868501961B36F00462E97 /* pkmOpticalFlow */,
 				8908684B1961AE9B00462E97 /* libz.dylib */,
 				890866DD19619B9200462E97 /* Accelerate.framework */,
 				890866DB19619B7700462E97 /* QTKit.framework */,
@@ -1524,6 +1524,7 @@
 					"values>",
 					/Users/pkmital/pkm/dev/of082osx/addons/ofxOpenCv2461/libs/opencv/lib,
 					"/Users/pkmital/pkm/dev/of082osx/addons/ofxOpenCv2461/libs/opencv/lib/python2.7/site-packages",
+					/Users/pkmital/pkm/dev/pkm/pkmDPGMM/libcluster/lib,
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/ofxOpenCv/libs/opencv/lib/osx\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"";
@@ -1567,6 +1568,7 @@
 					"values>",
 					/Users/pkmital/pkm/dev/of082osx/addons/ofxOpenCv2461/libs/opencv/lib,
 					"/Users/pkmital/pkm/dev/of082osx/addons/ofxOpenCv2461/libs/opencv/lib/python2.7/site-packages",
+					/Users/pkmital/pkm/dev/pkm/pkmDPGMM/libcluster/lib,
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/ofxOpenCv/libs/opencv/lib/osx\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"";

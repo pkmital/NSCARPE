@@ -570,6 +570,7 @@ public:
         maxValue2 = reduction.getMaximumCPU(multipleHeatmaps[1]->getTextureReference());
         heatmap2.begin();
         glClear(GL_COLOR_BUFFER_BIT);
+
         diffShader.begin();
         diffShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
         diffShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
@@ -577,6 +578,7 @@ public:
         diffShader.setUniform1f("maxValue2", maxValue2);
         multipleHeatmaps[0]->draw();
         diffShader.end();
+
         heatmap2.end();
         
         heatmap2.draw(0,0);

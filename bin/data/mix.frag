@@ -1,6 +1,7 @@
 uniform sampler2DRect img1;
 uniform sampler2DRect img2;
-uniform float maxValue;
+uniform float maxValue1;
+uniform float maxValue2;
 varying vec2 texcoordM;
 
 const float PI = 3.14159265;
@@ -9,7 +10,7 @@ const float colorMax = 1.0;
 
 void main (void)
 {
-    float dist = (texture2DRect(img1, texcoordM).a + texture2DRect(img2, texcoordM).a) / maxValue;
+    float dist = (texture2DRect(img1, texcoordM).a + texture2DRect(img2, texcoordM).a) / (maxValue1 + maxValue2);
     float max4 = 1.0 / 4.0;
     
     if(dist <= 0.0)
