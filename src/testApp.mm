@@ -6,9 +6,11 @@
 void testApp::setup() {
     bSetup = false;
     
-    ofSetLogLevel(OF_LOG_ERROR);
+    ofSetLogLevel(OF_LOG_WARNING);
     ofEnableArbTex();
     ofEnableDataPath();
+    
+    ofSetCircleResolution(20);
     
     loadUserSettings();
 
@@ -36,13 +38,34 @@ void testApp::update() {
     
     if (movieFrameNumber > movieTotalFrames)
     {
-        ofLog(OF_LOG_NOTICE, "Reached end of movie at %f seconds. Exiting.", movieFrameNumber / (float)movieFrameRate);
-        close();
-        OF_EXIT_APP(0);
+        ofLog(OF_LOG_NOTICE, "Reached end of movie at %f seconds.", movieFrameNumber / (float)movieFrameRate);
+        currentExperiment++;
+        
+        if(bExportMotionDescriptorsToHDF)
+        {
+            exportMotionDescriptorsToHDF5();
+        }
+        
+        if (currentExperiment < numberOfExperiments) {
+            initializeExperiment();
+        }
+        else if (bAutoQuitAfterProcessing)
+        {
+            ofLog(OF_LOG_NOTICE, "Exiting...");
+            close();
+            OF_EXIT_APP(0);
+        }
     }
     
-    moviePlayer.setFrame(movieFrameNumber);
-    eyeMovements.setTime(movieFrameNumber / (float)movieFrameRate);
+    if (bShowRealTime) {
+        moviePlayer.update();
+        movieFrameNumber = moviePlayer.getCurrentFrame();
+        eyeMovements.setTime(movieFrameNumber / (float)movieFrameRate);
+    }
+    else {
+        moviePlayer.setFrame(movieFrameNumber);
+        eyeMovements.setTime(movieFrameNumber / (float)movieFrameRate);
+    }
     
     if (bShowFlow) {
         flow.update(moviePlayer.getPixelsRef());
@@ -73,7 +96,7 @@ void testApp::draw()
     
     ofSetColor(255,255,255,255);
     
-    eyeMovements.draw(true);
+    eyeMovements.draw(bShowMeanBinocular, bShowEyes, bShowSaccades, bShowHeatmap, bShowDifferenceHeatmap);
     ofDisableAlphaBlending();
     recorderFbo.end();
     recorderFbo.draw(0, 0);
@@ -149,75 +172,102 @@ void testApp::loadUserSettings()
     
     cout << "[OK]: Choose the xml file: " << xmlURL << endl;
     
-    ofxXmlSettings settings;
     settings.loadFile(xmlURL);
     
-    string saveMovieURL;
-    
-    settings.pushTag("show");
+    settings.pushTag("globalsettings");
     {
-        bShowRealTime = settings.getValue("realtime", false);
-        bShowClustering = settings.getValue("clustering", false);
-        bShowAlphaScreen = settings.getValue("peekthrough", false);
-        bShowContours = settings.getValue("contours", false);
-        bShowEyes = settings.getValue("eyes", true);
-        bShowHeatmap = settings.getValue("heatmap", true);
-        bShowMeanBinocular = settings.getValue("meanbinocular", true);
-        bShowMovie = settings.getValue("movie", true);
-        bShowFlow = settings.getValue("visualsaliency", false);
-        bShowNormalized = settings.getValue("normalizedheatmap", true);
-        bShowRadialBlur = settings.getValue("radialblur", false);
-        bShowHistogram = settings.getValue("histogram", false);
-        bShowSaccades = settings.getValue("saccades", false);
-        bShowSubjectNames = settings.getValue("subjectnames", false);
-        frameIncrement = settings.getValue("framerate", 25.0f);
-    }
-    settings.popTag();
-    
-    settings.pushTag("presentation");
-    {
-        screenWidth = settings.getValue("screenwidth", 800);
-        screenHeight = settings.getValue("screenheight", 600);
-        bCalculateMovieOffset = settings.getValue("centermovie", true);
-        movieOffsetX = settings.getValue("movieoffsetx", 0);
-        movieOffsetY = settings.getValue("movieoffsety", 0);
-    }
-    settings.popTag();
-    
-    settings.pushTag("save");
-    {
-        saveMovieURL = settings.getValue("location", "");
-        bSaveMovie = settings.getValue("movie", true);
-        bSaveMovieImages = settings.getValue("images", false);
-    }
-    settings.popTag();
-    
-    string movieURL;
-    settings.pushTag("movie");
-    {
-        movieFrameRate = settings.getValue("framerate", 25.0f);
-        frameIncrement = movieFrameRate / frameIncrement;
-        movieURL = settings.getValue("file", "");
-    }
-    settings.popTag();
-    initializeMovie(movieURL);
-    
-    settings.pushTag("eyemovements");
-    {
-        bLoadBinocular = settings.getValue("binocular", true);
-        bLoadClassifiedData = settings.getValue("classified", false);
-        bLoadArringtonResearchFormat = settings.getValue("arrington", false);
-        eyeMovementFrameRate = settings.getValue("framerate", 1000.0f);
-        eyeMovements.setFrameRate(eyeMovementFrameRate);
-        int numConditions = settings.getNumTags("path");
-        cout << "[loadUserSettings()]::[OK] Reading " << numConditions << " conditions." << endl;
-        vector<string> paths;
-        for (int i = 0; i < numConditions; i++) {
-            paths.push_back(settings.getValue("path", "event_data", i));
+        settings.pushTag("show");
+        {
+            bAutoQuitAfterProcessing = settings.getValue("autoquit", true);
+            bShowRealTime = settings.getValue("realtime", false);
+            bShowClustering = settings.getValue("clustering", false);
+            bShowAlphaScreen = settings.getValue("peekthrough", false);
+            bShowContours = settings.getValue("contours", false);
+            bShowEyes = settings.getValue("eyes", true);
+            bShowSaccades = settings.getValue("saccades", true);
+            bShowHeatmap = settings.getValue("heatmap", true);
+            bShowDifferenceHeatmap = settings.getValue("differenceheatmap", true);
+            bShowMeanBinocular = settings.getValue("meanbinocular", true);
+            bShowMovie = settings.getValue("movie", true);
+            bShowFlow = settings.getValue("visualsaliency", false);
+            bShowNormalized = settings.getValue("normalizedheatmap", true);
+            bShowRadialBlur = settings.getValue("radialblur", false);
+            bShowHistogram = settings.getValue("histogram", false);
+            bShowSaccades = settings.getValue("saccades", false);
+            bShowSubjectNames = settings.getValue("subjectnames", false);
+            frameIncrement = settings.getValue("framerate", 25.0f);
         }
-        eyeMovements.setSigma(settings.getValue("sigma", 50));
-        initializeEyeTrackingData(paths);
-        
+        settings.popTag();
+        settings.pushTag("save");
+        {
+            saveMovieURL = settings.getValue("location", "");
+            bSaveMovie = settings.getValue("movie", true);
+            bSaveMovieImages = settings.getValue("images", false);
+            bExportMotionDescriptorsToHDF = settings.getValue("motiondescriptors", true);
+        }
+        settings.popTag();
+    }
+    settings.popTag();
+    
+    settings.pushTag("stimuli");
+    {
+        numberOfExperiments = settings.getNumTags("stimulus");
+        currentExperiment = 0;
+    }
+    settings.popTag();
+    
+    initializeExperiment();
+    
+}
+
+void testApp::initializeExperiment()
+{
+    
+    settings.pushTag("stimuli");
+    {
+        settings.pushTag("stimulus", currentExperiment);
+        {
+            settings.pushTag("presentation");
+            {
+                screenWidth = settings.getValue("screenwidth", 800);
+                screenHeight = settings.getValue("screenheight", 600);
+                bCalculateMovieOffset = settings.getValue("centermovie", true);
+                movieOffsetX = settings.getValue("movieoffsetx", 0);
+                movieOffsetY = settings.getValue("movieoffsety", 0);
+            }
+            settings.popTag();
+            
+            string movieURL;
+            settings.pushTag("movie");
+            {
+                movieFrameRate = settings.getValue("framerate", 25.0f);
+                frameIncrement = movieFrameRate / frameIncrement;
+                movieURL = settings.getValue("file", "");
+                ofLog(OF_LOG_NOTICE, "Reading %s", movieURL.c_str());
+            }
+            settings.popTag();
+            initializeMovie(movieURL);
+            
+            settings.pushTag("eyemovements");
+            {
+                bLoadBinocular = settings.getValue("binocular", true);
+                bLoadClassifiedData = settings.getValue("classified", false);
+                bLoadArringtonResearchFormat = settings.getValue("arrington", false);
+                eyeMovementFrameRate = settings.getValue("framerate", 1000.0f);
+                eyeMovements.setFrameRate(eyeMovementFrameRate);
+                int numConditions = settings.getNumTags("path");
+                cout << "[loadUserSettings()]::[OK] Reading " << numConditions << " conditions." << endl;
+                vector<string> paths;
+                for (int i = 0; i < numConditions; i++) {
+                    paths.push_back(settings.getValue("path", "event_data", i));
+                }
+                eyeMovements.setSigma(settings.getValue("sigma", 50));
+                initializeEyeTrackingData(paths);
+                
+            }
+            settings.popTag();
+        }
+        settings.popTag();
     }
     settings.popTag();
     
@@ -226,7 +276,6 @@ void testApp::loadUserSettings()
     
     if(bSaveMovie)
         initializeRecording(saveMovieURL);
-    
     
 }
 
@@ -254,6 +303,11 @@ void testApp::initializeMovie(string movieURL)
     moviePlayer.setLoopState(OF_LOOP_NONE);
     moviePlayer.setFrame(movieFrameNumber);
     movieTotalFrames = moviePlayer.getTotalNumFrames();
+    
+    if (bShowRealTime) {
+        moviePlayer.play();
+    }
+    
     if(movieTotalFrames / (float) moviePlayer.getDuration() != movieFrameRate)
     {
         cout << "[WARNING] User XML Settings declared movie frame rate as " << movieFrameRate << " though detected in movie file as " << movieTotalFrames / (float) moviePlayer.getDuration() << ".  Defaulting to user setting." << endl;
@@ -354,4 +408,8 @@ void testApp::initializeEyeTrackingData(vector<string> paths)
     }
 }
 
-
+//--------------------------------------------------------------
+void testApp::exportMotionDescriptorsToHDF5()
+{
+    flow.exportHOMGToHDF5();
+}

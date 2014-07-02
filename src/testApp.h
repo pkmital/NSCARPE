@@ -30,6 +30,7 @@ public:
     void initializeMovie(string movieURL);
     void initializeRecording(string saveURL);
     void initializeEyeTrackingData(vector<string> paths);
+    void initializeExperiment();
     //--------------------------------------------------------------
     
     //--------------------------------------------------------------
@@ -50,6 +51,18 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void mouseScrolled(float x, float y);
     //--------------------------------------------------------------
+
+    //--------------------------------------------------------------
+    void exportMotionDescriptorsToHDF5();
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void toggleHeatmap() { bShowHeatmap = !bShowHeatmap; }
+    void toggleClustering() { bShowClustering = !bShowClustering; }
+    void toggleEyes() { bShowEyes = !bShowEyes; }
+    void toggleSaccades() { bShowSaccades = !bShowSaccades; }
+    void toggleDifferenceHeatmap() { bShowDifferenceHeatmap = !bShowDifferenceHeatmap; }
+    //--------------------------------------------------------------
 	
 private:
     //--------------------------------------------------------------
@@ -67,6 +80,7 @@ private:
     ofxQTKitRecorder                recorder;
     bool                            bDoneRecording;
     ofFbo                           recorderFbo;
+    string                          saveMovieURL;
     
     
     //--------------------------------------------------------------
@@ -94,6 +108,13 @@ private:
     
     
     //--------------------------------------------------------------
+	// Experiment info
+    ofxXmlSettings                  settings;
+    int                             numberOfExperiments;
+    int                             currentExperiment;
+    
+    
+    //--------------------------------------------------------------
     // Control variables
     bool                            bLoadBinocular, 
                                     bLoadClassifiedData,
@@ -102,7 +123,9 @@ private:
                                     bShowAlphaScreen,
                                     bShowContours,
                                     bShowEyes,
+                                    bShowSaccades,
                                     bShowHeatmap,
+                                    bShowDifferenceHeatmap,
                                     bShowMeanBinocular,
                                     bShowMovie,
                                     bShowFlow,
@@ -111,10 +134,11 @@ private:
                                     bShowNormalized,
                                     bShowRadialBlur,
                                     bShowHistogram,
-                                    bShowSaccades,
                                     bShowSubjectNames,
                                     bCalculateMovieOffset,
                                     bLoadArringtonResearchFormat,
+                                    bAutoQuitAfterProcessing,
+                                    bExportMotionDescriptorsToHDF,
                                     bSetup;
     //--------------------------------------------------------------
 	

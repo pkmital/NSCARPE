@@ -30,6 +30,7 @@ public:
     map<int,int>        msLookUp;
     vector<ofVec2f>     previousEye;
     string              subjectName;
+    float               radius;
 };
 
 class pkmEyeMovementCollection {
@@ -200,6 +201,7 @@ public:
             {
                 
             }
+            subjects[conditionNumber][subject_i].radius = 5;
         }
     }
     
@@ -309,6 +311,7 @@ public:
                 }
 			}
             subjects[conditionNumber][subject_i].numFramesRecorded = frameCounter;
+            subjects[conditionNumber][subject_i].radius = 5;
 			
             // close the file after reading it
 			eyeFile.close();
@@ -455,17 +458,18 @@ public:
     }
     
     // can draw all ms data for a single frame? as path?
-    void draw(bool bDrawMeanEye = true)
+    void draw(bool bDrawMeanEye, bool bDrawEyes, bool bDrawSaccades, bool bDrawHeatmaps, bool bDrawDifferenceHeatmap)
     {
         assert(subjects.size() == multipleHeatmaps.size());
         
-        ofNoFill();
+        
+        ofFill();
         for(int condition_i = 0; condition_i < subjects.size(); condition_i++)
         {
             if(condition_i == 1)
-                ofSetColor(0, 255, 255);
+                ofSetColor(0, 255, 255, 100);
             else
-                ofSetColor(255, 255, 0);
+                ofSetColor(255, 255, 0, 100);
             
             // reset heatmap
             multipleHeatmaps[condition_i]->resetMixture();
@@ -489,13 +493,32 @@ public:
                                                                 sigma,
                                                                 weight);
                         
-                        // no idea why ofCircle stopped working, changed to a bitmapstring...
-//                        ofCircle(subject->binocularMeanEye[currentFrame].x - offsetX,
-//                                 subject->binocularMeanEye[currentFrame].y - offsetY, 0,
-//                                 4.0);
-                        ofDrawBitmapString("+",
-                                           subject->binocularMeanEye[currentFrame].x - offsetX,
-                                           subject->binocularMeanEye[currentFrame].y - offsetY);
+                        if (currentFrame > 0 &&
+                            ofDist(subject->binocularMeanEye[currentFrame].x,
+                                   subject->binocularMeanEye[currentFrame].y,
+                                   subject->binocularMeanEye[currentFrame-1].x,
+                                   subject->binocularMeanEye[currentFrame-1].y) < (sigmaInPixels * 0.25))
+                            subject->radius += 0.5;
+                        else
+                            subject->radius = 5;
+                        
+                        
+                        if (bDrawSaccades && currentFrame > 1) {
+                            ofLine(subject->binocularMeanEye[currentFrame].x,
+                                   subject->binocularMeanEye[currentFrame].y,
+                                   subject->binocularMeanEye[currentFrame-1].x,
+                                   subject->binocularMeanEye[currentFrame-1].y);
+                            ofLine(subject->binocularMeanEye[currentFrame-2].x,
+                                   subject->binocularMeanEye[currentFrame-2].y,
+                                   subject->binocularMeanEye[currentFrame-1].x,
+                                   subject->binocularMeanEye[currentFrame-1].y);
+                        }
+                        
+                        if(bDrawEyes)
+                            ofCircle(subject->binocularMeanEye[currentFrame].x - offsetX,
+                                     subject->binocularMeanEye[currentFrame].y - offsetY,
+                                     subject->radius);
+                        
                     }
                     else
                     {
@@ -504,18 +527,18 @@ public:
                                                                 sigma,
                                                                 weight);
                         
-                        ofDrawBitmapString("+",
-                                           subject->binocularLEye[currentFrame].x - offsetX,
-                                           subject->binocularLEye[currentFrame].y - offsetY);
+                        ofCircle(subject->binocularLEye[currentFrame].x - offsetX,
+                                 subject->binocularLEye[currentFrame].y - offsetY, 0,
+                                 5.0);
                         
                         multipleHeatmaps[condition_i]->addPoint(ofVec2f(subject->binocularREye[currentFrame].x - offsetX,
                                                                         subject->binocularREye[currentFrame].y - offsetY),
                                                                 sigma,
                                                                 weight);
-                        
-                        ofDrawBitmapString("+",
-                                           subject->binocularREye[currentFrame].x - offsetX,
-                                           subject->binocularREye[currentFrame].y - offsetY);
+
+                        ofCircle(subject->binocularREye[currentFrame].x - offsetX,
+                                 subject->binocularREye[currentFrame].y - offsetY, 0,
+                                 5.0);
                     }
                 }
                 subject++;
@@ -524,66 +547,50 @@ public:
         }
         ofSetColor(255);
         ofFill();
-        
-#if(0)
-        multipleHeatmaps[0]->buildMixture();
-        multipleHeatmaps[0]->update();
-        
-        heatmapFBO.begin();
-        glClear(GL_COLOR_BUFFER_BIT);
-        multipleHeatmaps[0]->draw();
-        heatmapFBO.end();
-        heatmapFBO.draw(0, 0);
-        
-        //
-        //        multipleHeatmaps[0]->buildMixture();
-        //        multipleHeatmaps[0]->update();
-        //        multipleHeatmaps[1]->buildMixture();
-        //        multipleHeatmaps[1]->update();
-        //
-        //        heatmapFBO.begin();
-        //        glClear(GL_COLOR_BUFFER_BIT);
-        //        multipleHeatmaps[0]->draw();
-        //        multipleHeatmaps[1]->draw();
-        //        heatmapFBO.end();
-        //        heatmapFBO.draw(0, 0);
-        
-#else
-        
-        multipleHeatmaps[0]->buildMixture();
-        multipleHeatmaps[0]->update();
-        multipleHeatmaps[1]->buildMixture();
-        multipleHeatmaps[1]->update();
-        
-        //        // first subtract and take abs, then find max of this map
-        //        // then do colormap difference using this maxvalue
-        //        heatmap1.begin();
-        //        glClear(GL_COLOR_BUFFER_BIT);
-        //        subtractShader.begin();
-        //        subtractShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
-        //        subtractShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
-        //        multipleHeatmaps[0]->draw();
-        //        subtractShader.end();
-        //        heatmap1.end();
-        
-        maxValue1 = reduction.getMaximumCPU(multipleHeatmaps[0]->getTextureReference());
-        maxValue2 = reduction.getMaximumCPU(multipleHeatmaps[1]->getTextureReference());
-        heatmap2.begin();
-        glClear(GL_COLOR_BUFFER_BIT);
 
-        diffShader.begin();
-        diffShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
-        diffShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
-        diffShader.setUniform1f("maxValue1", maxValue1);
-        diffShader.setUniform1f("maxValue2", maxValue2);
-        multipleHeatmaps[0]->draw();
-        diffShader.end();
+        if(bDrawHeatmaps)
+        {
+        
+            multipleHeatmaps[0]->buildMixture();
+            multipleHeatmaps[0]->update();
+            multipleHeatmaps[1]->buildMixture();
+            multipleHeatmaps[1]->update();
 
-        heatmap2.end();
-        
-        heatmap2.draw(0,0);
-        
-#endif
+            heatmap2.begin();
+            glClear(GL_COLOR_BUFFER_BIT);
+            
+            if(bDrawDifferenceHeatmap)
+            {
+                maxValue1 = reduction.getMaximumCPU(multipleHeatmaps[0]->getTextureReference());
+                maxValue2 = reduction.getMaximumCPU(multipleHeatmaps[1]->getTextureReference());
+
+                diffShader.begin();
+                diffShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
+                diffShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
+                diffShader.setUniform1f("maxValue1", maxValue1);
+                diffShader.setUniform1f("maxValue2", maxValue2);
+                multipleHeatmaps[0]->draw();
+                diffShader.end();
+            }
+            else
+            {
+                maxValue1 = reduction.getMaximumCPU(multipleHeatmaps[0]->getTextureReference());
+                maxValue2 = reduction.getMaximumCPU(multipleHeatmaps[1]->getTextureReference());
+                
+                mixShader.begin();
+                mixShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
+                mixShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
+                mixShader.setUniform1f("maxValue1", maxValue1);
+                mixShader.setUniform1f("maxValue2", maxValue2);
+                multipleHeatmaps[0]->draw();
+                mixShader.end();
+            }
+
+            heatmap2.end();
+            
+            heatmap2.draw(0,0);
+        }
+
     }
     
 private:

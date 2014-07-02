@@ -1513,8 +1513,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				HEADER_SEARCH_PATHS = (
-					"$(OF_CORE_HEADERS)",
-					"$(OPENCV_HEADERS_PATH)",
+					"$(HEADER_SEARCH_PATHS)",
 					../../../addons/ofxOpenCv2461/libs/opencv/include,
 				);
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
@@ -1530,7 +1529,10 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"";
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
+					"-L/usr/local/lib",
 					"$(OPENCV_LIBS)",
+					"-lhdf5_hl",
+					"-lhdf5",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = NSCARPEDebug;
@@ -1557,8 +1559,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				HEADER_SEARCH_PATHS = (
-					"$(OF_CORE_HEADERS)",
-					"$(OPENCV_HEADERS_PATH)",
+					"$(HEADER_SEARCH_PATHS)",
 					../../../addons/ofxOpenCv2461/libs/opencv/include,
 				);
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
@@ -1574,7 +1575,10 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"";
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
+					"-L/usr/local/lib",
 					"$(OPENCV_LIBS)",
+					"-lhdf5_hl",
+					"-lhdf5",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = NSCARPE;
