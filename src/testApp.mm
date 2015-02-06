@@ -72,9 +72,20 @@
  */
 
 
-
 #include "testApp.h"
 #include "ofxFileDialogOSX.h"
+
+
+#define max(a,b) \
+({ __typeof__ (a) _a = (a); \
+__typeof__ (b) _b = (b); \
+_a > _b ? _a : _b; })
+
+#define min(a,b) \
+({ __typeof__ (a) _a = (a); \
+__typeof__ (b) _b = (b); \
+_a < _b ? _a : _b; })
+
 
 //--------------------------------------------------------------
 void testApp::setup() {
@@ -82,6 +93,7 @@ void testApp::setup() {
     
     bPaused = false;
     bShowDetail = false;
+    bNeedsUpdate = false;
     
     ofSetLogLevel(OF_LOG_NOTICE);
     ofEnableArbTex();
@@ -163,7 +175,7 @@ void testApp::update() {
         }
     }
     
-    if (!bPaused)
+    if (!bPaused || bNeedsUpdate)
     {
         
         if (bShowRealTime) {
@@ -179,15 +191,17 @@ void testApp::update() {
         if (bShowFlow) {
             flow.update(moviePlayer->getPixelsRef());
             flow.computeHistogramOfOrientedMotionGradients();
-    //        flow.computeFlowDevianceImage();
         }
 
         
-        movieFrameNumber+=frameIncrement;
+        if(!bPaused)
+            movieFrameNumber+=frameIncrement;
         
         ofLog(OF_LOG_NOTICE, "Processing Frame %f/%f", movieFrameNumber, movieTotalFrames);
         
     }
+    
+    bNeedsUpdate = false;
 }
 
 //--------------------------------------------------------------
@@ -197,28 +211,31 @@ void testApp::draw() {
         return;
     }
     
-    if(!bPaused)
+
+    recorderFbo.begin();
+    
+    if (bShowMovie)
     {
-        recorderFbo.begin();
         moviePlayer->draw(0, 0);
-        ofEnableAlphaBlending();
-        
-        if (bShowFlow) {
-            ofSetColor(255,255,255,150);
-            if (bShowFlowMagnitude) {
-                flow.drawMagnitude(0, 0, moviePlayer->getWidth(), moviePlayer->getHeight());
-            }
-            else if (bShowFlowDirection)
-                flow.drawFlowDeviance(0, 0, moviePlayer->getWidth(), moviePlayer->getHeight());
-        }
-        
-        ofSetColor(255,255,255,255);
-        
-        eyeMovements->draw(bShowMeanBinocular, bShowEyes, bShowSaccades, bShowHeatmap, bShowDifferenceHeatmap, bShowDetail);
-        ofDisableAlphaBlending();
-        recorderFbo.end();
-        
     }
+    
+    ofEnableAlphaBlending();
+    
+    if (bShowFlow) {
+        ofSetColor(255,255,255,150);
+        if (bShowFlowMagnitude) {
+            flow.drawMagnitude(0, 0, moviePlayer->getWidth(), moviePlayer->getHeight());
+        }
+        else if (bShowFlowDirection)
+            flow.drawColorFlow(0, 0, moviePlayer->getWidth(), moviePlayer->getHeight());
+    }
+    
+    ofSetColor(255,255,255,255);
+    
+    eyeMovements->draw(bShowMeanBinocular, bShowEyes, bShowSaccades, bShowHeatmap, bShowDifferenceHeatmap, bShowDetail, bShowNormalized, bShowClustering, bPaused);
+    ofDisableAlphaBlending();
+    recorderFbo.end();
+        
     recorderFbo.draw(0, 0);
     
     
@@ -230,7 +247,7 @@ void testApp::draw() {
     
     if (bShowDetail) {
         ofDrawBitmapString("frame: " + ofToString(movieFrameNumber) + "/" + ofToString(movieTotalFrames), ofPoint(20, 20));
-        ofDrawBitmapString("stimulus: " + ofToString(currentExperiment+1) + "/" + ofToString(numberOfExperiments), ofPoint(20, 20));
+        ofDrawBitmapString("stimulus: " + ofToString(currentExperiment+1) + "/" + ofToString(numberOfExperiments), ofPoint(20, 32));
     }
     
 }
@@ -243,6 +260,16 @@ void testApp::keyPressed(int key) {
         bPaused = !bPaused;
     else if(key == 'd')
         bShowDetail = !bShowDetail;
+    else if(key == '[')
+    {
+        movieFrameNumber = max(0, movieFrameNumber - 1);
+        bNeedsUpdate = true;
+    }
+    else if(key == ']')
+    {
+        movieFrameNumber = min(movieTotalFrames - 1, movieFrameNumber + 1);
+        bNeedsUpdate = true;
+    }
 }
 
 //--------------------------------------------------------------
@@ -307,34 +334,33 @@ void testApp::loadUserSettings() {
     {
         settings.pushTag("show");
         {
-            bAutoQuitAfterProcessing = settings.getValue("autoquit", true);
-            bShowRealTime = settings.getValue("realtime", false);
-            bShowClustering = settings.getValue("clustering", false);
-            bShowAlphaScreen = settings.getValue("peekthrough", false);
-            bShowContours = settings.getValue("contours", false);
-            bShowEyes = settings.getValue("eyes", true);
-            bShowSaccades = settings.getValue("saccades", true);
-            bShowHeatmap = settings.getValue("heatmap", true);
-            bShowDifferenceHeatmap = settings.getValue("differenceheatmap", true);
-            bShowMeanBinocular = settings.getValue("meanbinocular", true);
-            bShowMovie = settings.getValue("movie", true);
-            bShowFlow = settings.getValue("visualsaliency", true);
-            bShowFlowMagnitude = settings.getValue("visualsaliencymagnitude", true);
-            bShowFlowDirection = settings.getValue("visualsaliencydirection", false);
-            bShowNormalized = settings.getValue("normalizedheatmap", true);
-            bShowRadialBlur = settings.getValue("radialblur", false);
-            bShowHistogram = settings.getValue("histogram", false);
-            bShowSaccades = settings.getValue("saccades", false);
-            bShowSubjectNames = settings.getValue("subjectnames", false);
-//            frameIncrement = settings.getValue("framerate", 25.0f);
+            bAutoQuitAfterProcessing = ofToLower(settings.getValue("autoquit", "true")) == "true";
+            bShowRealTime = ofToLower(settings.getValue("realtime", "false")) == "true";
+            bShowClustering = ofToLower(settings.getValue("clustering", "false")) == "true";
+            bShowAlphaScreen = ofToLower(settings.getValue("peekthrough", "false")) == "true";
+            bShowContours = ofToLower(settings.getValue("contours", "false")) == "true";
+            bShowEyes = ofToLower(settings.getValue("eyes", "true")) == "true";
+            bShowSaccades = ofToLower(settings.getValue("saccades", "true")) == "true";
+            bShowHeatmap = ofToLower(settings.getValue("heatmap", "true")) == "true";
+            bShowDifferenceHeatmap = ofToLower(settings.getValue("differenceheatmap", "true")) == "true";
+            bShowMeanBinocular = ofToLower(settings.getValue("meanbinocular", "true")) == "true";
+            bShowMovie = ofToLower(settings.getValue("movie", "true")) == "true";
+            bShowFlow = ofToLower(settings.getValue("visualsaliency", "true")) == "true";
+            bShowFlowMagnitude = ofToLower(settings.getValue("visualsaliencymagnitude", "true")) == "true";
+            bShowFlowDirection = ofToLower(settings.getValue("visualsaliencydirection", "false")) == "true";
+            bShowNormalized = ofToLower(settings.getValue("normalizedheatmap", "true")) == "true";
+            bShowRadialBlur = ofToLower(settings.getValue("radialblur", "false")) == "true";
+            bShowHistogram = ofToLower(settings.getValue("histogram", "false")) == "true";
+            bShowSaccades = ofToLower(settings.getValue("saccades", "false")) == "true";
+            bShowSubjectNames = ofToLower(settings.getValue("subjectnames", "false")) == "true";
         }
         settings.popTag();
         settings.pushTag("save");
         {
             saveMovieURL = settings.getValue("location", "");
-            bSaveMovie = settings.getValue("movie", true);
-            bSaveMovieImages = settings.getValue("images", false);
-            bExportMotionDescriptorsToHDF = settings.getValue("motiondescriptors", true);
+            bSaveMovie = ofToLower(settings.getValue("movie", "true")) == "true";
+            bSaveMovieImages = ofToLower(settings.getValue("images", "false")) == "true";
+            bExportMotionDescriptorsToHDF = ofToLower(settings.getValue("motiondescriptors", "true")) == "true";
         }
         settings.popTag();
     }
@@ -363,7 +389,7 @@ void testApp::initializeExperiment() {
             {
                 screenWidth = settings.getValue("screenwidth", 800);
                 screenHeight = settings.getValue("screenheight", 600);
-                bCalculateMovieOffset = settings.getValue("centermovie", true);
+                bCalculateMovieOffset = ofToLower(settings.getValue("centermovie", "true")) == "true";
                 movieOffsetX = settings.getValue("movieoffsetx", 0);
                 movieOffsetY = settings.getValue("movieoffsety", 0);
             }
@@ -372,7 +398,7 @@ void testApp::initializeExperiment() {
             string movieURL;
             settings.pushTag("movie");
             {
-                movieFrameRate = settings.getValue("framerate", 25.0f);
+                movieFrameRate = settings.getValue("framerate", 30.0f);
                 frameIncrement = 1.0;//movieFrameRate / frameIncrement;
                 movieURL = settings.getValue("file", "");
                 ofLog(OF_LOG_NOTICE, "Reading %s", movieURL.c_str());
@@ -382,9 +408,10 @@ void testApp::initializeExperiment() {
             
             settings.pushTag("eyemovements");
             {
-                bLoadBinocular = settings.getValue("binocular", true);
-                bLoadClassifiedData = settings.getValue("classified", false);
-                bLoadArringtonResearchFormat = settings.getValue("arrington", false);
+                bLoadBinocular = ofToLower(settings.getValue("binocular", "true")) == "true";
+                bLoadMillisecondFormat = ofToLower(settings.getValue("millisecond", "false")) == "true";
+                bLoadClassifiedData = ofToLower(settings.getValue("classified", "false")) == "true";
+                bLoadArringtonResearchFormat = ofToLower(settings.getValue("arrington", "false")) == "true";
                 int numConditions = settings.getNumTags("path");
                 cout << "[loadUserSettings()]::[OK] Reading " << numConditions << " conditions." << endl;
                 vector<string> paths;
@@ -539,7 +566,7 @@ void testApp::initializeEyeTrackingData(vector<string> paths)
             eyeMovements->loadArringtonFiles(paths[i]);
         else
             //eyeMovements->loadFiles(paths[i], movieName, bLoadBinocular, i);
-            eyeMovements->loadFiles(paths[i], bLoadBinocular, i);
+            eyeMovements->loadFiles(paths[i], bLoadBinocular, bLoadMillisecondFormat, i);
     }
 }
 
@@ -549,4 +576,11 @@ void testApp::exportMotionDescriptorsToHDF5()
 //    flow.exportHOMGToHDF5();                                  // HDF5 broken in universal build...
 //    flow.exportHOMGToPPM(saveMovieURL + "/", movieName);      // not enough precision
     flow.exportHOMGToYML(saveMovieURL + "/", movieName);        // requires importing opencv into python...
+}
+
+
+//--------------------------------------------------------------
+void testApp::exportFrame()
+{
+    
 }

@@ -75,14 +75,18 @@
 #pragma once
 
 #include "ofMain.h"
+#include "pkmMatrix.h"
+#include "pkmDPGMM.h"
 
-#define MAXSIZE 100
+#define MAXSIZE 150
 #define STRINGIFY(A) #A
 
+//--------------------------------------------------------------
 class pkmMixtureOfGaussians
 {
 public:
     
+    //--------------------------------------------------------------
     pkmMixtureOfGaussians()
     {
         means = (float *)malloc(sizeof(float)*2*MAXSIZE);
@@ -91,13 +95,19 @@ public:
         size = 0;
         bAllocated = true;
     }
+    //--------------------------------------------------------------
+    
+    
+    //--------------------------------------------------------------
     ~pkmMixtureOfGaussians()
     {
         free(means);
         free(sigmas);
         free(weights);
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void setGaussians(vector<ofVec2f> mean, vector<ofVec2f> sigma, vector<float> weight)
     {
         assert(mean.size() == sigma.size());
@@ -114,22 +124,30 @@ public:
             weights[i] = weight[i];
         }
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     float *getMeans()
     {
         return means;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     float *getSigmas()
     {
         return sigmas;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     float *getWeights()
     {
         return weights;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void clear()
     {
         for(int i = 0; i < size; i++)
@@ -141,19 +159,25 @@ public:
             weights[i] = 0;
         }
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void allocate(int n)
     {
         resize(n);
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void resize(int n)
     {
         
         size = n;
         clear();
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void scale(float scalar)
     {
         for(int i = 0; i < size*2; i++)
@@ -162,30 +186,44 @@ public:
             sigmas[i] *= scalar;
         }
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     int length()
     {
         return size;
     }
+    //--------------------------------------------------------------
     
 private:
     
+    //--------------------------------------------------------------
     int size;
+    
+    
+    //--------------------------------------------------------------
     float *means;       // 2xN
     float *sigmas;      // 2xN
     float *weights;     // N
     
+    
+    //--------------------------------------------------------------
     bool bAllocated;
     
 };
 
+//--------------------------------------------------------------
 class pkmReductionChain
 {
 public:
+    //--------------------------------------------------------------
     pkmReductionChain()
     {
+        
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void allocate(int w, int h)
     {
         
@@ -220,7 +258,9 @@ public:
             i++;
         }
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     double getEntropyCPU(ofTexture& tex)
     {
         ofFloatPixels pixels;
@@ -228,24 +268,28 @@ public:
         double entropy = 0.0f;
         //cout << "w: " << tex.getWidth() << " h: " << tex.getHeight() << endl;
         for (int i = 0; i < tex.getWidth() * tex.getHeight(); i++) {
-            entropy += pixels[4*i + 3] * logf(pixels[4*i + 3]);
+            entropy += pixels[4*i] * logf(pixels[4*i]);
         }
         return entropy;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     double getMaximumCPU(ofTexture& tex)
     {
         ofFloatPixels pixels;
         tex.readToPixels(pixels);
         double maxValue = 0.0f;
-        //cout << "w: " << tex.getWidth() << " h: " << tex.getHeight() << endl;
+//        cout << "w: " << tex.getWidth() << " h: " << tex.getHeight() << endl;
         for (int i = 0; i < tex.getWidth() * tex.getHeight(); i++) {
-            if(maxValue < pixels[4*i + 3])
-                maxValue = pixels[4*i + 3];
+            if(maxValue < pixels[4*i])
+                maxValue = pixels[4*i];
         }
         return maxValue;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     float getMaximum(ofTexture& tex)
     {
         ofFloatPixels pixels;
@@ -284,8 +328,9 @@ public:
         
         return maxValue;
     }
+    //--------------------------------------------------------------
     
-    
+    //--------------------------------------------------------------
     void drawReduction()
     {
         ofPushMatrix();
@@ -295,35 +340,44 @@ public:
         }
         ofPopMatrix();
     }
+    //--------------------------------------------------------------
     
 private:
+    //--------------------------------------------------------------
     vector<ofFbo>           reductionChain;
     ofShader                reductionShader;
     int                     width, height;
+    //--------------------------------------------------------------
 };
 
+//--------------------------------------------------------------
 class pkmMixtureOfGaussiansHeatmap
 {
 public:
     
+    //--------------------------------------------------------------
     enum colormode {
         heatmap_jet,
         heatmap_hot,
         heatmap_cool,
         heatmap_gray
     };
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     pkmMixtureOfGaussiansHeatmap()
     {
         bAllocated = false;
         bNeedsUpdate = true;
         bNormalize = true;
         ofLog(OF_LOG_NOTICE, "Loading Mixture Model Shader...");
-        posteriorMap.load(ofToDataPath("gaussianMixtureModel", true));
+        posteriorMap.load(ofToDataPath("gaussianMixtureModel"));
         setColorMap(heatmap_jet);
         maxValue = 1.0f;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void allocate(int w, int h, float s = 1.0)
     {
         scale = s;
@@ -365,7 +419,9 @@ public:
         
         bAllocated = true;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void setColorMap(colormode c)
     {
         if (c == heatmap_jet) {
@@ -387,99 +443,47 @@ public:
         
         bNeedsUpdate = true;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void toggleNormalization()
     {
         bNormalize = !bNormalize;
         
         bNeedsUpdate = true;
     }
+    //--------------------------------------------------------------
     
-    void setMixture(pkmMixtureOfGaussians mix)
-    {
-        mixture = mix;
-        
-        mixture.scale(scale);
-        
-        //        float heatmapScalar = 0.0;
-        //        for (int i = 0; i < mixture.length(); i++) {
-        //            float a = 1.0 / (2.0 * PI * mixture.getSigmas()[2*i+0] * mixture.getSigmas()[2*i+0]);
-        //            heatmapScalar = max(heatmapScalar,(a * mixture.getWeights()[i] * expf(0.0)));
-        //        }
-        
-        posteriorMapFBO.begin();
-        {
-            glClear( GL_COLOR_BUFFER_BIT );
-            
-            posteriorMap.begin();
-            {
-                posteriorMap.setUniform2fv("means", mixture.getMeans(), MAXSIZE);
-                posteriorMap.setUniform2fv("sigmas", mixture.getSigmas(), MAXSIZE);
-                posteriorMap.setUniform1fv("weights", mixture.getWeights(), MAXSIZE);
-                posteriorMap.setUniform1i("totalGaussians", MIN(MAXSIZE,mixture.length()));
-                //                posteriorMap.setUniform1f("scalar", 1.0);
-                posteriorMap.setUniformTexture("image", posteriorMap2FBO.getTextureReference(), 0);
-                
-                posteriorMap2FBO.draw(0, 0, width, height);
-            }
-            posteriorMap.end();
-        }
-        posteriorMapFBO.end();
-        
-        normalizeHeatmap();
-        
-        bNeedsUpdate = true;
-    }
-    
-    void resetMixture()
-    {
-        mixture.clear();
-        means.resize(0);
-        sigmas.resize(0);
-        weights.resize(0);
-    }
-    
+    //--------------------------------------------------------------
     void addPoint(ofVec2f mean, ofVec2f sigma, float weight)
     {
         means.push_back(mean);
         sigmas.push_back(sigma);
         weights.push_back(weight);
     }
+    //--------------------------------------------------------------
     
-    void buildMixture()
+    //--------------------------------------------------------------
+    void addPointForFrame(int frame, ofVec2f mean, ofVec2f sigma, float weight)
     {
-        int totalGaussians = means.size();
-        if(totalGaussians > 0)
-        {
-            mixture.setGaussians(means, sigmas, weights);
-            
-            posteriorMap2FBO.begin();
-            glClear( GL_COLOR_BUFFER_BIT );
-            posteriorMap2FBO.end();
-            
-            posteriorMapFBO.begin();
-            glClear( GL_COLOR_BUFFER_BIT );
-            
-            posteriorMap.begin();
-            posteriorMap.setUniform2fv("means", mixture.getMeans(), MAXSIZE);
-            posteriorMap.setUniform2fv("sigmas", mixture.getSigmas(), MAXSIZE);
-            posteriorMap.setUniform1fv("weights", mixture.getWeights(), MAXSIZE);
-            posteriorMap.setUniform1i("totalGaussians", MIN(totalGaussians, MAXSIZE));
-            posteriorMap.setUniformTexture("image", posteriorMap2FBO.getTextureReference(), 0);
-            posteriorMap2FBO.draw(0, 0, width, height);
-            posteriorMap.end();
-            
-            posteriorMapFBO.end();
-            
-            normalizeHeatmap();
-            bNeedsUpdate = true;
-        }
-        else
-        {
-            ofLog(OF_LOG_WARNING, "No gaussians to draw!");
-        }
+        means.push_back(mean);
+        sigmas.push_back(sigma);
+        weights.push_back(weight);
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
+    void setMixture(pkmMixtureOfGaussians mix)
+    {
+        mixture = mix;
+        
+        mixture.scale(scale);
+        
+        bNeedsUpdate = true;
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
     void setMixture(vector<ofVec2f> means,
                     vector<ofVec2f> sigmas,
                     vector<float> weights)
@@ -495,31 +499,38 @@ public:
         
         mixture.setGaussians(means, sigmas, weights);
         
-        posteriorMapFBO.begin();
-        {
-            glClear( GL_COLOR_BUFFER_BIT );
-            
-            posteriorMap.begin();
-            {
-                posteriorMap.setUniform2fv("means", mixture.getMeans(), MAXSIZE);
-                posteriorMap.setUniform2fv("sigmas", mixture.getSigmas(), MAXSIZE);
-                posteriorMap.setUniform1fv("weights", mixture.getWeights(), MAXSIZE);
-                posteriorMap.setUniform1i("totalGaussians", MIN(totalGaussians, MAXSIZE));
-                //                posteriorMap.setUniform1f("scalar", 1.0f);
-                posteriorMap.setUniformTexture("image", posteriorMap2FBO.getTextureReference(), 0);
-                
-                posteriorMap2FBO.draw(0, 0, width, height);
-            }
-            posteriorMap.end();
-        }
-        posteriorMapFBO.end();
-        
-        normalizeHeatmap();
-        
         bNeedsUpdate = true;
-        
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
+    void resetMixture()
+    {
+        mixture.clear();
+        means.resize(0);
+        sigmas.resize(0);
+        weights.resize(0);
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void buildMixture()
+    {
+        int totalGaussians = means.size();
+        if(totalGaussians > 0)
+        {
+            mixture.setGaussians(means, sigmas, weights);
+            
+            bNeedsUpdate = true;
+        }
+        else
+        {
+            ofLog(OF_LOG_WARNING, "No gaussians to draw!");
+        }
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
     void setRandomMixture(int totalGaussians = MAXSIZE)
     {
         mixture.clear();
@@ -542,34 +553,68 @@ public:
         
         mixture.setGaussians(means, sigmas, weights);
         
-        posteriorMapFBO.begin();
-        {
-            glClear( GL_COLOR_BUFFER_BIT );
-            
-            posteriorMap.begin();
-            {
-                posteriorMap.setUniform2fv("means", mixture.getMeans(), totalGaussians);
-                posteriorMap.setUniform2fv("sigmas", mixture.getSigmas(), totalGaussians);
-                posteriorMap.setUniform1fv("weights", mixture.getWeights(), totalGaussians);
-                posteriorMap.setUniform1i("totalGaussians", MIN(totalGaussians, MAXSIZE));
-                posteriorMap.setUniformTexture("image", posteriorMap2FBO.getTextureReference(), 0);
-                
-                posteriorMap2FBO.draw(0, 0, width, height);
-            }
-            posteriorMap.end();
-        }
-        posteriorMapFBO.end();
-        
-        normalizeHeatmap();
         
         bNeedsUpdate = true;
     }
+    //--------------------------------------------------------------
     
-    void update()
+    //--------------------------------------------------------------
+    void update(bool bCluster)
     {
         if(bNeedsUpdate)
         {
             bNeedsUpdate = false;
+            
+            posteriorMapFBO.begin();
+            {
+                glClear( GL_COLOR_BUFFER_BIT );
+                
+                posteriorMap.begin();
+                {
+                    int totalGaussians = means.size();
+                    
+                    if(bCluster)
+                    {
+                        size_t feature_length = 2;
+                        pkm::Mat input(mixture.length(), feature_length, mixture.getMeans()), means, covars, sigmas, weights;
+                        pkmDPGMM::cluster(input, means, covars, weights, feature_length);
+                        for(int i = 0; i <= means.rows; i++)
+                        {
+                            for(int f = 0; f < feature_length; f++)
+                                sigmas.push_back(covars.row(2*i+f)[f]);
+                        }
+                        sigmas.sqrt();
+                        
+//                        cout << "input: " <<endl;
+//                        input.print();
+//                        cout << "means: " <<endl;
+//                        means.print();
+//                        cout << "sigmas: " <<endl;
+//                        sigmas.print();
+//                        cout << "weights: " <<endl;
+//                        weights.print();
+                        
+                        posteriorMap.setUniform2fv("means", means.data, means.rows);
+                        posteriorMap.setUniform2fv("sigmas", sigmas.data, means.rows);
+                        posteriorMap.setUniform1fv("weights", weights.data, means.rows);
+                        posteriorMap.setUniform1i("totalGaussians", MIN(totalGaussians, means.rows));
+                    }
+                    else
+                    {
+                        posteriorMap.setUniform2fv("means", mixture.getMeans(), MAXSIZE);
+                        posteriorMap.setUniform2fv("sigmas", mixture.getSigmas(), MAXSIZE);
+                        posteriorMap.setUniform1fv("weights", mixture.getWeights(), MAXSIZE);
+                        posteriorMap.setUniform1i("totalGaussians", MIN(totalGaussians, MAXSIZE));
+                    }
+                    //                posteriorMap.setUniform1f("scalar", 1.0f);
+                    posteriorMap.setUniformTexture("image", posteriorMap2FBO.getTextureReference(), 0);
+                    
+                    posteriorMap2FBO.draw(0, 0, width, height);
+                }
+                posteriorMap.end();
+            }
+            posteriorMapFBO.end();
+            
             finalFBO.begin();
             glClear(GL_COLOR_BUFFER_BIT);
             colormap.begin();
@@ -580,70 +625,98 @@ public:
             finalFBO.end();
         }
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void normalizeHeatmap()
     {
         if(bNormalize)
         {
             maxValue = reduction.getMaximumCPU(posteriorMapFBO.getTextureReference());
+            cout << "max value: " << maxValue << endl;
         }
         else
         {
             maxValue = 1.0f;
         }
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void drawUnColored()
     {
         posteriorMapFBO.draw(0, 0, width, height);
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void draw()
     {
         finalFBO.draw(0, 0, width, height);
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     ofTexture & getTextureReferenceOfUnColored()
     {
         return posteriorMapFBO.getTextureReference();
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     ofTexture & getTextureReference()
     {
         return finalFBO.getTextureReference();
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     void clear()
     {
         resetMixture();
         bNeedsUpdate = true;
     }
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     double getMaxValue()
     {
         return maxValue;
     }
+    //--------------------------------------------------------------
     
 private:
+    //--------------------------------------------------------------
     ofShader                colormap;
     ofShader                posteriorMap;
     pkmMixtureOfGaussians   mixture;
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     vector<ofVec2f>         means;
     vector<ofVec2f>         sigmas;
     vector<float>           weights;
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     ofFbo                   posteriorMap2FBO;
     ofFbo                   posteriorMapFBO;
     ofFbo                   finalFBO;
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     pkmReductionChain       reduction;
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     bool                    bAllocated, bNeedsUpdate, bNormalize;
+    //--------------------------------------------------------------
     
+    //--------------------------------------------------------------
     int                     width, height;
     float                   scale;
     double                  maxValue;
+    //--------------------------------------------------------------
     
 };
 

@@ -9,40 +9,6 @@
 /* Begin PBXBuildFile section */
 		890866DC19619B7700462E97 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 890866DB19619B7700462E97 /* QTKit.framework */; };
 		890866DE19619B9200462E97 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 890866DD19619B9200462E97 /* Accelerate.framework */; };
-		890866DF19619DA900462E97 /* subtract.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29EA1771FDD000BDD593 /* subtract.frag */; };
-		890866E019619DA900462E97 /* subtract.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29EB1771FDD000BDD593 /* subtract.vert */; };
-		890866E119619DA900462E97 /* add.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29E61771FDB500BDD593 /* add.frag */; };
-		890866E219619DA900462E97 /* add.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29E71771FDB500BDD593 /* add.vert */; };
-		890866E319619DA900462E97 /* gaussianMixtureModel3D.frag in Resources */ = {isa = PBXBuildFile; fileRef = 897AADDD17773FF200CD8E10 /* gaussianMixtureModel3D.frag */; };
-		890866E419619DA900462E97 /* gaussianMixtureModel3D.vert in Resources */ = {isa = PBXBuildFile; fileRef = 897AADDE17773FF200CD8E10 /* gaussianMixtureModel3D.vert */; };
-		890866E519619DA900462E97 /* gaussianMixtureModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29A8176FC75900BDD593 /* gaussianMixtureModel.frag */; };
-		890866E619619DA900462E97 /* gaussianMixtureModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29A9176FC75900BDD593 /* gaussianMixtureModel.vert */; };
-		890866E719619DA900462E97 /* norm.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29CC1771272000BDD593 /* norm.frag */; };
-		890866E819619DA900462E97 /* norm.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29CD1771272000BDD593 /* norm.vert */; };
-		890866E919619DA900462E97 /* diffheatmap2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29D01771335700BDD593 /* diffheatmap2.frag */; };
-		890866EA19619DA900462E97 /* diffheatmap2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29D31771335700BDD593 /* diffheatmap2.vert */; };
-		890866EB19619DA900462E97 /* diffheatmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29D11771335700BDD593 /* diffheatmap.frag */; };
-		890866EC19619DA900462E97 /* diffheatmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89DB29D21771335700BDD593 /* diffheatmap.vert */; };
-		890866ED19619DA900462E97 /* mix.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D4163AB0F700222F56 /* mix.frag */; };
-		890866EE19619DA900462E97 /* mix.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E4163AB0F700222F56 /* mix.vert */; };
-		890866EF19619DA900462E97 /* heatmap1.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D5163AB0F700222F56 /* heatmap1.frag */; };
-		890866F019619DA900462E97 /* heatmap2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D6163AB0F700222F56 /* heatmap2.frag */; };
-		890866F119619DA900462E97 /* jetmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D7163AB0F700222F56 /* jetmap.frag */; };
-		890866F219619DA900462E97 /* jetmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E2163AB0F700222F56 /* jetmap.vert */; };
-		890866F319619DA900462E97 /* cp.gaussian.2p.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D8163AB0F700222F56 /* cp.gaussian.2p.frag */; };
-		890866F419619DA900462E97 /* cp.gaussian.2p.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DC163AB0F700222F56 /* cp.gaussian.2p.vert */; };
-		890866F519619DA900462E97 /* hotmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6D9163AB0F700222F56 /* hotmap.frag */; };
-		890866F619619DA900462E97 /* hotmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E1163AB0F700222F56 /* hotmap.vert */; };
-		890866F719619DA900462E97 /* coolmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DA163AB0F700222F56 /* coolmap.frag */; };
-		890866F819619DA900462E97 /* coolmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DD163AB0F700222F56 /* coolmap.vert */; };
-		890866F919619DA900462E97 /* doh.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DB163AB0F700222F56 /* doh.frag */; };
-		890866FA19619DA900462E97 /* doh.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E3163AB0F700222F56 /* doh.vert */; };
-		890866FB19619DA900462E97 /* heatmap1.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DF163AB0F700222F56 /* heatmap1.vert */; };
-		890866FC19619DA900462E97 /* heatmap2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E0163AB0F700222F56 /* heatmap2.vert */; };
-		890866FD19619DA900462E97 /* graymap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E6163AB0F700222F56 /* graymap.frag */; };
-		890866FE19619DA900462E97 /* graymap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6DE163AB0F700222F56 /* graymap.vert */; };
-		890866FF19619DA900462E97 /* maxreduction.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E5163AB0F700222F56 /* maxreduction.frag */; };
-		8908670019619DA900462E97 /* maxreduction.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8928C6E7163AB0F700222F56 /* maxreduction.vert */; };
 		890868261961A90900462E97 /* install.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8908672E1961A90900462E97 /* install.xml */; };
 		890868271961A90900462E97 /* libopencv_calib3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 890867EB1961A90900462E97 /* libopencv_calib3d.a */; };
 		890868281961A90900462E97 /* libopencv_contrib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 890867EC1961A90900462E97 /* libopencv_contrib.a */; };
@@ -78,48 +44,58 @@
 		890868571961B36F00462E97 /* pkmOpticalFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 890868521961B36F00462E97 /* pkmOpticalFlow.cpp */; };
 		8928C60C16399D8D00222F56 /* ofxFileDialogOSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C60A16399D8D00222F56 /* ofxFileDialogOSX.cpp */; };
 		8928C6CA163A9ADC00222F56 /* pkmEyeMovementCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6C9163A9ADC00222F56 /* pkmEyeMovementCollection.cpp */; };
-		8928C6E8163AB0F700222F56 /* mix.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6D4163AB0F700222F56 /* mix.frag */; };
-		8928C6E9163AB0F700222F56 /* heatmap1.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6D5163AB0F700222F56 /* heatmap1.frag */; };
-		8928C6EA163AB0F700222F56 /* heatmap2.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6D6163AB0F700222F56 /* heatmap2.frag */; };
-		8928C6EB163AB0F700222F56 /* jetmap.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6D7163AB0F700222F56 /* jetmap.frag */; };
-		8928C6EC163AB0F700222F56 /* cp.gaussian.2p.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6D8163AB0F700222F56 /* cp.gaussian.2p.frag */; };
-		8928C6ED163AB0F700222F56 /* hotmap.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6D9163AB0F700222F56 /* hotmap.frag */; };
-		8928C6EE163AB0F700222F56 /* coolmap.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6DA163AB0F700222F56 /* coolmap.frag */; };
-		8928C6EF163AB0F700222F56 /* doh.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6DB163AB0F700222F56 /* doh.frag */; };
-		8928C6F0163AB0F700222F56 /* cp.gaussian.2p.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6DC163AB0F700222F56 /* cp.gaussian.2p.vert */; };
-		8928C6F1163AB0F700222F56 /* coolmap.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6DD163AB0F700222F56 /* coolmap.vert */; };
-		8928C6F2163AB0F700222F56 /* graymap.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6DE163AB0F700222F56 /* graymap.vert */; };
-		8928C6F3163AB0F700222F56 /* heatmap1.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6DF163AB0F700222F56 /* heatmap1.vert */; };
-		8928C6F4163AB0F700222F56 /* heatmap2.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E0163AB0F700222F56 /* heatmap2.vert */; };
-		8928C6F5163AB0F700222F56 /* hotmap.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E1163AB0F700222F56 /* hotmap.vert */; };
-		8928C6F6163AB0F700222F56 /* jetmap.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E2163AB0F700222F56 /* jetmap.vert */; };
-		8928C6F7163AB0F700222F56 /* doh.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E3163AB0F700222F56 /* doh.vert */; };
-		8928C6F8163AB0F700222F56 /* mix.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E4163AB0F700222F56 /* mix.vert */; };
-		8928C6F9163AB0F700222F56 /* maxreduction.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E5163AB0F700222F56 /* maxreduction.frag */; };
-		8928C6FA163AB0F700222F56 /* graymap.frag in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E6163AB0F700222F56 /* graymap.frag */; };
-		8928C6FB163AB0F700222F56 /* maxreduction.vert in Sources */ = {isa = PBXBuildFile; fileRef = 8928C6E7163AB0F700222F56 /* maxreduction.vert */; };
 		8928C78A163AB21500222F56 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C77A163AB21500222F56 /* tinyxml.cpp */; };
 		8928C78B163AB21500222F56 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C77C163AB21500222F56 /* tinyxmlerror.cpp */; };
 		8928C78C163AB21500222F56 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C77D163AB21500222F56 /* tinyxmlparser.cpp */; };
 		8928C78D163AB21500222F56 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8928C77F163AB21500222F56 /* ofxXmlSettings.cpp */; };
 		892921BF1755CE8A00497C24 /* ofxQTKitRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 892921B11755CE8A00497C24 /* ofxQTKitRecorder.mm */; };
 		892921C01755CE8A00497C24 /* ofxQTKitVideoGrabber.mm in Sources */ = {isa = PBXBuildFile; fileRef = 892921B41755CE8A00497C24 /* ofxQTKitVideoGrabber.mm */; };
-		897AADDF17773FF200CD8E10 /* gaussianMixtureModel3D.frag in Sources */ = {isa = PBXBuildFile; fileRef = 897AADDD17773FF200CD8E10 /* gaussianMixtureModel3D.frag */; };
-		897AADE017773FF200CD8E10 /* gaussianMixtureModel3D.vert in Sources */ = {isa = PBXBuildFile; fileRef = 897AADDE17773FF200CD8E10 /* gaussianMixtureModel3D.vert */; };
 		899E1DC0163AC13E0088E6F4 /* ofxFbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 899E1DBE163AC13E0088E6F4 /* ofxFbo.cpp */; };
-		89AB8CCE1642E9830088E218 /* usersettings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89AB8CCD1642E9820088E218 /* usersettings.xml */; };
-		89DB29AA176FC75900BDD593 /* gaussianMixtureModel.frag in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29A8176FC75900BDD593 /* gaussianMixtureModel.frag */; };
-		89DB29AB176FC75900BDD593 /* gaussianMixtureModel.vert in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29A9176FC75900BDD593 /* gaussianMixtureModel.vert */; };
-		89DB29CE1771272000BDD593 /* norm.frag in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29CC1771272000BDD593 /* norm.frag */; };
-		89DB29CF1771272000BDD593 /* norm.vert in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29CD1771272000BDD593 /* norm.vert */; };
-		89DB29D41771335700BDD593 /* diffheatmap2.frag in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29D01771335700BDD593 /* diffheatmap2.frag */; };
-		89DB29D51771335700BDD593 /* diffheatmap.frag in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29D11771335700BDD593 /* diffheatmap.frag */; };
-		89DB29D61771335700BDD593 /* diffheatmap.vert in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29D21771335700BDD593 /* diffheatmap.vert */; };
-		89DB29D71771335700BDD593 /* diffheatmap2.vert in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29D31771335700BDD593 /* diffheatmap2.vert */; };
-		89DB29E81771FDB500BDD593 /* add.frag in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29E61771FDB500BDD593 /* add.frag */; };
-		89DB29E91771FDB500BDD593 /* add.vert in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29E71771FDB500BDD593 /* add.vert */; };
-		89DB29EC1771FDD000BDD593 /* subtract.frag in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29EA1771FDD000BDD593 /* subtract.frag */; };
-		89DB29ED1771FDD000BDD593 /* subtract.vert in Sources */ = {isa = PBXBuildFile; fileRef = 89DB29EB1771FDD000BDD593 /* subtract.vert */; };
+		89A18D67196CCA6C006BE759 /* liblibcluster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8970053A196A0C480013A62C /* liblibcluster.a */; };
+		89EA8C891A84F5D200F66FDA /* pkmMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 89EA8C781A84F5D200F66FDA /* pkmMatrix.cpp */; };
+		89EA8CC11A85369E00F66FDA /* gaussianMixtureModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C961A85369E00F66FDA /* gaussianMixtureModel.frag */; };
+		89EA8CC21A85369E00F66FDA /* mix.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C971A85369E00F66FDA /* mix.frag */; };
+		89EA8CC31A85369E00F66FDA /* diffheatmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C981A85369E00F66FDA /* diffheatmap.frag */; };
+		89EA8CC41A85369E00F66FDA /* homg.ppm in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C991A85369E00F66FDA /* homg.ppm */; };
+		89EA8CC51A85369E00F66FDA /* homg.h5 in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9A1A85369E00F66FDA /* homg.h5 */; };
+		89EA8CC61A85369E00F66FDA /* add.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9B1A85369E00F66FDA /* add.frag */; };
+		89EA8CC71A85369E00F66FDA /* add.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9C1A85369E00F66FDA /* add.vert */; };
+		89EA8CC81A85369E00F66FDA /* cp.gaussian.2p.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9D1A85369E00F66FDA /* cp.gaussian.2p.frag */; };
+		89EA8CC91A85369E00F66FDA /* cp.gaussian.2p.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9E1A85369E00F66FDA /* cp.gaussian.2p.vert */; };
+		89EA8CCA1A85369E00F66FDA /* diffheatmap 2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9F1A85369E00F66FDA /* diffheatmap 2.frag */; };
+		89EA8CCB1A85369E00F66FDA /* diffheatmap 2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA01A85369E00F66FDA /* diffheatmap 2.vert */; };
+		89EA8CCC1A85369E00F66FDA /* diffheatmap2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA11A85369E00F66FDA /* diffheatmap2.frag */; };
+		89EA8CCD1A85369E00F66FDA /* diffheatmap2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA21A85369E00F66FDA /* diffheatmap2.vert */; };
+		89EA8CCE1A85369E00F66FDA /* doh.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA31A85369E00F66FDA /* doh.frag */; };
+		89EA8CCF1A85369E00F66FDA /* doh.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA41A85369E00F66FDA /* doh.vert */; };
+		89EA8CD01A85369E00F66FDA /* gaussianMixtureModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA51A85369E00F66FDA /* gaussianMixtureModel.vert */; };
+		89EA8CD11A85369E00F66FDA /* gaussianMixtureModel3D.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA61A85369E00F66FDA /* gaussianMixtureModel3D.frag */; };
+		89EA8CD21A85369E00F66FDA /* gaussianMixtureModel3D.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA71A85369E00F66FDA /* gaussianMixtureModel3D.vert */; };
+		89EA8CD31A85369E00F66FDA /* gaussianSlow.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA81A85369E00F66FDA /* gaussianSlow.frag */; };
+		89EA8CD41A85369E00F66FDA /* gaussianSlow.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA91A85369E00F66FDA /* gaussianSlow.vert */; };
+		89EA8CD51A85369E00F66FDA /* graymap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAA1A85369E00F66FDA /* graymap.frag */; };
+		89EA8CD61A85369E00F66FDA /* graymap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAB1A85369E00F66FDA /* graymap.vert */; };
+		89EA8CD71A85369E00F66FDA /* heatmap1.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAC1A85369E00F66FDA /* heatmap1.frag */; };
+		89EA8CD81A85369E00F66FDA /* heatmap1.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAD1A85369E00F66FDA /* heatmap1.vert */; };
+		89EA8CD91A85369E00F66FDA /* heatmap2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAE1A85369E00F66FDA /* heatmap2.frag */; };
+		89EA8CDA1A85369E00F66FDA /* heatmap2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAF1A85369E00F66FDA /* heatmap2.vert */; };
+		89EA8CDB1A85369E00F66FDA /* jetmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB01A85369E00F66FDA /* jetmap.frag */; };
+		89EA8CDC1A85369E00F66FDA /* jetmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB11A85369E00F66FDA /* jetmap.vert */; };
+		89EA8CDD1A85369E00F66FDA /* maxreduction.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB21A85369E00F66FDA /* maxreduction.frag */; };
+		89EA8CDE1A85369E00F66FDA /* maxreduction.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB31A85369E00F66FDA /* maxreduction.vert */; };
+		89EA8CDF1A85369E00F66FDA /* mix 2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB41A85369E00F66FDA /* mix 2.frag */; };
+		89EA8CE01A85369E00F66FDA /* mix 2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB51A85369E00F66FDA /* mix 2.vert */; };
+		89EA8CE11A85369E00F66FDA /* mix.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB61A85369E00F66FDA /* mix.vert */; };
+		89EA8CE21A85369E00F66FDA /* norm.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB71A85369E00F66FDA /* norm.frag */; };
+		89EA8CE31A85369E00F66FDA /* norm.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB81A85369E00F66FDA /* norm.vert */; };
+		89EA8CE41A85369E00F66FDA /* usersettings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB91A85369E00F66FDA /* usersettings.xml */; };
+		89EA8CE51A85369E00F66FDA /* subtract.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBA1A85369E00F66FDA /* subtract.frag */; };
+		89EA8CE61A85369E00F66FDA /* hotmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBB1A85369E00F66FDA /* hotmap.frag */; };
+		89EA8CE71A85369E00F66FDA /* coolmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBC1A85369E00F66FDA /* coolmap.frag */; };
+		89EA8CE81A85369E00F66FDA /* diffheatmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBD1A85369E00F66FDA /* diffheatmap.vert */; };
+		89EA8CE91A85369E00F66FDA /* subtract.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBE1A85369E00F66FDA /* subtract.vert */; };
+		89EA8CEA1A85369E00F66FDA /* coolmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBF1A85369E00F66FDA /* coolmap.vert */; };
+		89EA8CEB1A85369E00F66FDA /* hotmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CC01A85369E00F66FDA /* hotmap.vert */; };
 		89F222F4176F43A400C65195 /* pkmMixtureOfGaussiansHeatmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 89F222F3176F43A400C65195 /* pkmMixtureOfGaussiansHeatmap.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -149,6 +125,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		89700539196A0C480013A62C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89700526196A0C480013A62C /* libcluster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 890EF1071793311900C8F929;
+			remoteInfo = libcluster;
+		};
+		8970053B196A21550013A62C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89700526196A0C480013A62C /* libcluster.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 890EF1061793311900C8F929;
+			remoteInfo = libcluster;
+		};
 		E4328147138ABC890047C5CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
@@ -391,26 +381,6 @@
 		8928C60B16399D8D00222F56 /* ofxFileDialogOSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFileDialogOSX.h; sourceTree = "<group>"; };
 		8928C6C8163A9ACB00222F56 /* pkmEyeMovementCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkmEyeMovementCollection.h; sourceTree = "<group>"; };
 		8928C6C9163A9ADC00222F56 /* pkmEyeMovementCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pkmEyeMovementCollection.cpp; sourceTree = "<group>"; };
-		8928C6D4163AB0F700222F56 /* mix.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = mix.frag; path = bin/data/mix.frag; sourceTree = "<group>"; };
-		8928C6D5163AB0F700222F56 /* heatmap1.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap1.frag; path = bin/data/heatmap1.frag; sourceTree = "<group>"; };
-		8928C6D6163AB0F700222F56 /* heatmap2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap2.frag; path = bin/data/heatmap2.frag; sourceTree = "<group>"; };
-		8928C6D7163AB0F700222F56 /* jetmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = jetmap.frag; path = bin/data/jetmap.frag; sourceTree = "<group>"; };
-		8928C6D8163AB0F700222F56 /* cp.gaussian.2p.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = cp.gaussian.2p.frag; path = bin/data/cp.gaussian.2p.frag; sourceTree = "<group>"; };
-		8928C6D9163AB0F700222F56 /* hotmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = hotmap.frag; path = bin/data/hotmap.frag; sourceTree = "<group>"; };
-		8928C6DA163AB0F700222F56 /* coolmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = coolmap.frag; path = bin/data/coolmap.frag; sourceTree = "<group>"; };
-		8928C6DB163AB0F700222F56 /* doh.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = doh.frag; path = bin/data/doh.frag; sourceTree = "<group>"; };
-		8928C6DC163AB0F700222F56 /* cp.gaussian.2p.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = cp.gaussian.2p.vert; path = bin/data/cp.gaussian.2p.vert; sourceTree = "<group>"; };
-		8928C6DD163AB0F700222F56 /* coolmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = coolmap.vert; path = bin/data/coolmap.vert; sourceTree = "<group>"; };
-		8928C6DE163AB0F700222F56 /* graymap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = graymap.vert; path = bin/data/graymap.vert; sourceTree = "<group>"; };
-		8928C6DF163AB0F700222F56 /* heatmap1.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap1.vert; path = bin/data/heatmap1.vert; sourceTree = "<group>"; };
-		8928C6E0163AB0F700222F56 /* heatmap2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap2.vert; path = bin/data/heatmap2.vert; sourceTree = "<group>"; };
-		8928C6E1163AB0F700222F56 /* hotmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = hotmap.vert; path = bin/data/hotmap.vert; sourceTree = "<group>"; };
-		8928C6E2163AB0F700222F56 /* jetmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = jetmap.vert; path = bin/data/jetmap.vert; sourceTree = "<group>"; };
-		8928C6E3163AB0F700222F56 /* doh.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = doh.vert; path = bin/data/doh.vert; sourceTree = "<group>"; };
-		8928C6E4163AB0F700222F56 /* mix.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = mix.vert; path = bin/data/mix.vert; sourceTree = "<group>"; };
-		8928C6E5163AB0F700222F56 /* maxreduction.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = maxreduction.frag; path = bin/data/maxreduction.frag; sourceTree = "<group>"; };
-		8928C6E6163AB0F700222F56 /* graymap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = graymap.frag; path = bin/data/graymap.frag; sourceTree = "<group>"; };
-		8928C6E7163AB0F700222F56 /* maxreduction.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = maxreduction.vert; path = bin/data/maxreduction.vert; sourceTree = "<group>"; };
 		8928C77A163AB21500222F56 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		8928C77B163AB21500222F56 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		8928C77C163AB21500222F56 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -421,23 +391,58 @@
 		892921B11755CE8A00497C24 /* ofxQTKitRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxQTKitRecorder.mm; sourceTree = "<group>"; };
 		892921B31755CE8A00497C24 /* ofxQTKitVideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQTKitVideoGrabber.h; sourceTree = "<group>"; };
 		892921B41755CE8A00497C24 /* ofxQTKitVideoGrabber.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxQTKitVideoGrabber.mm; sourceTree = "<group>"; };
-		897AADDD17773FF200CD8E10 /* gaussianMixtureModel3D.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel3D.frag; path = bin/data/gaussianMixtureModel3D.frag; sourceTree = "<group>"; };
-		897AADDE17773FF200CD8E10 /* gaussianMixtureModel3D.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel3D.vert; path = bin/data/gaussianMixtureModel3D.vert; sourceTree = "<group>"; };
+		89700521196A0C480013A62C /* distributions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = distributions.h; sourceTree = "<group>"; };
+		89700522196A0C480013A62C /* libcluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libcluster.h; sourceTree = "<group>"; };
+		89700523196A0C480013A62C /* probutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = probutils.h; sourceTree = "<group>"; };
+		89700526196A0C480013A62C /* libcluster.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = libcluster.xcodeproj; sourceTree = "<group>"; };
+		89700531196A0C480013A62C /* pkmDPGMM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pkmDPGMM.h; path = ../../../../pkm/pkmDPGMM/pkmDPGMM.h; sourceTree = "<group>"; };
 		899E1DBE163AC13E0088E6F4 /* ofxFbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFbo.cpp; sourceTree = "<group>"; };
 		899E1DBF163AC13E0088E6F4 /* ofxFbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFbo.h; sourceTree = "<group>"; };
-		89AB8CCD1642E9820088E218 /* usersettings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = usersettings.xml; path = bin/data/usersettings.xml; sourceTree = "<group>"; };
-		89DB29A8176FC75900BDD593 /* gaussianMixtureModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel.frag; path = bin/data/gaussianMixtureModel.frag; sourceTree = "<group>"; };
-		89DB29A9176FC75900BDD593 /* gaussianMixtureModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel.vert; path = bin/data/gaussianMixtureModel.vert; sourceTree = "<group>"; };
-		89DB29CC1771272000BDD593 /* norm.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = norm.frag; path = bin/data/norm.frag; sourceTree = "<group>"; };
-		89DB29CD1771272000BDD593 /* norm.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = norm.vert; path = bin/data/norm.vert; sourceTree = "<group>"; };
-		89DB29D01771335700BDD593 /* diffheatmap2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap2.frag; path = bin/data/diffheatmap2.frag; sourceTree = "<group>"; };
-		89DB29D11771335700BDD593 /* diffheatmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap.frag; path = bin/data/diffheatmap.frag; sourceTree = "<group>"; };
-		89DB29D21771335700BDD593 /* diffheatmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap.vert; path = bin/data/diffheatmap.vert; sourceTree = "<group>"; };
-		89DB29D31771335700BDD593 /* diffheatmap2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap2.vert; path = bin/data/diffheatmap2.vert; sourceTree = "<group>"; };
-		89DB29E61771FDB500BDD593 /* add.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = add.frag; path = bin/data/add.frag; sourceTree = "<group>"; };
-		89DB29E71771FDB500BDD593 /* add.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = add.vert; path = bin/data/add.vert; sourceTree = "<group>"; };
-		89DB29EA1771FDD000BDD593 /* subtract.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = subtract.frag; path = bin/data/subtract.frag; sourceTree = "<group>"; };
-		89DB29EB1771FDD000BDD593 /* subtract.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = subtract.vert; path = bin/data/subtract.vert; sourceTree = "<group>"; };
+		89EA8C781A84F5D200F66FDA /* pkmMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pkmMatrix.cpp; sourceTree = "<group>"; };
+		89EA8C791A84F5D200F66FDA /* pkmMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkmMatrix.h; sourceTree = "<group>"; };
+		89EA8C961A85369E00F66FDA /* gaussianMixtureModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel.frag; path = ../../data/gaussianMixtureModel.frag; sourceTree = "<group>"; };
+		89EA8C971A85369E00F66FDA /* mix.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = mix.frag; path = ../../data/mix.frag; sourceTree = "<group>"; };
+		89EA8C981A85369E00F66FDA /* diffheatmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap.frag; path = ../../data/diffheatmap.frag; sourceTree = "<group>"; };
+		89EA8C991A85369E00F66FDA /* homg.ppm */ = {isa = PBXFileReference; lastKnownFileType = file; name = homg.ppm; path = ../../data/homg.ppm; sourceTree = "<group>"; };
+		89EA8C9A1A85369E00F66FDA /* homg.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; name = homg.h5; path = ../../data/homg.h5; sourceTree = "<group>"; };
+		89EA8C9B1A85369E00F66FDA /* add.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = add.frag; path = ../../data/add.frag; sourceTree = "<group>"; };
+		89EA8C9C1A85369E00F66FDA /* add.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = add.vert; path = ../../data/add.vert; sourceTree = "<group>"; };
+		89EA8C9D1A85369E00F66FDA /* cp.gaussian.2p.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = cp.gaussian.2p.frag; path = ../../data/cp.gaussian.2p.frag; sourceTree = "<group>"; };
+		89EA8C9E1A85369E00F66FDA /* cp.gaussian.2p.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = cp.gaussian.2p.vert; path = ../../data/cp.gaussian.2p.vert; sourceTree = "<group>"; };
+		89EA8C9F1A85369E00F66FDA /* diffheatmap 2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = "diffheatmap 2.frag"; path = "../../data/diffheatmap 2.frag"; sourceTree = "<group>"; };
+		89EA8CA01A85369E00F66FDA /* diffheatmap 2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = "diffheatmap 2.vert"; path = "../../data/diffheatmap 2.vert"; sourceTree = "<group>"; };
+		89EA8CA11A85369E00F66FDA /* diffheatmap2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap2.frag; path = ../../data/diffheatmap2.frag; sourceTree = "<group>"; };
+		89EA8CA21A85369E00F66FDA /* diffheatmap2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap2.vert; path = ../../data/diffheatmap2.vert; sourceTree = "<group>"; };
+		89EA8CA31A85369E00F66FDA /* doh.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = doh.frag; path = ../../data/doh.frag; sourceTree = "<group>"; };
+		89EA8CA41A85369E00F66FDA /* doh.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = doh.vert; path = ../../data/doh.vert; sourceTree = "<group>"; };
+		89EA8CA51A85369E00F66FDA /* gaussianMixtureModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel.vert; path = ../../data/gaussianMixtureModel.vert; sourceTree = "<group>"; };
+		89EA8CA61A85369E00F66FDA /* gaussianMixtureModel3D.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel3D.frag; path = ../../data/gaussianMixtureModel3D.frag; sourceTree = "<group>"; };
+		89EA8CA71A85369E00F66FDA /* gaussianMixtureModel3D.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel3D.vert; path = ../../data/gaussianMixtureModel3D.vert; sourceTree = "<group>"; };
+		89EA8CA81A85369E00F66FDA /* gaussianSlow.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianSlow.frag; path = ../../data/gaussianSlow.frag; sourceTree = "<group>"; };
+		89EA8CA91A85369E00F66FDA /* gaussianSlow.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianSlow.vert; path = ../../data/gaussianSlow.vert; sourceTree = "<group>"; };
+		89EA8CAA1A85369E00F66FDA /* graymap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = graymap.frag; path = ../../data/graymap.frag; sourceTree = "<group>"; };
+		89EA8CAB1A85369E00F66FDA /* graymap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = graymap.vert; path = ../../data/graymap.vert; sourceTree = "<group>"; };
+		89EA8CAC1A85369E00F66FDA /* heatmap1.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap1.frag; path = ../../data/heatmap1.frag; sourceTree = "<group>"; };
+		89EA8CAD1A85369E00F66FDA /* heatmap1.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap1.vert; path = ../../data/heatmap1.vert; sourceTree = "<group>"; };
+		89EA8CAE1A85369E00F66FDA /* heatmap2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap2.frag; path = ../../data/heatmap2.frag; sourceTree = "<group>"; };
+		89EA8CAF1A85369E00F66FDA /* heatmap2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap2.vert; path = ../../data/heatmap2.vert; sourceTree = "<group>"; };
+		89EA8CB01A85369E00F66FDA /* jetmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = jetmap.frag; path = ../../data/jetmap.frag; sourceTree = "<group>"; };
+		89EA8CB11A85369E00F66FDA /* jetmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = jetmap.vert; path = ../../data/jetmap.vert; sourceTree = "<group>"; };
+		89EA8CB21A85369E00F66FDA /* maxreduction.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = maxreduction.frag; path = ../../data/maxreduction.frag; sourceTree = "<group>"; };
+		89EA8CB31A85369E00F66FDA /* maxreduction.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = maxreduction.vert; path = ../../data/maxreduction.vert; sourceTree = "<group>"; };
+		89EA8CB41A85369E00F66FDA /* mix 2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = "mix 2.frag"; path = "../../data/mix 2.frag"; sourceTree = "<group>"; };
+		89EA8CB51A85369E00F66FDA /* mix 2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = "mix 2.vert"; path = "../../data/mix 2.vert"; sourceTree = "<group>"; };
+		89EA8CB61A85369E00F66FDA /* mix.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = mix.vert; path = ../../data/mix.vert; sourceTree = "<group>"; };
+		89EA8CB71A85369E00F66FDA /* norm.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = norm.frag; path = ../../data/norm.frag; sourceTree = "<group>"; };
+		89EA8CB81A85369E00F66FDA /* norm.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = norm.vert; path = ../../data/norm.vert; sourceTree = "<group>"; };
+		89EA8CB91A85369E00F66FDA /* usersettings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = usersettings.xml; path = ../../data/usersettings.xml; sourceTree = "<group>"; };
+		89EA8CBA1A85369E00F66FDA /* subtract.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = subtract.frag; path = ../../data/subtract.frag; sourceTree = "<group>"; };
+		89EA8CBB1A85369E00F66FDA /* hotmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = hotmap.frag; path = ../../data/hotmap.frag; sourceTree = "<group>"; };
+		89EA8CBC1A85369E00F66FDA /* coolmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = coolmap.frag; path = ../../data/coolmap.frag; sourceTree = "<group>"; };
+		89EA8CBD1A85369E00F66FDA /* diffheatmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap.vert; path = ../../data/diffheatmap.vert; sourceTree = "<group>"; };
+		89EA8CBE1A85369E00F66FDA /* subtract.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = subtract.vert; path = ../../data/subtract.vert; sourceTree = "<group>"; };
+		89EA8CBF1A85369E00F66FDA /* coolmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = coolmap.vert; path = ../../data/coolmap.vert; sourceTree = "<group>"; };
+		89EA8CC01A85369E00F66FDA /* hotmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = hotmap.vert; path = ../../data/hotmap.vert; sourceTree = "<group>"; };
 		89F222F2176F43A400C65195 /* pkmMixtureOfGaussiansHeatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkmMixtureOfGaussiansHeatmap.h; sourceTree = "<group>"; };
 		89F222F3176F43A400C65195 /* pkmMixtureOfGaussiansHeatmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pkmMixtureOfGaussiansHeatmap.cpp; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
@@ -482,6 +487,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A18D67196CCA6C006BE759 /* liblibcluster.a in Frameworks */,
 				8908684C1961AE9B00462E97 /* libz.dylib in Frameworks */,
 				8908682D1961A90900462E97 /* libopencv_highgui.a in Frameworks */,
 				890866DE19619B9200462E97 /* Accelerate.framework in Frameworks */,
@@ -1005,41 +1011,49 @@
 		8928C6D3163AB0DF00222F56 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				89DB29EA1771FDD000BDD593 /* subtract.frag */,
-				89DB29EB1771FDD000BDD593 /* subtract.vert */,
-				89DB29E61771FDB500BDD593 /* add.frag */,
-				89DB29E71771FDB500BDD593 /* add.vert */,
-				897AADDD17773FF200CD8E10 /* gaussianMixtureModel3D.frag */,
-				897AADDE17773FF200CD8E10 /* gaussianMixtureModel3D.vert */,
-				89DB29A8176FC75900BDD593 /* gaussianMixtureModel.frag */,
-				89DB29A9176FC75900BDD593 /* gaussianMixtureModel.vert */,
-				89AB8CCD1642E9820088E218 /* usersettings.xml */,
-				89DB29CC1771272000BDD593 /* norm.frag */,
-				89DB29CD1771272000BDD593 /* norm.vert */,
-				89DB29D01771335700BDD593 /* diffheatmap2.frag */,
-				89DB29D31771335700BDD593 /* diffheatmap2.vert */,
-				89DB29D11771335700BDD593 /* diffheatmap.frag */,
-				89DB29D21771335700BDD593 /* diffheatmap.vert */,
-				8928C6D4163AB0F700222F56 /* mix.frag */,
-				8928C6E4163AB0F700222F56 /* mix.vert */,
-				8928C6D5163AB0F700222F56 /* heatmap1.frag */,
-				8928C6D6163AB0F700222F56 /* heatmap2.frag */,
-				8928C6D7163AB0F700222F56 /* jetmap.frag */,
-				8928C6E2163AB0F700222F56 /* jetmap.vert */,
-				8928C6D8163AB0F700222F56 /* cp.gaussian.2p.frag */,
-				8928C6DC163AB0F700222F56 /* cp.gaussian.2p.vert */,
-				8928C6D9163AB0F700222F56 /* hotmap.frag */,
-				8928C6E1163AB0F700222F56 /* hotmap.vert */,
-				8928C6DA163AB0F700222F56 /* coolmap.frag */,
-				8928C6DD163AB0F700222F56 /* coolmap.vert */,
-				8928C6DB163AB0F700222F56 /* doh.frag */,
-				8928C6E3163AB0F700222F56 /* doh.vert */,
-				8928C6DF163AB0F700222F56 /* heatmap1.vert */,
-				8928C6E0163AB0F700222F56 /* heatmap2.vert */,
-				8928C6E6163AB0F700222F56 /* graymap.frag */,
-				8928C6DE163AB0F700222F56 /* graymap.vert */,
-				8928C6E5163AB0F700222F56 /* maxreduction.frag */,
-				8928C6E7163AB0F700222F56 /* maxreduction.vert */,
+				89EA8C971A85369E00F66FDA /* mix.frag */,
+				89EA8C981A85369E00F66FDA /* diffheatmap.frag */,
+				89EA8C991A85369E00F66FDA /* homg.ppm */,
+				89EA8C9A1A85369E00F66FDA /* homg.h5 */,
+				89EA8C9B1A85369E00F66FDA /* add.frag */,
+				89EA8C9C1A85369E00F66FDA /* add.vert */,
+				89EA8C9D1A85369E00F66FDA /* cp.gaussian.2p.frag */,
+				89EA8C9E1A85369E00F66FDA /* cp.gaussian.2p.vert */,
+				89EA8C9F1A85369E00F66FDA /* diffheatmap 2.frag */,
+				89EA8CA01A85369E00F66FDA /* diffheatmap 2.vert */,
+				89EA8CA11A85369E00F66FDA /* diffheatmap2.frag */,
+				89EA8CA21A85369E00F66FDA /* diffheatmap2.vert */,
+				89EA8CA31A85369E00F66FDA /* doh.frag */,
+				89EA8CA41A85369E00F66FDA /* doh.vert */,
+				89EA8C961A85369E00F66FDA /* gaussianMixtureModel.frag */,
+				89EA8CA51A85369E00F66FDA /* gaussianMixtureModel.vert */,
+				89EA8CA61A85369E00F66FDA /* gaussianMixtureModel3D.frag */,
+				89EA8CA71A85369E00F66FDA /* gaussianMixtureModel3D.vert */,
+				89EA8CA81A85369E00F66FDA /* gaussianSlow.frag */,
+				89EA8CA91A85369E00F66FDA /* gaussianSlow.vert */,
+				89EA8CAA1A85369E00F66FDA /* graymap.frag */,
+				89EA8CAB1A85369E00F66FDA /* graymap.vert */,
+				89EA8CAC1A85369E00F66FDA /* heatmap1.frag */,
+				89EA8CAD1A85369E00F66FDA /* heatmap1.vert */,
+				89EA8CAE1A85369E00F66FDA /* heatmap2.frag */,
+				89EA8CAF1A85369E00F66FDA /* heatmap2.vert */,
+				89EA8CB01A85369E00F66FDA /* jetmap.frag */,
+				89EA8CB11A85369E00F66FDA /* jetmap.vert */,
+				89EA8CB21A85369E00F66FDA /* maxreduction.frag */,
+				89EA8CB31A85369E00F66FDA /* maxreduction.vert */,
+				89EA8CB41A85369E00F66FDA /* mix 2.frag */,
+				89EA8CB51A85369E00F66FDA /* mix 2.vert */,
+				89EA8CB61A85369E00F66FDA /* mix.vert */,
+				89EA8CB71A85369E00F66FDA /* norm.frag */,
+				89EA8CB81A85369E00F66FDA /* norm.vert */,
+				89EA8CB91A85369E00F66FDA /* usersettings.xml */,
+				89EA8CBA1A85369E00F66FDA /* subtract.frag */,
+				89EA8CBB1A85369E00F66FDA /* hotmap.frag */,
+				89EA8CBC1A85369E00F66FDA /* coolmap.frag */,
+				89EA8CBD1A85369E00F66FDA /* diffheatmap.vert */,
+				89EA8CBE1A85369E00F66FDA /* subtract.vert */,
+				89EA8CBF1A85369E00F66FDA /* coolmap.vert */,
+				89EA8CC01A85369E00F66FDA /* hotmap.vert */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -1092,9 +1106,58 @@
 			path = ofxQTKitVideoGrabber;
 			sourceTree = "<group>";
 		};
+		8970051E196A0C3A0013A62C /* pkmDPGMM */ = {
+			isa = PBXGroup;
+			children = (
+				8970051F196A0C480013A62C /* libcluster */,
+				89700531196A0C480013A62C /* pkmDPGMM.h */,
+			);
+			name = pkmDPGMM;
+			sourceTree = "<group>";
+		};
+		8970051F196A0C480013A62C /* libcluster */ = {
+			isa = PBXGroup;
+			children = (
+				89700520196A0C480013A62C /* include */,
+				89700526196A0C480013A62C /* libcluster.xcodeproj */,
+			);
+			name = libcluster;
+			path = ../../../../pkm/pkmDPGMM/libcluster;
+			sourceTree = "<group>";
+		};
+		89700520196A0C480013A62C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				89700521196A0C480013A62C /* distributions.h */,
+				89700522196A0C480013A62C /* libcluster.h */,
+				89700523196A0C480013A62C /* probutils.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		89700527196A0C480013A62C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8970053A196A0C480013A62C /* liblibcluster.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		89EA8C6B1A84F5D200F66FDA /* pkmMatrix */ = {
+			isa = PBXGroup;
+			children = (
+				89EA8C781A84F5D200F66FDA /* pkmMatrix.cpp */,
+				89EA8C791A84F5D200F66FDA /* pkmMatrix.h */,
+			);
+			name = pkmMatrix;
+			path = ../../../../pkm/pkmMatrix;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				89EA8C6B1A84F5D200F66FDA /* pkmMatrix */,
+				8970051E196A0C3A0013A62C /* pkmDPGMM */,
 				890868501961B36F00462E97 /* pkmOpticalFlow */,
 				8908670B1961A90800462E97 /* ofxOpenCv2461 */,
 				892921AF1755CE8A00497C24 /* ofxQTKitRecorder */,
@@ -1238,6 +1301,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8970053C196A21550013A62C /* PBXTargetDependency */,
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
 			name = C.A.R.P.E.;
@@ -1268,6 +1332,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 89700527196A0C480013A62C /* Products */;
+					ProjectRef = 89700526196A0C480013A62C /* libcluster.xcodeproj */;
+				},
+				{
 					ProductGroup = E4328144138ABC890047C5CB /* Products */;
 					ProjectRef = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
 				},
@@ -1280,6 +1348,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		8970053A196A0C480013A62C /* liblibcluster.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibcluster.a;
+			remoteRef = 89700539196A0C480013A62C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1294,47 +1369,55 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				890866DF19619DA900462E97 /* subtract.frag in Resources */,
-				890866E019619DA900462E97 /* subtract.vert in Resources */,
-				890866E119619DA900462E97 /* add.frag in Resources */,
-				890866E219619DA900462E97 /* add.vert in Resources */,
-				890866E319619DA900462E97 /* gaussianMixtureModel3D.frag in Resources */,
-				890866E419619DA900462E97 /* gaussianMixtureModel3D.vert in Resources */,
-				890866E519619DA900462E97 /* gaussianMixtureModel.frag in Resources */,
-				890866E619619DA900462E97 /* gaussianMixtureModel.vert in Resources */,
-				890866E719619DA900462E97 /* norm.frag in Resources */,
-				890866E819619DA900462E97 /* norm.vert in Resources */,
-				890866E919619DA900462E97 /* diffheatmap2.frag in Resources */,
-				890866EA19619DA900462E97 /* diffheatmap2.vert in Resources */,
 				8908683D1961A90900462E97 /* README.md in Resources */,
-				890866EB19619DA900462E97 /* diffheatmap.frag in Resources */,
-				890866EC19619DA900462E97 /* diffheatmap.vert in Resources */,
-				890866ED19619DA900462E97 /* mix.frag in Resources */,
-				890866EE19619DA900462E97 /* mix.vert in Resources */,
+				89EA8CE51A85369E00F66FDA /* subtract.frag in Resources */,
+				89EA8CCE1A85369E00F66FDA /* doh.frag in Resources */,
+				89EA8CD51A85369E00F66FDA /* graymap.frag in Resources */,
+				89EA8CE21A85369E00F66FDA /* norm.frag in Resources */,
+				89EA8CD41A85369E00F66FDA /* gaussianSlow.vert in Resources */,
 				8908683B1961A90900462E97 /* cv.py in Resources */,
-				890866EF19619DA900462E97 /* heatmap1.frag in Resources */,
-				890866F019619DA900462E97 /* heatmap2.frag in Resources */,
-				890866F119619DA900462E97 /* jetmap.frag in Resources */,
-				890866F219619DA900462E97 /* jetmap.vert in Resources */,
-				890866F319619DA900462E97 /* cp.gaussian.2p.frag in Resources */,
-				890866F419619DA900462E97 /* cp.gaussian.2p.vert in Resources */,
-				890866F519619DA900462E97 /* hotmap.frag in Resources */,
-				890866F619619DA900462E97 /* hotmap.vert in Resources */,
+				89EA8CCC1A85369E00F66FDA /* diffheatmap2.frag in Resources */,
+				89EA8CCF1A85369E00F66FDA /* doh.vert in Resources */,
 				8908683A1961A90900462E97 /* opencv.pc in Resources */,
-				890866F719619DA900462E97 /* coolmap.frag in Resources */,
-				890866F819619DA900462E97 /* coolmap.vert in Resources */,
-				890866F919619DA900462E97 /* doh.frag in Resources */,
-				890866FA19619DA900462E97 /* doh.vert in Resources */,
-				890866FB19619DA900462E97 /* heatmap1.vert in Resources */,
-				890866FC19619DA900462E97 /* heatmap2.vert in Resources */,
-				890866FD19619DA900462E97 /* graymap.frag in Resources */,
-				890866FE19619DA900462E97 /* graymap.vert in Resources */,
+				89EA8CE61A85369E00F66FDA /* hotmap.frag in Resources */,
+				89EA8CD61A85369E00F66FDA /* graymap.vert in Resources */,
+				89EA8CD81A85369E00F66FDA /* heatmap1.vert in Resources */,
+				89EA8CE41A85369E00F66FDA /* usersettings.xml in Resources */,
+				89EA8CE71A85369E00F66FDA /* coolmap.frag in Resources */,
+				89EA8CC11A85369E00F66FDA /* gaussianMixtureModel.frag in Resources */,
+				89EA8CC21A85369E00F66FDA /* mix.frag in Resources */,
+				89EA8CCB1A85369E00F66FDA /* diffheatmap 2.vert in Resources */,
 				890868561961B36F00462E97 /* license in Resources */,
-				890866FF19619DA900462E97 /* maxreduction.frag in Resources */,
-				8908670019619DA900462E97 /* maxreduction.vert in Resources */,
+				89EA8CDA1A85369E00F66FDA /* heatmap2.vert in Resources */,
+				89EA8CE31A85369E00F66FDA /* norm.vert in Resources */,
+				89EA8CD91A85369E00F66FDA /* heatmap2.frag in Resources */,
+				89EA8CC91A85369E00F66FDA /* cp.gaussian.2p.vert in Resources */,
+				89EA8CC41A85369E00F66FDA /* homg.ppm in Resources */,
+				89EA8CC61A85369E00F66FDA /* add.frag in Resources */,
+				89EA8CE11A85369E00F66FDA /* mix.vert in Resources */,
+				89EA8CD11A85369E00F66FDA /* gaussianMixtureModel3D.frag in Resources */,
+				89EA8CD31A85369E00F66FDA /* gaussianSlow.frag in Resources */,
+				89EA8CE81A85369E00F66FDA /* diffheatmap.vert in Resources */,
+				89EA8CD71A85369E00F66FDA /* heatmap1.frag in Resources */,
+				89EA8CCD1A85369E00F66FDA /* diffheatmap2.vert in Resources */,
+				89EA8CE01A85369E00F66FDA /* mix 2.vert in Resources */,
+				89EA8CEB1A85369E00F66FDA /* hotmap.vert in Resources */,
+				89EA8CDE1A85369E00F66FDA /* maxreduction.vert in Resources */,
+				89EA8CDB1A85369E00F66FDA /* jetmap.frag in Resources */,
+				89EA8CC31A85369E00F66FDA /* diffheatmap.frag in Resources */,
 				EE672EE31541E8D200229B52 /* MainMenu.xib in Resources */,
-				89AB8CCE1642E9830088E218 /* usersettings.xml in Resources */,
+				89EA8CCA1A85369E00F66FDA /* diffheatmap 2.frag in Resources */,
+				89EA8CC51A85369E00F66FDA /* homg.h5 in Resources */,
+				89EA8CEA1A85369E00F66FDA /* coolmap.vert in Resources */,
+				89EA8CDF1A85369E00F66FDA /* mix 2.frag in Resources */,
+				89EA8CD21A85369E00F66FDA /* gaussianMixtureModel3D.vert in Resources */,
+				89EA8CDD1A85369E00F66FDA /* maxreduction.frag in Resources */,
+				89EA8CE91A85369E00F66FDA /* subtract.vert in Resources */,
+				89EA8CDC1A85369E00F66FDA /* jetmap.vert in Resources */,
+				89EA8CC71A85369E00F66FDA /* add.vert in Resources */,
 				890868261961A90900462E97 /* install.xml in Resources */,
+				89EA8CD01A85369E00F66FDA /* gaussianMixtureModel.vert in Resources */,
+				89EA8CC81A85369E00F66FDA /* cp.gaussian.2p.frag in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,60 +1456,32 @@
 				8928C60C16399D8D00222F56 /* ofxFileDialogOSX.cpp in Sources */,
 				8908683F1961A90900462E97 /* ofxCvContourFinder.cpp in Sources */,
 				8928C6CA163A9ADC00222F56 /* pkmEyeMovementCollection.cpp in Sources */,
-				8928C6E8163AB0F700222F56 /* mix.frag in Sources */,
-				8928C6E9163AB0F700222F56 /* heatmap1.frag in Sources */,
-				8928C6EA163AB0F700222F56 /* heatmap2.frag in Sources */,
-				8928C6EB163AB0F700222F56 /* jetmap.frag in Sources */,
-				8928C6EC163AB0F700222F56 /* cp.gaussian.2p.frag in Sources */,
-				8928C6ED163AB0F700222F56 /* hotmap.frag in Sources */,
-				8928C6EE163AB0F700222F56 /* coolmap.frag in Sources */,
-				8928C6EF163AB0F700222F56 /* doh.frag in Sources */,
-				8928C6F0163AB0F700222F56 /* cp.gaussian.2p.vert in Sources */,
-				8928C6F1163AB0F700222F56 /* coolmap.vert in Sources */,
-				8928C6F2163AB0F700222F56 /* graymap.vert in Sources */,
 				8908683E1961A90900462E97 /* ofxCvColorImage.cpp in Sources */,
-				8928C6F3163AB0F700222F56 /* heatmap1.vert in Sources */,
-				8928C6F4163AB0F700222F56 /* heatmap2.vert in Sources */,
 				890868411961A90900462E97 /* ofxCvGrayscaleImage.cpp in Sources */,
-				8928C6F5163AB0F700222F56 /* hotmap.vert in Sources */,
-				8928C6F6163AB0F700222F56 /* jetmap.vert in Sources */,
-				8928C6F7163AB0F700222F56 /* doh.vert in Sources */,
-				8928C6F8163AB0F700222F56 /* mix.vert in Sources */,
 				890868571961B36F00462E97 /* pkmOpticalFlow.cpp in Sources */,
-				8928C6F9163AB0F700222F56 /* maxreduction.frag in Sources */,
-				8928C6FA163AB0F700222F56 /* graymap.frag in Sources */,
-				8928C6FB163AB0F700222F56 /* maxreduction.vert in Sources */,
 				8928C78A163AB21500222F56 /* tinyxml.cpp in Sources */,
 				8928C78B163AB21500222F56 /* tinyxmlerror.cpp in Sources */,
 				8928C78C163AB21500222F56 /* tinyxmlparser.cpp in Sources */,
+				89EA8C891A84F5D200F66FDA /* pkmMatrix.cpp in Sources */,
 				8928C78D163AB21500222F56 /* ofxXmlSettings.cpp in Sources */,
 				899E1DC0163AC13E0088E6F4 /* ofxFbo.cpp in Sources */,
 				892921BF1755CE8A00497C24 /* ofxQTKitRecorder.mm in Sources */,
 				892921C01755CE8A00497C24 /* ofxQTKitVideoGrabber.mm in Sources */,
 				89F222F4176F43A400C65195 /* pkmMixtureOfGaussiansHeatmap.cpp in Sources */,
-				89DB29AA176FC75900BDD593 /* gaussianMixtureModel.frag in Sources */,
 				890868431961A90900462E97 /* ofxCvImage.cpp in Sources */,
-				89DB29AB176FC75900BDD593 /* gaussianMixtureModel.vert in Sources */,
-				89DB29CE1771272000BDD593 /* norm.frag in Sources */,
-				89DB29CF1771272000BDD593 /* norm.vert in Sources */,
-				89DB29D41771335700BDD593 /* diffheatmap2.frag in Sources */,
 				890868421961A90900462E97 /* ofxCvHaarFinder.cpp in Sources */,
-				89DB29D51771335700BDD593 /* diffheatmap.frag in Sources */,
-				89DB29D61771335700BDD593 /* diffheatmap.vert in Sources */,
-				89DB29D71771335700BDD593 /* diffheatmap2.vert in Sources */,
-				89DB29E81771FDB500BDD593 /* add.frag in Sources */,
-				89DB29E91771FDB500BDD593 /* add.vert in Sources */,
-				89DB29EC1771FDD000BDD593 /* subtract.frag in Sources */,
-				89DB29ED1771FDD000BDD593 /* subtract.vert in Sources */,
 				890868441961A90900462E97 /* ofxCvShortImage.cpp in Sources */,
-				897AADDF17773FF200CD8E10 /* gaussianMixtureModel3D.frag in Sources */,
-				897AADE017773FF200CD8E10 /* gaussianMixtureModel3D.vert in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8970053C196A21550013A62C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libcluster;
+			targetProxy = 8970053B196A21550013A62C /* PBXContainerItemProxy */;
+		};
 		E4EEB9AC138B136A00A80321 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = openFrameworks;
@@ -1527,9 +1582,11 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/ofxOpenCv/libs/opencv/lib/osx\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					"-L/usr/local/lib",
+					"-L/usr/local/HDF5-universal/lib/",
 					"$(OPENCV_LIBS)",
 					"-lhdf5_hl",
 					"-lhdf5",
@@ -1573,9 +1630,11 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/ofxOpenCv/libs/opencv/lib/osx\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					"-L/usr/local/lib",
+					"-L/usr/local/HDF5-universal/lib/",
 					"$(OPENCV_LIBS)",
 					"-lhdf5_hl",
 					"-lhdf5",

@@ -20,12 +20,10 @@ void main(){
         float mux = texcoord.x - means[i].x;
         float muy = texcoord.y - means[i].y;
         float muz = z - means[i].z;
-        mux *= mux;
-        muy *= muy;
-        muz *= muz;
-        float exponet = mux / (2.0 * sigmas[i].x * sigmas[i].x + regularizer) + 
-                        muy / (2.0 * sigmas[i].y * sigmas[i].y + regularizer) + 
-                        muz / (2.0 * sigmas[i].z * sigmas[i].z + regularizer);
+
+        float exponet = mux * mux / (2.0 * sigmas[i].x * sigmas[i].x + regularizer) +
+                        muy * muy / (2.0 * sigmas[i].y * sigmas[i].y + regularizer) +
+                        muz * muz / (2.0 * sigmas[i].z * sigmas[i].z + regularizer);
         dist += weights[i] * a * exp(-exponet);
     }
 

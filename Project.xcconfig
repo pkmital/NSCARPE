@@ -17,5 +17,5 @@ ICON_FILE_PATH = $(OF_PATH)/libs/openFrameworksCompiled/project/osx/
 //IF YOU WANT AN APP TO HAVE A CUSTOM ICON - PUT THEM IN YOUR DATA FOLDER AND CHANGE ICON_FILE_PATH to:
 //ICON_FILE_PATH = bin/data/
 
-OTHER_LDFLAGS = -L/usr/local/lib -lhdf5_hl -lhdf5 $(OF_CORE_LIBS)
+OTHER_LDFLAGS = -L/usr/local/lib -L/usr/local/HDF5-universal/lib/ -lhdf5_hl -lhdf5 $(OF_CORE_LIBS)
 HEADER_SEARCH_PATHS = /usr/local/include $(OF_CORE_HEADERS) $(OPENCV_HEADERS_PATH)

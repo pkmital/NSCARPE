@@ -75,8 +75,9 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
-@synthesize OpticalFlow;
+
 @synthesize exportMotionDescriptorsToHDF5Item;
+@synthesize exportFrame;
 @synthesize toggleHeatmap;
 @synthesize toggleClustering;
 
@@ -92,10 +93,23 @@
     }
 	ofxNSWindower::destroy();
 }
+- (IBAction)showMovie:(id)sender {
+    appPtr->toggleMovie();
+    
+}
+- (IBAction)showMagnitude:(id)sender {
+    appPtr->toggleFlowMagnitude();
+}
+- (IBAction)showDirection:(id)sender {
+    appPtr->toggleFlowDirection();
+}
 
 - (IBAction)exportMotionDescriptorsToHDF5:(id)sender {
     appPtr->exportMotionDescriptorsToHDF5();
 
+}
+- (IBAction)exportFrame:(id)sender {
+    appPtr->exportFrame();
 }
 - (IBAction)toggleEyes:(id)sender {
     appPtr->toggleEyes();
@@ -127,6 +141,7 @@
 	ofxNSWindower::instance()->addWindow(appPtr, "C.A.R.P.E.: Stimulus Display", NSTitledWindowMask, 0);
     
 //    [exportMotionDescriptorsToHDF5Item setEnabled:true];
+    [exportFrame setEnabled:true];
     
     bAllocated = true;
 }

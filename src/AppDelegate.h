@@ -80,6 +80,7 @@
     testApp *appPtr;
     bool bAllocated;
     NSMenuItem *exportMotionDescriptorsToHDF5Item;
+    NSMenuItem *exportFrame;
     NSMenuItem *toggleHeatmap;
     NSMenuItem *toggleClustering;
     NSMenuItem *OpticalFlow;
@@ -87,11 +88,11 @@
 
 // FILE
 @property (assign) IBOutlet NSMenuItem *exportMotionDescriptorsToHDF5Item;
+@property (assign) IBOutlet NSMenuItem *exportFrame;
 
 // VIEW
 @property (assign) IBOutlet NSMenuItem *toggleHeatmap;
 @property (assign) IBOutlet NSMenuItem *toggleClustering;
-@property (assign) IBOutlet NSMenuItem *OpticalFlow;
 
 // FILE
 - (IBAction)loadStudy:(id)sender;

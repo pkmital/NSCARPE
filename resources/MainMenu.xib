@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -10,7 +11,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="373" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="29">
             <items>
@@ -67,6 +68,11 @@
                                     <action selector="loadStudy:" target="811" id="839"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Export Frame" hidden="YES" enabled="NO" keyEquivalent="e" id="rIf-Nm-FVp" userLabel="Menu Item - Export Frame">
+                                <connections>
+                                    <action selector="exportFrame:" target="811" id="DPr-BB-F6a"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Export Motion Descriptors to HDF5" hidden="YES" enabled="NO" keyEquivalent="e" id="XpW-Yr-pDw">
                                 <connections>
                                     <action selector="exportMotionDescriptorsToHDF5:" target="811" id="NrK-eG-Ohn"/>
@@ -79,54 +85,61 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="296">
                         <items>
+                            <menuItem title="Toggle Movie" id="k5y-9a-QyE">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showMovie:" target="811" id="vEf-P2-l3t"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="UNh-O2-uYE"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Toggle Eyes" id="gxe-fW-7iL">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleEyes:" target="811" id="D6j-Bq-jx8"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="0TH-vn-fEZ"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Toggle Saccades" id="Tn9-mK-AT0">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleSaccades:" target="811" id="dD2-3i-cqz"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="rkK-k5-wi1"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Heatmap" keyEquivalent="t" id="297">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Toggle Heatmap" id="297">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleHeatmap:" target="811" id="b5n-yT-EYM"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="rsp-MP-1Z2"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Difference Heatmap" keyEquivalent="t" id="ewK-hw-6Rd">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Toggle Difference Heatmap" id="ewK-hw-6Rd">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleDifferenceHeatmap:" target="811" id="w6g-E4-tla"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="xo4-TQ-wlC"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Toggle Clustering" id="298">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleClustering:" target="811" id="7ed-4v-74c"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="D8G-45-0Nt"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Optical Flow" enabled="NO" id="J87-oD-rLz">
+                            <menuItem title="Toggle Motion Magnitude" id="5h5-9n-yBK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Optical Flow" autoenablesItems="NO" id="cGm-xm-hTF">
-                                    <items>
-                                        <menuItem title="Show Magnitude" hidden="YES" enabled="NO" id="5h5-9n-yBK">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="alignLeft:" target="-1" id="q4F-f6-3DU"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Show Direction" hidden="YES" enabled="NO" id="3Nb-H9-JtW">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="alignLeft:" target="-1" id="m2b-DJ-STr"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                                <connections>
+                                    <action selector="showMagnitude:" target="811" id="fgf-ZN-6ES"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="vaD-uR-0AF"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Toggle Motion Direction" id="3Nb-H9-JtW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showDirection:" target="811" id="X2l-yr-O4f"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="ggF-UZ-1Ig"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -139,6 +152,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleEyes:" target="811" id="aws-5M-zpg"/>
+                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="iYd-a0-ZX7"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -160,11 +174,12 @@
         </menu>
         <customObject id="811" customClass="AppDelegate">
             <connections>
-                <outlet property="OpticalFlow" destination="J87-oD-rLz" id="xDg-zR-tuC"/>
+                <outlet property="exportFrame" destination="rIf-Nm-FVp" id="YKM-qU-Anx"/>
                 <outlet property="exportMotionDescriptorsToHDF5Item" destination="XpW-Yr-pDw" id="H0Q-na-YaG"/>
                 <outlet property="toggleClustering" destination="298" id="OV2-Ve-MYS"/>
                 <outlet property="toggleHeatmap" destination="297" id="bKa-gA-B0t"/>
             </connections>
         </customObject>
+        <userDefaultsController representsSharedInstance="YES" id="yHX-27-Qg4"/>
     </objects>
 </document>

@@ -127,17 +127,19 @@ public:
 
     //--------------------------------------------------------------
     void exportMotionDescriptorsToHDF5();
+    void exportFrame();
     //--------------------------------------------------------------
     
     //--------------------------------------------------------------
-    void toggleHeatmap() { bShowHeatmap = !bShowHeatmap; }
-    void toggleClustering() { bShowClustering = !bShowClustering; }
-    void toggleEyes() { bShowEyes = !bShowEyes; }
-    void toggleSaccades() { bShowSaccades = !bShowSaccades; }
-    void toggleDifferenceHeatmap() { bShowDifferenceHeatmap = !bShowDifferenceHeatmap; }
-    void toggleFlow() { bShowFlow = !bShowFlow; }
-    void toggleFlowMagnitude() { bShowFlowMagnitude = !bShowFlowMagnitude; }
-    void toggleFlowDirection() { bShowFlowDirection = !bShowFlowDirection; }
+    bool toggleHeatmap() { bShowHeatmap = !bShowHeatmap; return bShowHeatmap; }
+    bool toggleClustering() { bShowClustering = !bShowClustering; return bShowClustering; }
+    bool toggleEyes() { bShowEyes = !bShowEyes; return bShowEyes; }
+    bool toggleSaccades() { bShowSaccades = !bShowSaccades; return bShowSaccades; }
+    bool toggleDifferenceHeatmap() { bShowDifferenceHeatmap = !bShowDifferenceHeatmap; return bShowDifferenceHeatmap; }
+    bool toggleFlow() { bShowFlow = !bShowFlow; return bShowFlow; }
+    bool toggleFlowMagnitude() { bShowFlowMagnitude = !bShowFlowMagnitude; return bShowFlowMagnitude; }
+    bool toggleFlowDirection() { bShowFlowDirection = !bShowFlowDirection; return bShowFlowDirection; }
+    bool toggleMovie() { bShowMovie = !bShowMovie; return bShowMovie; }
     //--------------------------------------------------------------
 	
 private:
@@ -192,7 +194,8 @@ private:
     
     //--------------------------------------------------------------
     // Control variables
-    bool                            bLoadBinocular, 
+    bool                            bLoadBinocular,
+                                    bLoadMillisecondFormat,
                                     bLoadClassifiedData,
                                     bShowRealTime,
                                     bShowClustering,
@@ -219,6 +222,7 @@ private:
                                     bExportMotionDescriptorsToHDF,
                                     bPaused,
                                     bShowDetail,
+                                    bNeedsUpdate,
                                     bSetup;
     //--------------------------------------------------------------
 	

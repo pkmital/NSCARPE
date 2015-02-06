@@ -1,4 +1,4 @@
-const int MAX_GAUSSIANS = 80;
+const int MAX_GAUSSIANS = 50;
 uniform int totalGaussians;
 uniform sampler2DRect image;
 //
@@ -14,18 +14,15 @@ const float PI = 3.14159265;
 void main(){
     float regularizer = 0.0001;
     float dist = 0.0;
-    float a = 1.0;// / float(totalGaussians);// / (2.0 * PI * sigmas[i].x * sigmas[i].y + regularizer);
+    float a = 1.0 / 2.502;
     for(int i = 0; i < totalGaussians; i++)
     {
         float mux = texcoord.x - means[i].x;
         float muy = texcoord.y - means[i].y;
-        mux *= mux;
-        muy *= muy;
-        float exponet = mux / (2.0 * sigmas[i].x * sigmas[i].x + regularizer) + 
-                        muy / (2.0 * sigmas[i].y * sigmas[i].y + regularizer);
-        dist += weights[i] * a * exp(-exponet);
+        float exponet = (mux * mux) / (2.0 * sigmas[i].x * sigmas[i].x + regularizer) +
+        (muy * muy) / (2.0 * sigmas[i].y * sigmas[i].y + regularizer);
+        exponet *= exponet;
+        dist += weights[i] * a * exp(-exponet/2.0);
     }
-
-    gl_FragColor = vec4(dist);
-
+    gl_FragColor = vec4(1.0);
 }
