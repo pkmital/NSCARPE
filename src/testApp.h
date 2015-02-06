@@ -188,7 +188,12 @@ public:
     
     //--------------------------------------------------------------
     bool toggleFlowMagnitude() {
-        bShowFlowMagnitude = !bShowFlowMagnitude; return bShowFlowMagnitude;
+        bShowFlowMagnitude = !bShowFlowMagnitude;
+        if(bShowFlowMagnitude)
+            bShowFlow = true;
+        else if(!bShowFlowDirection && !bShowFlowMagnitude && !bExportMotionDescriptorsToHDF)
+            bShowFlow = false;
+        return bShowFlowMagnitude;
     }
     bool isFlowMagnitudeEnabled() {
         return bShowFlowMagnitude;
@@ -196,7 +201,12 @@ public:
     
     //--------------------------------------------------------------
     bool toggleFlowDirection() {
-        bShowFlowDirection = !bShowFlowDirection; return bShowFlowDirection;
+        bShowFlowDirection = !bShowFlowDirection;
+        if(bShowFlowDirection)
+            bShowFlow = true;
+        else if(!bShowFlowDirection && !bShowFlowMagnitude && !bExportMotionDescriptorsToHDF)
+            bShowFlow = false;
+        return bShowFlowDirection;
     }
     bool isFlowDirectionEnabled() {
         return bShowFlowDirection;

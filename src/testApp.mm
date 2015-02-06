@@ -437,8 +437,7 @@ void testApp::initializeExperiment() {
     }
     settings.popTag();
     
-    if(bShowFlow)
-        initializeVisualSaliency();
+    initializeVisualSaliency();
     
     if(bSaveMovie)
         initializeRecording(saveMovieURL);
