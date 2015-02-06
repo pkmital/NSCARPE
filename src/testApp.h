@@ -131,15 +131,85 @@ public:
     //--------------------------------------------------------------
     
     //--------------------------------------------------------------
-    bool toggleHeatmap() { bShowHeatmap = !bShowHeatmap; return bShowHeatmap; }
-    bool toggleClustering() { bShowClustering = !bShowClustering; return bShowClustering; }
-    bool toggleEyes() { bShowEyes = !bShowEyes; return bShowEyes; }
-    bool toggleSaccades() { bShowSaccades = !bShowSaccades; return bShowSaccades; }
-    bool toggleDifferenceHeatmap() { bShowDifferenceHeatmap = !bShowDifferenceHeatmap; return bShowDifferenceHeatmap; }
-    bool toggleFlow() { bShowFlow = !bShowFlow; return bShowFlow; }
-    bool toggleFlowMagnitude() { bShowFlowMagnitude = !bShowFlowMagnitude; return bShowFlowMagnitude; }
-    bool toggleFlowDirection() { bShowFlowDirection = !bShowFlowDirection; return bShowFlowDirection; }
-    bool toggleMovie() { bShowMovie = !bShowMovie; return bShowMovie; }
+    bool toggleHeatmap() {
+        bShowHeatmap = !bShowHeatmap; return bShowHeatmap;
+    }
+    bool isHeatmapEnabled() {
+        return bShowHeatmap;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleClustering() {
+        bShowClustering = !bShowClustering; return bShowClustering;
+    }
+    bool isClusteringEnabled() {
+        return bShowClustering;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleEyes() {
+        bShowEyes = !bShowEyes; return bShowEyes;
+    }
+    bool isEyesEnabled() {
+        return bShowEyes;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleSaccades() {
+        bShowSaccades = !bShowSaccades; return bShowSaccades;
+    }
+    bool isSaccadesEnabled() {
+        return bShowSaccades;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleDifferenceHeatmap() {
+        bShowDifferenceHeatmap = !bShowDifferenceHeatmap; return bShowDifferenceHeatmap;
+    }
+    bool isDifferenceHeatmapEnabled() {
+        return bShowDifferenceHeatmap;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleNormalization() {
+        bShowNormalized = !bShowNormalized; return bShowNormalized;
+    }
+    bool isNormalizationEnabled() {
+        return bShowNormalized;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleFlow() {
+        bShowFlow = !bShowFlow; return bShowFlow;
+    }
+    bool isFlowEnabled() {
+        return bShowFlow;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleFlowMagnitude() {
+        bShowFlowMagnitude = !bShowFlowMagnitude; return bShowFlowMagnitude;
+    }
+    bool isFlowMagnitudeEnabled() {
+        return bShowFlowMagnitude;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleFlowDirection() {
+        bShowFlowDirection = !bShowFlowDirection; return bShowFlowDirection;
+    }
+    bool isFlowDirectionEnabled() {
+        return bShowFlowDirection;
+    }
+    
+    //--------------------------------------------------------------
+    bool toggleMovie() {
+        bShowMovie = !bShowMovie; return bShowMovie;
+    }
+    bool isMovieEnabled() {
+        return bShowMovie;
+    }
+    
     //--------------------------------------------------------------
 	
 private:
@@ -190,6 +260,7 @@ private:
     ofxXmlSettings                  settings;
     int                             numberOfExperiments;
     int                             currentExperiment;
+    int                             heatmapType;
     
     
     //--------------------------------------------------------------

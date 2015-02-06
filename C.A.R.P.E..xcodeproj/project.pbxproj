@@ -456,7 +456,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* NSCARPEDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSCARPEDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* C.A.R.P.E.Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C.A.R.P.E.Debug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -1011,7 +1011,6 @@
 		8928C6D3163AB0DF00222F56 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				89EA8C971A85369E00F66FDA /* mix.frag */,
 				89EA8C981A85369E00F66FDA /* diffheatmap.frag */,
 				89EA8C991A85369E00F66FDA /* homg.ppm */,
 				89EA8C9A1A85369E00F66FDA /* homg.h5 */,
@@ -1043,6 +1042,7 @@
 				89EA8CB31A85369E00F66FDA /* maxreduction.vert */,
 				89EA8CB41A85369E00F66FDA /* mix 2.frag */,
 				89EA8CB51A85369E00F66FDA /* mix 2.vert */,
+				89EA8C971A85369E00F66FDA /* mix.frag */,
 				89EA8CB61A85369E00F66FDA /* mix.vert */,
 				89EA8CB71A85369E00F66FDA /* norm.frag */,
 				89EA8CB81A85369E00F66FDA /* norm.vert */,
@@ -1227,7 +1227,7 @@
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
 				EE672F011541E9AD00229B52 /* resources */,
-				E4B69B5B0A3A1756003C02F2 /* NSCARPEDebug.app */,
+				E4B69B5B0A3A1756003C02F2 /* C.A.R.P.E.Debug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1306,7 +1306,7 @@
 			);
 			name = C.A.R.P.E.;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* NSCARPEDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* C.A.R.P.E.Debug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1317,7 +1317,7 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "NSCARPE" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "C.A.R.P.E." */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1592,7 +1592,7 @@
 					"-lhdf5",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = NSCARPEDebug;
+				PRODUCT_NAME = C.A.R.P.E.Debug;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1640,7 +1640,7 @@
 					"-lhdf5",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = NSCARPE;
+				PRODUCT_NAME = C.A.R.P.E.;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1649,7 +1649,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "NSCARPE" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "C.A.R.P.E." */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,

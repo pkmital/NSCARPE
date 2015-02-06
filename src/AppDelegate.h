@@ -79,27 +79,54 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     testApp *appPtr;
     bool bAllocated;
+    
     NSMenuItem *exportMotionDescriptorsToHDF5Item;
     NSMenuItem *exportFrame;
-    NSMenuItem *toggleHeatmap;
-    NSMenuItem *toggleClustering;
-    NSMenuItem *OpticalFlow;
+    
+    NSMenuItem *viewMenu;
+    NSMenuItem *viewMenu_Movie;
+    NSMenuItem *viewMenu_Eyes;
+    NSMenuItem *viewMenu_Saccades;
+    NSMenuItem *viewMenu_Heatmap;
+    NSMenuItem *viewMenu_DifferenceHeatmap;
+    NSMenuItem *viewMenu_Clustering;
+    NSMenuItem *viewMenu_MotionMagnitude;
+    NSMenuItem *viewMenu_MotionDirection;
+    NSMenuItem *viewMenu_Normalization;
+    NSMenuItem *playbackMenu;
+    NSMenuItem *openStudyMenuItem;
 }
 
-// FILE
+// FILE ITEMS:
+@property (assign) IBOutlet NSMenuItem *openStudyMenuItem;
 @property (assign) IBOutlet NSMenuItem *exportMotionDescriptorsToHDF5Item;
 @property (assign) IBOutlet NSMenuItem *exportFrame;
 
-// VIEW
-@property (assign) IBOutlet NSMenuItem *toggleHeatmap;
-@property (assign) IBOutlet NSMenuItem *toggleClustering;
-
-// FILE
+// FILE ACTIONS:
 - (IBAction)loadStudy:(id)sender;
 - (IBAction)exportMotionDescriptorsToHDF5:(id)sender;
 
-// VIEW
+// VIEW ITEMS:
+@property (assign) IBOutlet NSMenuItem *viewMenu;
+@property (assign) IBOutlet NSMenuItem *viewMenu_Movie;
+@property (assign) IBOutlet NSMenuItem *viewMenu_Eyes;
+@property (assign) IBOutlet NSMenuItem *viewMenu_Saccades;
+@property (assign) IBOutlet NSMenuItem *viewMenu_Heatmap;
+@property (assign) IBOutlet NSMenuItem *viewMenu_DifferenceHeatmap;
+@property (assign) IBOutlet NSMenuItem *viewMenu_Clustering;
+@property (assign) IBOutlet NSMenuItem *viewMenu_MotionMagnitude;
+@property (assign) IBOutlet NSMenuItem *viewMenu_MotionDirection;
+@property (assign) IBOutlet NSMenuItem *viewMenu_Normalization;
+
+// VIEW ACTIONS:
 - (IBAction)toggleHeatmap:(id)sender;
 - (IBAction)toggleClustering:(id)sender;
+
+// PLAYBACK ITEMS:
+@property (assign) IBOutlet NSMenuItem *playbackMenu;
+
+// PLAYBACK ACTIONS:
+
+
 
 @end

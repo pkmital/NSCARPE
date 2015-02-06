@@ -89,8 +89,8 @@ _a < _b ? _a : _b; })
 
 //--------------------------------------------------------------
 void testApp::setup() {
+
     bSetup = false;
-    
     bPaused = false;
     bShowDetail = false;
     bNeedsUpdate = false;
@@ -218,6 +218,12 @@ void testApp::draw() {
     {
         moviePlayer->draw(0, 0);
     }
+    else
+    {
+        ofSetColor(0);
+        ofRect(0, 0, moviePlayer->getWidth(), moviePlayer->getHeight());
+        ofSetColor(255);
+    }
     
     ofEnableAlphaBlending();
     
@@ -342,6 +348,7 @@ void testApp::loadUserSettings() {
             bShowEyes = ofToLower(settings.getValue("eyes", "true")) == "true";
             bShowSaccades = ofToLower(settings.getValue("saccades", "true")) == "true";
             bShowHeatmap = ofToLower(settings.getValue("heatmap", "true")) == "true";
+            heatmapType = std::max<int>(0, std::min<int>(4, settings.getValue("heatmaptype", 4)));
             bShowDifferenceHeatmap = ofToLower(settings.getValue("differenceheatmap", "true")) == "true";
             bShowMeanBinocular = ofToLower(settings.getValue("meanbinocular", "true")) == "true";
             bShowMovie = ofToLower(settings.getValue("movie", "true")) == "true";
@@ -421,7 +428,7 @@ void testApp::initializeExperiment() {
                 initializeEyeTrackingData(paths);
                 eyeMovementFrameRate = settings.getValue("framerate", 1000.0f);
                 eyeMovements->setFrameRate(eyeMovementFrameRate);
-                eyeMovements->setSigma(settings.getValue("sigma", 50));
+                eyeMovements->setSigma(settings.getValue("sigma", 50.0));
                 
             }
             settings.popTag();
@@ -475,7 +482,7 @@ void testApp::initializeMovie(string movieURL)
     }
     movieWidth = moviePlayer->getWidth();
     movieHeight = moviePlayer->getHeight();
-    movieMSPerFrame = 1.0 / movieFrameRate * 1000;
+    movieMSPerFrame = 1.0 / movieFrameRate * 1000.0;
     cout << "[OK]: Loaded movie with " << movieTotalFrames << " frames at " << movieFrameRate << " fps and " << movieWidth << "x" << movieHeight << " resolution." << endl;
     
 	//////////////////////////////////////////////////////
@@ -566,7 +573,13 @@ void testApp::initializeEyeTrackingData(vector<string> paths)
             eyeMovements->loadArringtonFiles(paths[i]);
         else
             //eyeMovements->loadFiles(paths[i], movieName, bLoadBinocular, i);
-            eyeMovements->loadFiles(paths[i], bLoadBinocular, bLoadMillisecondFormat, i);
+            if(heatmapType == 4)
+                if(paths.size() > 1)
+                    eyeMovements->loadFiles(paths[i], bLoadBinocular, bLoadMillisecondFormat, bLoadClassifiedData, i, i+1);
+                else
+                    eyeMovements->loadFiles(paths[i], bLoadBinocular, bLoadMillisecondFormat, bLoadClassifiedData, i, 0);
+            else
+                eyeMovements->loadFiles(paths[i], bLoadBinocular, bLoadMillisecondFormat, bLoadClassifiedData, i, heatmapType);
     }
 }
 

@@ -81,64 +81,62 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="View" id="295">
+                <menuItem title="View" enabled="NO" id="295">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="296">
                         <items>
-                            <menuItem title="Toggle Movie" id="k5y-9a-QyE">
+                            <menuItem title="Toggle Movie" enabled="NO" id="k5y-9a-QyE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showMovie:" target="811" id="vEf-P2-l3t"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="UNh-O2-uYE"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Eyes" id="gxe-fW-7iL">
+                            <menuItem title="Toggle Eyes" enabled="NO" id="gxe-fW-7iL">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleEyes:" target="811" id="D6j-Bq-jx8"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="0TH-vn-fEZ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Saccades" id="Tn9-mK-AT0">
+                            <menuItem title="Toggle Saccades" enabled="NO" id="Tn9-mK-AT0">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleSaccades:" target="811" id="dD2-3i-cqz"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="rkK-k5-wi1"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Heatmap" id="297">
+                            <menuItem title="Toggle Heatmap" enabled="NO" id="297">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleHeatmap:" target="811" id="b5n-yT-EYM"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="rsp-MP-1Z2"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Difference Heatmap" id="ewK-hw-6Rd">
+                            <menuItem title="Toggle Difference Heatmap" enabled="NO" id="ewK-hw-6Rd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleDifferenceHeatmap:" target="811" id="w6g-E4-tla"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="xo4-TQ-wlC"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Clustering" id="298">
+                            <menuItem title="Toggle Normalization" enabled="NO" id="Wdj-82-DWl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleNormalization:" target="811" id="ova-ii-upX"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Toggle Clustering" enabled="NO" id="298">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleClustering:" target="811" id="7ed-4v-74c"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="D8G-45-0Nt"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Motion Magnitude" id="5h5-9n-yBK">
+                            <menuItem title="Toggle Motion Magnitude" enabled="NO" id="5h5-9n-yBK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showMagnitude:" target="811" id="fgf-ZN-6ES"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="vaD-uR-0AF"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Motion Direction" id="3Nb-H9-JtW">
+                            <menuItem title="Toggle Motion Direction" enabled="NO" id="3Nb-H9-JtW">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showDirection:" target="811" id="X2l-yr-O4f"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="ggF-UZ-1Ig"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -150,10 +148,6 @@
                         <items>
                             <menuItem title="Real-Time Playback" id="L4L-aI-OuG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="toggleEyes:" target="811" id="aws-5M-zpg"/>
-                                    <binding destination="yHX-27-Qg4" name="value" keyPath="values.LiveIcon" id="iYd-a0-ZX7"/>
-                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -162,7 +156,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="106">
                         <items>
-                            <menuItem title="NSCARPE Help" keyEquivalent="?" id="111">
+                            <menuItem title="C.A.R.P.E. Help" keyEquivalent="?" id="111">
                                 <connections>
                                     <action selector="showHelp:" target="-1" id="360"/>
                                 </connections>
@@ -176,8 +170,18 @@
             <connections>
                 <outlet property="exportFrame" destination="rIf-Nm-FVp" id="YKM-qU-Anx"/>
                 <outlet property="exportMotionDescriptorsToHDF5Item" destination="XpW-Yr-pDw" id="H0Q-na-YaG"/>
-                <outlet property="toggleClustering" destination="298" id="OV2-Ve-MYS"/>
-                <outlet property="toggleHeatmap" destination="297" id="bKa-gA-B0t"/>
+                <outlet property="openStudyMenuItem" destination="72" id="8HJ-Ja-5c3"/>
+                <outlet property="playbackMenu" destination="n4R-lX-lsy" id="tAM-ou-vKg"/>
+                <outlet property="viewMenu" destination="295" id="ZPd-Ww-wcB"/>
+                <outlet property="viewMenu_Clustering" destination="298" id="PMo-hA-eV1"/>
+                <outlet property="viewMenu_DifferenceHeatmap" destination="ewK-hw-6Rd" id="tih-ht-h3q"/>
+                <outlet property="viewMenu_Eyes" destination="gxe-fW-7iL" id="0J7-FS-V06"/>
+                <outlet property="viewMenu_Heatmap" destination="297" id="esm-2i-Rjn"/>
+                <outlet property="viewMenu_MotionDirection" destination="3Nb-H9-JtW" id="VEe-J4-Ec7"/>
+                <outlet property="viewMenu_MotionMagnitude" destination="5h5-9n-yBK" id="63l-kp-Uw1"/>
+                <outlet property="viewMenu_Movie" destination="k5y-9a-QyE" id="xUc-bF-9p5"/>
+                <outlet property="viewMenu_Normalization" destination="Wdj-82-DWl" id="wfj-jw-d05"/>
+                <outlet property="viewMenu_Saccades" destination="Tn9-mK-AT0" id="RRz-Yw-hHY"/>
             </connections>
         </customObject>
         <userDefaultsController representsSharedInstance="YES" id="yHX-27-Qg4"/>

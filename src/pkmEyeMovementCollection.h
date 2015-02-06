@@ -187,7 +187,7 @@ public:
         heatmap2.end();
         
         ofLog(OF_LOG_NOTICE, "Loading Mix Shader");
-        mixShader.load(ofToDataPath("mix", true));
+        mixShader.load(ofToDataPath("mix 2", true));
         ofLog(OF_LOG_NOTICE, "Loading Difference of Heatmap Shader");
         diffShader.load(ofToDataPath("diffheatmap", true));
         ofLog(OF_LOG_NOTICE, "Loading Norm Shader");
@@ -204,7 +204,7 @@ public:
     //--------------------------------------------------------------
     
     //--------------------------------------------------------------
-    void loadArringtonFiles(string path)
+    void loadArringtonFiles(string path, int colormapType = 0)
     {
         // create new vector of subjects for condition
         vector<pkmEyeMovementSubject> a;
@@ -217,7 +217,7 @@ public:
         // create new heatmap for condition
         ofPtr<pkmMixtureOfGaussiansHeatmap> h(new pkmMixtureOfGaussiansHeatmap());
         h->allocate(movieWidth, movieHeight);
-        h->setColorMap((pkmMixtureOfGaussiansHeatmap::colormode)0);
+        h->setColorMap((pkmMixtureOfGaussiansHeatmap::colormode)colormapType);
         multipleHeatmaps.push_back(h);
         totalClasses++;
         
@@ -315,7 +315,8 @@ public:
                    bool bLoadBinocular = true,          // format of eye-data has twice as many columns for the second eye
                    bool bLoadMillisecondData = false,   // 1st column has millisecond frame, 2nd column has video frame.
                    bool bLoadClassifiedData = false,
-                   int conditionNumber = 0)     // (for multiple heatmaps)
+                   int conditionNumber = 0,
+                   int colormapType = 0)     // (for multiple heatmaps)
     {
         bMultipleHeatmaps = true;
         
@@ -334,15 +335,16 @@ public:
             return;
         }
         
+        // This is really experimental.. need a test case for multiple conditions... 
         // create new vector of subjects for condition
         vector<pkmEyeMovementSubject> a;
+        a.resize(numSubjects);
         subjects.push_back(a);
-        subjects[conditionNumber].resize(numSubjects);
         
         // create new heatmap for condition
         ofPtr<pkmMixtureOfGaussiansHeatmap> h(new pkmMixtureOfGaussiansHeatmap());
         h->allocate(movieWidth, movieHeight);
-        h->setColorMap((pkmMixtureOfGaussiansHeatmap::colormode)(conditionNumber));
+        h->setColorMap((pkmMixtureOfGaussiansHeatmap::colormode)(colormapType));
         multipleHeatmaps.push_back(h);
         totalClasses++;
         
@@ -644,8 +646,9 @@ public:
             
             bNeedsUpdate = false;
         }
-    
-        heatmap2.draw(0,0);
+        
+        if(bDrawHeatmaps)
+            heatmap2.draw(0,0);
 
     }
     //--------------------------------------------------------------
@@ -819,8 +822,8 @@ public:
 
         }
         
-        
-        heatmapFBO.draw(0,0);
+        if(bDrawHeatmaps)
+            heatmapFBO.draw(0,0);
         
     }
     //--------------------------------------------------------------

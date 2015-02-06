@@ -76,10 +76,27 @@
 
 @implementation AppDelegate
 
+// FILE menu
+@synthesize openStudyMenuItem;
 @synthesize exportMotionDescriptorsToHDF5Item;
 @synthesize exportFrame;
-@synthesize toggleHeatmap;
-@synthesize toggleClustering;
+
+// VIEW menu
+@synthesize viewMenu;
+@synthesize viewMenu_Movie;
+@synthesize viewMenu_Eyes;
+@synthesize viewMenu_Saccades;
+@synthesize viewMenu_Heatmap;
+@synthesize viewMenu_DifferenceHeatmap;
+@synthesize viewMenu_Clustering;
+@synthesize viewMenu_MotionMagnitude;
+@synthesize viewMenu_MotionDirection;
+@synthesize viewMenu_Normalization;
+
+// PLAYBACK menu
+@synthesize playbackMenu;
+
+#pragma mark APPLICATION
 
 - (void) applicationDidFinishLaunching: (NSNotification*) notification {
     bAllocated = false;
@@ -93,44 +110,9 @@
     }
 	ofxNSWindower::destroy();
 }
-- (IBAction)showMovie:(id)sender {
-    appPtr->toggleMovie();
-    
-}
-- (IBAction)showMagnitude:(id)sender {
-    appPtr->toggleFlowMagnitude();
-}
-- (IBAction)showDirection:(id)sender {
-    appPtr->toggleFlowDirection();
-}
 
-- (IBAction)exportMotionDescriptorsToHDF5:(id)sender {
-    appPtr->exportMotionDescriptorsToHDF5();
 
-}
-- (IBAction)exportFrame:(id)sender {
-    appPtr->exportFrame();
-}
-- (IBAction)toggleEyes:(id)sender {
-    appPtr->toggleEyes();
-}
-
-- (IBAction)toggleSaccades:(id)sender {
-    appPtr->toggleSaccades();
-}
-
-- (IBAction)toggleHeatmap:(id)sender {
-    appPtr->toggleHeatmap();
-}
-
-- (IBAction)toggleDifferenceHeatmap:(id)sender {
-    appPtr->toggleDifferenceHeatmap();
-}
-
-- (IBAction)toggleClustering:(id)sender {
-    appPtr->toggleClustering();
-}
-
+#pragma mark FILE_MENU
 - (IBAction)loadStudy:(id)sender {
     if(bAllocated)
     {
@@ -138,11 +120,71 @@
         bAllocated = false;
     }
     appPtr = new testApp();
-	ofxNSWindower::instance()->addWindow(appPtr, "C.A.R.P.E.: Stimulus Display", NSTitledWindowMask, 0);
+    ofxNSWindower::instance()->addWindow(appPtr, "C.A.R.P.E.: Stimulus Display", NSTitledWindowMask, 0);
     
-//    [exportMotionDescriptorsToHDF5Item setEnabled:true];
+    //    [exportMotionDescriptorsToHDF5Item setEnabled:true];
+    [openStudyMenuItem setEnabled:false];
     [exportFrame setEnabled:true];
+    [viewMenu setEnabled:true];
+    [playbackMenu setEnabled:true];
+    
+    [viewMenu_Movie setState:appPtr->isMovieEnabled()];
+    [viewMenu_Eyes setState:appPtr->isEyesEnabled()];
+    [viewMenu_Saccades setState:appPtr->isSaccadesEnabled()];
+    [viewMenu_Heatmap setState:appPtr->isHeatmapEnabled()];
+    [viewMenu_DifferenceHeatmap setState:appPtr->isDifferenceHeatmapEnabled()];
+    [viewMenu_Normalization setState:appPtr->isNormalizationEnabled()];
+    [viewMenu_Clustering setState:appPtr->isClusteringEnabled()];
+    [viewMenu_MotionMagnitude setState:appPtr->isFlowMagnitudeEnabled()];
+    [viewMenu_MotionDirection setState:appPtr->isFlowDirectionEnabled()];
     
     bAllocated = true;
 }
+
+- (IBAction)exportFrame:(id)sender {
+    appPtr->exportFrame();
+}
+
+- (IBAction)exportMotionDescriptorsToHDF5:(id)sender {
+    appPtr->exportMotionDescriptorsToHDF5();
+    
+}
+
+#pragma mark VIEW_MENU
+- (IBAction)showMovie:(id)sender {
+    [sender setState:appPtr->toggleMovie()];
+}
+
+- (IBAction)toggleEyes:(id)sender {
+    [sender setState:appPtr->toggleEyes()];
+}
+
+- (IBAction)toggleSaccades:(id)sender {
+    [sender setState:appPtr->toggleSaccades()];
+}
+
+- (IBAction)toggleHeatmap:(id)sender {
+    [sender setState:appPtr->toggleHeatmap()];
+}
+
+- (IBAction)toggleDifferenceHeatmap:(id)sender {
+    [sender setState:appPtr->toggleDifferenceHeatmap()];
+}
+
+- (IBAction)toggleNormalization:(id)sender {
+    [sender setState:appPtr->toggleNormalization()];
+}
+
+- (IBAction)toggleClustering:(id)sender {
+    [sender setState:appPtr->toggleClustering()];
+}
+
+- (IBAction)showMagnitude:(id)sender {
+    [sender setState:appPtr->toggleFlowMagnitude()];
+}
+- (IBAction)showDirection:(id)sender {
+    [sender setState:appPtr->toggleFlowDirection()];
+}
+
+
 @end
