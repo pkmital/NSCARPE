@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<globalsettings>
+    <show>
+        <!-- Automatically exit CARPE once the movie has finished processing [true] -->
+        <autoquit>true</autoquit>
+        
+        <!-- Should skip frames to produce a real-time sense (not good to outputting files) or not (better for outputting files) [false] -->
+        <realtime>false</realtime>
+        
+        <!-- Automatically determine clusters of eye-movements [false] -->
+        <clustering>false</clustering>
+        
+        <!-- Create Alpha-map based on eye-movement density map [false] -->
+        <peekthrough>false</peekthrough>
+        
+        <!-- Show contour lines around eye-movement density map [false] -->
+        <contours>false</contours>
+        
+        <!-- Show circles for every fixation [true] -->
+        <eyes>true</eyes>
+        
+        <!-- Show lines between fixations [true] -->
+        <saccades>true</saccades>
+        
+        <!-- Show a JET colormapped heatmap of the eye-movements [true] -->
+        <heatmap>true</heatmap>
+        
+        <!-- options are 0 = "jet" (rgb map from cool to hot), 1 = "cool", 2 = "hot", 3 = "gray" (no color), [4] = "auto" (if only one condition is detection, sets to "jet"; if two, sets first to "hot", and second to "cool"); [4] -->
+        <heatmaptype>4</heatmaptype>
+        
+        <!-- Show a Hot or Cool colormapped heatmap of the eye-movements (only effects when multiple paths (conditions) are loaded in eye-movements [true] -->
+        <differenceheatmap>false</differenceheatmap>
+        
+        <!-- Compute mean of L/R eyes and present the mean [true] -->
+        <meanbinocular>true</meanbinocular>
+        
+        <!-- Display the movie (useful if you need render of heatmap or saliency only [true] -->
+        <movie>true</movie>
+        
+        <!-- Compute the saliency by using TV-L1 dense optical flow [true] -->
+        <visualsaliency>false</visualsaliency>
+        
+        <!-- Show the magnitude of the flow [true] -->
+        <visualsaliencymagnitude>false</visualsaliencymagnitude>
+        
+        <!-- Show the color coded direction of the flow [false] -->
+        <visualsaliencydirection>false</visualsaliencydirection>
+        
+        <!-- Normalize the heatmap to show the peak as the hotest (messy with low number of subjects) [true] -->
+        <normalizedheatmap>true</normalizedheatmap>
+        
+        <!-- experimental [false] -->
+        <radialblur>false</radialblur>
+        
+        <!-- experimental [false] -->
+        <histogram>false</histogram>
+        
+        <!-- Show subject names next to each eye-movement, discovered from the filename tags [false] -->
+        <subjectnames>false</subjectnames>
+    </show>
+    <save>
+        <!-- location to save a movie/images/hdf5 descriptor (MUST EXIST) -->
+        <location>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_1280x720</location>
+        
+        <!-- outputs a movie rendering with all selected options -->
+        <movie>true</movie>
+        
+        <!-- outputs images of every frame rendered -->
+        <images>false</images>
+        
+        <!-- outputs an hdf5 file with motion descriptors of every frame (experimental) -->
+        <motiondescriptors>true</motiondescriptors>
+    </save>
+</globalsettings>
+
+<!-- load in a batch of stimuli, one processed after the other -->
+<stimuli>
+    <!-- first stimuli to process -->
+    <stimulus>
+        <!-- this has to reflect the filenames of the movie AND the eye-tracking data such that it is unique to only its data -->
+        <name>50_people_brooklyn_1280x720</name>
+        <!-- description of the presentation format -->
+        <presentation>
+            <!-- monitor resolution -->
+            <screenwidth>1280</screenwidth>
+            <screenheight>960</screenheight>
+            
+            <!-- was the movie centered? this will override the movieoffsetx/y variables -->
+            <centermovie>true</centermovie>
+            
+            <!-- don't have to change this if you set the centering flag. [0] -->
+            <movieoffsetx>0</movieoffsetx>
+            <movieoffsety>0</movieoffsety>
+        </presentation>
+        <movie>
+            <file>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_1280x720/video/50_people_brooklyn_1280x720.mp4</file>
+            <!--  The movie's framerate (overrides detected framerate) -->
+            <framerate>30</framerate>
+        </movie>
+        <eyemovements>
+            <!-- framerate of the data... if 1000Hz, set to 1000, if 30 FPS, set to 30... [1000] -->
+            <framerate>30</framerate>
+            
+            <!-- if true, loads eye-movements using arrington research format (experimental); otherwise, column delimited text. [false] -->
+            <arrington>false</arrington>
+            
+            <!-- 2 degrees resolution in pixels [50] -->
+            <sigma>90</sigma>
+            
+            <!-- is the data in binocular format? i.e.  lx, ly, ldil, levent, rx, ry, rdil, revent [true] -->
+            <binocular>true</binocular>
+            
+            <!-- if true, data will be expected to have 2 columns denoting the MS timestamp and then the VIDEO_FRAME timestamp, rather than just one column denoting the VIDEO_FRAME. [false] -->
+            <millisecond>false</millisecond>
+            
+            <!-- if true, the last column, after the revent (or levent if monocular), denotes some condition of the eye-movements; e.g. 0 up until a button press, when the eye-movements become 1... [false]-->
+            <classified>false</classified>
+            
+            <!-- using the name set above, will find all eye-movements in this directory
+             
+             Data should be like so (with all right eye optional):
+             
+             [(optional)ms] [frame] [left_x] [left_y] [left_dil] [left_event] [(optional)right_x] [(optional)right_y] [(optional)right_dil] [(optional)right_event] [(optional)condition_number]
+             
+             Event flags are:
+             -1 = Error/dropped frame
+             0 = Blink
+             1 = Fixation
+             2 = Saccade
+             
+             -->
+            <path>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_1280x720/event_data</path>
+            
+            <!-- set another path to load more than one condition, letting you see difference heatmaps -->
+            <!--path>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_no_voices_1280x720/event_data</path-->
+        </eyemovements>
+    </stimulus>
+    <!-- next stimulus to process in batch -->
+    <stimulus>
+        <name>50_people_brooklyn_no_voices_1280x720</name>
+        <presentation>
+            <screenwidth>1280</screenwidth>
+            <screenheight>960</screenheight>
+            <centermovie>true</centermovie>
+            <movieoffsetx>0</movieoffsetx>
+            <movieoffsety>0</movieoffsety>
+        </presentation>
+        <movie>
+            <file>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_no_voices_1280x720/video/50_people_brooklyn_no_voices_1280x720.mp4</file>
+        </movie>
+        <eyemovements>
+            <framerate>30</framerate>
+            <sigma>50</sigma>
+            <binocular>true</binocular>
+            <millisecond>false</millisecond>
+            <classified>false</classified>
+            <path>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_no_voices_1280x720/event_data</path>
+        </eyemovements>
+    </stimulus>
+    <stimulus>
+        <name>50_people_london_1280x720</name>
+        <presentation>
+            <screenwidth>1280</screenwidth>
+            <screenheight>960</screenheight>
+            <centermovie>true</centermovie>
+            <movieoffsetx>0</movieoffsetx>
+            <movieoffsety>0</movieoffsety>
+        </presentation>
+        <movie>
+            <file>/Users/pkmital/pkm/research/diem/data/50_people_london_1280x720/video/50_people_london_1280x720.mp4</file>
+        </movie>
+        <eyemovements>
+            <framerate>30</framerate>
+            <sigma>50</sigma>
+            <binocular>true</binocular>
+            <millisecond>false</millisecond>
+            <classified>false</classified>
+            <path>/Users/pkmital/pkm/research/diem/data/50_people_london_1280x720/event_data</path>
+        </eyemovements>
+    </stimulus>
+    <stimulus>
+        <name>50_people_london_no_voices_1280x720</name>
+        <presentation>
+            <screenwidth>1280</screenwidth>
+            <screenheight>960</screenheight>
+            <centermovie>true</centermovie>
+            <movieoffsetx>0</movieoffsetx>
+            <movieoffsety>0</movieoffsety>
+        </presentation>
+        <movie>
+            <file>/Users/pkmital/pkm/research/diem/data/50_people_london_no_voices_1280x720/video/50_people_london_no_voices_1280x720.mp4</file>
+        </movie>
+        <eyemovements>
+            <framerate>30</framerate>
+            <sigma>50</sigma>
+            <binocular>true</binocular>
+            <millisecond>false</millisecond>
+            <classified>false</classified>
+            <path>/Users/pkmital/pkm/research/diem/data/50_people_london_no_voices_1280x720/event_data</path>
+        </eyemovements>
+    </stimulus>
+</stimuli>
