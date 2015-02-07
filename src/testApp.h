@@ -80,6 +80,8 @@
 #include "ofxQTKitRecorder.h"
 #include "pkmEyeMovementCollection.h"
 #include "pkmOpticalFlow.h"
+#include "pkmAudioWindow.h"
+#include "pkmAudioWaveform.h"
 
 
 //--------------------------------------------------------------
@@ -101,9 +103,10 @@ public:
     //--------------------------------------------------------------
     void initializeVisualSaliency();
     void initializeMovie(string movieURL);
-    void initializeRecording(string saveURL);
+    void initializeRecording(string saveURL, string audioTrack = "");
     void initializeEyeTrackingData(vector<string> paths);
     void initializeExperiment();
+    void initializeAudio();
     //--------------------------------------------------------------
     
     //--------------------------------------------------------------
@@ -221,12 +224,23 @@ public:
     }
     
     //--------------------------------------------------------------
+    string getAudioURL()
+    {
+        return audioURL;
+    }
+    
+    float* getAudioPlaybackPoint()
+    {
+        return audioPlaybackPtr;
+    }
 	
 private:
     //--------------------------------------------------------------
     // Movie 
     ofQTKitPlayer                   *moviePlayer;
-    string                          movieURL, movieName;
+    pkmAudioWaveform                *audioWaveform;
+    float                           *audioPlaybackPtr;
+    string                          movieURL, movieName, audioURL;
     float                           movieFrameNumber, movieTotalFrames, movieMSPerFrame, frameIncrement;
     int                             movieWidth, movieHeight;
     float                           movieFrameRate;
@@ -238,7 +252,7 @@ private:
     ofxQTKitRecorder                recorder;
     bool                            bDoneRecording;
     ofFbo                           recorderFbo;
-    string                          saveMovieURL;
+    string                          saveMovieURL, saveFilename, audioTrack;
     
     
     //--------------------------------------------------------------

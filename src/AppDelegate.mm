@@ -120,7 +120,16 @@
         bAllocated = false;
     }
     appPtr = new testApp();
+    
     ofxNSWindower::instance()->addWindow(appPtr, "C.A.R.P.E.: Stimulus Display", NSTitledWindowMask, 0);
+    
+    string audioURL = appPtr->getAudioURL();
+    if(audioURL != "")
+    {
+        waveformPtr = new pkmAudioWaveformApp();
+        ofxNSWindower::instance()->addWindow(waveformPtr, "Audio Controller", NSTitledWindowMask, 10);
+        waveformPtr->allocate(audioURL, appPtr->getAudioPlaybackPoint());
+    }
     
     //    [exportMotionDescriptorsToHDF5Item setEnabled:true];
     [openStudyMenuItem setEnabled:false];

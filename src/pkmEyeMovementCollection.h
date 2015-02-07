@@ -161,12 +161,12 @@ public:
         ofLog(OF_LOG_NOTICE, "Loading FBO");
         
         ofFbo::Settings settings;
-        settings.minFilter = GL_NEAREST;
-        settings.maxFilter = GL_NEAREST;
+        settings.minFilter = GL_LINEAR;
+        settings.maxFilter = GL_LINEAR;
         settings.width = movieWidth;
         settings.height = movieHeight;
         settings.internalformat = GL_RGBA32F_ARB;
-        settings.numSamples = 0;
+        settings.numSamples = 4;
         settings.useDepth = false;
         settings.useStencil = false;
         

@@ -73,11 +73,13 @@
 
 
 #include "testApp.h"
+#include "pkmAudioWaveform.h"
 #include "ofxNSWindower.h"
 #import <Cocoa/Cocoa.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     testApp *appPtr;
+    pkmAudioWaveformApp *waveformPtr;
     bool bAllocated;
     
     NSMenuItem *exportMotionDescriptorsToHDF5Item;

@@ -103,7 +103,7 @@ void testApp::setup() {
     ofSetCircleResolution(20);
     
     loadUserSettings();
-
+    
 	ofSetWindowShape(movieWidth, movieHeight);
     bSetup = true;
 }
@@ -115,6 +115,14 @@ void testApp::close() {
     if(bSaveMovie)
     {
         recorder.flushToFile();
+        
+        if(audioTrack != "")
+        {
+            recorder.loadAudioTrack(audioTrack.c_str());
+            recorder.addAudioTrack(saveFilename.c_str());
+            audioTrack = "";
+        }
+        
         recorder.releaseRecording();
     }
     
@@ -156,6 +164,14 @@ void testApp::update() {
         if(bSaveMovie)
         {
             recorder.flushToFile();
+            
+            if(audioTrack != "")
+            {
+                recorder.loadAudioTrack(audioTrack.c_str());
+                recorder.addAudioTrack(saveFilename.c_str());
+                audioTrack = "";
+            }
+            
             recorder.releaseRecording();
         }
         
@@ -196,6 +212,8 @@ void testApp::update() {
         
         if(!bPaused)
             movieFrameNumber+=frameIncrement;
+        
+        audioPlaybackPtr[0] = (float)(movieFrameNumber / (float)movieTotalFrames);
         
         ofLog(OF_LOG_NOTICE, "Processing Frame %f/%f", movieFrameNumber, movieTotalFrames);
         
@@ -248,7 +266,8 @@ void testApp::draw() {
     if(bSaveMovie)
     {
         recorderFbo.readToPixels(readbackPixels);
-        recorder.addFrame(readbackPixels, movieFrameRate);
+        unsigned long msPerFrame = 1000.0 / movieFrameRate;
+        recorder.addFrame(readbackPixels, msPerFrame);
     }
     
     if (bShowDetail) {
@@ -360,6 +379,8 @@ void testApp::loadUserSettings() {
             bShowHistogram = ofToLower(settings.getValue("histogram", "false")) == "true";
             bShowSaccades = ofToLower(settings.getValue("saccades", "false")) == "true";
             bShowSubjectNames = ofToLower(settings.getValue("subjectnames", "false")) == "true";
+            audioURL = settings.getValue("audiotrack", "");
+            audioPlaybackPtr = new float[1];
         }
         settings.popTag();
         settings.pushTag("save");
@@ -368,6 +389,7 @@ void testApp::loadUserSettings() {
             bSaveMovie = ofToLower(settings.getValue("movie", "true")) == "true";
             bSaveMovieImages = ofToLower(settings.getValue("images", "false")) == "true";
             bExportMotionDescriptorsToHDF = ofToLower(settings.getValue("motiondescriptors", "true")) == "true";
+            audioTrack = settings.getValue("audiotrack", "");
         }
         settings.popTag();
     }
@@ -381,7 +403,15 @@ void testApp::loadUserSettings() {
     settings.popTag();
     
     initializeExperiment();
+    initializeVisualSaliency();
+    if(bSaveMovie)
+        initializeRecording(saveMovieURL, audioTrack);
     
+}
+
+//--------------------------------------------------------------
+void testApp::initializeAudio() {
+
 }
 
 //--------------------------------------------------------------
@@ -437,11 +467,6 @@ void testApp::initializeExperiment() {
     }
     settings.popTag();
     
-    initializeVisualSaliency();
-    
-    if(bSaveMovie)
-        initializeRecording(saveMovieURL);
-    
 }
 
 
@@ -493,7 +518,7 @@ void testApp::initializeMovie(string movieURL)
 }
 
 //--------------------------------------------------------------
-void testApp::initializeRecording(string location)
+void testApp::initializeRecording(string location, string audioTrack)
 {
 	//////////////////////////////////////////////////////
     // set codec
@@ -503,7 +528,6 @@ void testApp::initializeRecording(string location)
 	
 	//////////////////////////////////////////////////////
 	// Output movie to
-	string filename;
 	int fileno = 1;
 	ifstream in;
 	do {
@@ -516,27 +540,27 @@ void testApp::initializeRecording(string location)
 		else
             str << location << "/" << movieName << "_output" << "(" << (fileno-1) << ").mov";
         //str << "output/" << movieName << "/" << movieName << "_output" << "(" << (fileno-1) << ").mov";
-		filename = str.str();
+		saveFilename = str.str();
 		++fileno;
 		// attempt to open for read
-		in.open( filename.c_str() );
+		in.open( saveFilename.c_str() );
 	} while( in.is_open() );
 	in.close();
 	// found a file that does not exists
     
 	//////////////////////////////////////////////////////
 	// now create the file so that we can start adding frames to it:
-	ofstream tmpptr( filename.c_str() );
+	ofstream tmpptr( saveFilename.c_str() );
 	tmpptr.close();
     
 	//////////////////////////////////////////////////////
     // setup recorder
-	string out_movie_audio = "audio/" + movieName + ".wav";
-    recorder.setup(filename);
-    //recorder.addAudioTrack(ofToDataPath(out_movie_audio, true).c_str());
+
+    recorder.setup(saveFilename);
     //recorder.loadAudioTrack(ofToDataPath(out_movie_audio, true).c_str());
     //cout << "Adding audio track: " << ofToDataPath(out_movie_audio) << endl;
     recorderFbo.allocate(movieWidth, movieHeight, GL_RGB);
+
     
 	//////////////////////////////////////////////////////
     // setup asynchronous readback
