@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <globalsettings>
     <show>
-        <!-- Automatically exit CARPE once the movie has finished processing [true] -->
+        <!-- Automatically start processing the first stimuli [true] -->
+        <autoplay>true</autoplay>
+        
+        <!-- Automatically exit CARPE once all stimulis have finished processing [true] -->
         <autoquit>true</autoquit>
         
         <!-- Should skip frames to produce a real-time sense (not good to outputting files) or not (better for outputting files) [false] -->
@@ -85,18 +88,34 @@
             <screenwidth>1280</screenwidth>
             <screenheight>960</screenheight>
             
-            <!-- was the movie centered? this will override the movieoffsetx/y variables -->
+            <!-- movie's resolution (overrides automatic detection of movie size) -->
+            <moviewidth>1280</moviewidth>
+            <movieheight>720</movieheight>
+            
+            <!-- Can shift eye-movements if the monitor/movie resolutions differed.  Most likely cenetered in the display -->
+            <!-- was the movie centered? this will override the movieoffsetx/y variables. -->
             <centermovie>true</centermovie>
             
             <!-- don't have to change this if you set the centering flag. [0] -->
             <movieoffsetx>0</movieoffsetx>
             <movieoffsety>0</movieoffsety>
         </presentation>
+        <!-- add the video file at this location to the recorded output.  at present, no audio is laoded from this file. -->
         <movie>
             <file>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_1280x720/video/50_people_brooklyn_1280x720.mp4</file>
             <!--  The movie's framerate (overrides detected framerate) -->
             <framerate>30</framerate>
         </movie>
+        <!-- add the audio file at this location to the recorded output. -->
+        <audio>
+            <file>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_1280x720/audio/50_people_brooklyn_1280x720.wav</file>
+            
+            <!-- will play back the audio while carpe is running -->
+            <playback>true</playback>
+            
+            <!-- will save the original audio (not rendered audio w/ CARPE which could be from any timepoint based on how you move around in time) along with the video.  This is only useful if you batch process the video in non-realtime mode, since every frame will be rendered and the audio will match up perfectly. in the future i'd like to add the "rendered" audio to the saved video file.  -->
+            <save>false</save>
+        </audio>
         <eyemovements>
             <!-- framerate of the data... if 1000Hz, set to 1000, if 30 FPS, set to 30... [1000] -->
             <framerate>30</framerate>
@@ -137,27 +156,6 @@
     </stimulus>
     <!-- next stimulus to process in batch -->
     <stimulus>
-        <name>50_people_brooklyn_no_voices_1280x720</name>
-        <presentation>
-            <screenwidth>1280</screenwidth>
-            <screenheight>960</screenheight>
-            <centermovie>true</centermovie>
-            <movieoffsetx>0</movieoffsetx>
-            <movieoffsety>0</movieoffsety>
-        </presentation>
-        <movie>
-            <file>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_no_voices_1280x720/video/50_people_brooklyn_no_voices_1280x720.mp4</file>
-        </movie>
-        <eyemovements>
-            <framerate>30</framerate>
-            <sigma>50</sigma>
-            <binocular>true</binocular>
-            <millisecond>false</millisecond>
-            <classified>false</classified>
-            <path>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_no_voices_1280x720/event_data</path>
-        </eyemovements>
-    </stimulus>
-    <stimulus>
         <name>50_people_london_1280x720</name>
         <presentation>
             <screenwidth>1280</screenwidth>
@@ -169,6 +167,11 @@
         <movie>
             <file>/Users/pkmital/pkm/research/diem/data/50_people_london_1280x720/video/50_people_london_1280x720.mp4</file>
         </movie>
+        <audio>
+            <file>/Users/pkmital/pkm/research/diem/data/50_people_london_1280x720/audio/50_people_london_1280x720.wav</file>
+            <playback>true</playback>
+            <save>false</save>
+        </audio>
         <eyemovements>
             <framerate>30</framerate>
             <sigma>50</sigma>
@@ -197,6 +200,27 @@
             <millisecond>false</millisecond>
             <classified>false</classified>
             <path>/Users/pkmital/pkm/research/diem/data/50_people_london_no_voices_1280x720/event_data</path>
+        </eyemovements>
+    </stimulus>
+    <stimulus>
+        <name>50_people_brooklyn_no_voices_1280x720</name>
+        <presentation>
+            <screenwidth>1280</screenwidth>
+            <screenheight>960</screenheight>
+            <centermovie>true</centermovie>
+            <movieoffsetx>0</movieoffsetx>
+            <movieoffsety>0</movieoffsety>
+        </presentation>
+        <movie>
+            <file>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_no_voices_1280x720/video/50_people_brooklyn_no_voices_1280x720.mp4</file>
+        </movie>
+        <eyemovements>
+            <framerate>30</framerate>
+            <sigma>50</sigma>
+            <binocular>true</binocular>
+            <millisecond>false</millisecond>
+            <classified>false</classified>
+            <path>/Users/pkmital/pkm/research/diem/data/50_people_brooklyn_no_voices_1280x720/event_data</path>
         </eyemovements>
     </stimulus>
 </stimuli>
