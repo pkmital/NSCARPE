@@ -37,6 +37,7 @@ public:
         bDrawMousePlay = false;
         bNeedsUpdate = true;
         bMoveToSample = false;
+        bSetupGraphics = false;
         bFollow = true;
         seconds = 0.0;
         bLoaded = false;
@@ -70,6 +71,13 @@ public:
         delete guiOverview;
         free(buffer);
     }
+    
+    void setupAudio(int fS = 1024)
+    {
+        frameSize = fS;
+        buffer = (float *)malloc(sizeof(float) * fS);
+        vDSP_vclr(buffer, 1, fS);
+    }
 
     // r determines resolution. higher is bigger windows, meaning less resolution.  set between 0.0-2.0.
     void setup(int px = 0, int py = 0, int w = 1280, int h = 100, int fS = 1024, float r = 2.5)
@@ -81,23 +89,23 @@ public:
         y = py;
         width = w;
         height = h - gui_bar_height;
-        frameSize = fS;
-        buffer = (float *)malloc(sizeof(float) * fS);
-        vDSP_vclr(buffer, 1, fS);
         resolution = r;
+        
+        setupAudio(fS);
         
         guiOverview = new ofxUICanvas(x + padding, y + height + 1, w - padding*2, gui_bar_height);
         slider = new ofxUIRangeSlider(width - padding*2 - 1, gui_bar_height, 0.0, 1.0, 0.0, 1.0, "Time");
         slider->setColorFill(ofColor(80));
         guiOverview->addWidget(slider);
         guiOverview->getWidget("Time")->setDrawOutlineHighLight(true);
-        string fontFile = "helvetica.ttf";
-        if (!guiOverview->setFont(ofToDataPath(fontFile, true)))
-        {
-            cerr << "Unable to load font file: " << fontFile << endl;
-            OF_EXIT_APP(0);
-        }
-        ofAddListener(guiOverview->newGUIEvent, this, &pkmAudioWaveform::guiEvent); 
+//        string fontFile = "helvetica.ttf";
+//        if (!guiOverview->setFont(ofToDataPath(fontFile, true)))
+//        {
+//            cerr << "Unable to load font file: " << fontFile << endl;
+//            OF_EXIT_APP(0);
+//        }
+        ofAddListener(guiOverview->newGUIEvent, this, &pkmAudioWaveform::guiEvent);
+        guiOverview->disableMouseEventCallbacks();
         guiOverview->disableAppEventCallbacks();
         
         waveformFbo.allocate(width, height, GL_RGBA, 0);
@@ -108,6 +116,8 @@ public:
         ofRect(0, 0, width, height);
         ofDisableAlphaBlending();
         waveformFbo.end();
+        
+        bSetupGraphics = true;
     }
     
     void setSize(int px, int py, int w, int h)
@@ -169,11 +179,14 @@ public:
                 cout << "range: " << rangeSliderWidth << endl;
             }
             seconds = totalSamples / sampleRate;
-            slider->setMin(0.0);
-            slider->setMax(seconds);
             
+            if(bSetupGraphics)
+            {
+                slider->setMin(0.0);
+                slider->setMax(seconds);
+                setRegionToZoom(sampleStart, sampleEnd);
+            }
             
-            setRegionToZoom(sampleStart, sampleEnd);
             currentSample = sampleStart;
             bLoaded = true;
             bUserInteracting = false;
@@ -190,6 +203,9 @@ public:
     
     void setRegionToZoom(unsigned long sampleStart, unsigned long sampleEnd)
     {
+        if (!bSetupGraphics)
+            return;
+        
         if (!bRezooming && (sampleEnd - sampleStart) > 1) {
             bRezooming = true;
             
@@ -243,14 +259,29 @@ public:
         setRegionToZoom(secondStart * sampleRate, secondEnd * sampleRate);        
     }
     
-    void setCurrentSample(float pct)
+    void setCurrentPercent(float pct)
     {
-        gotoCurrentSample = pct * totalSamples;
+        
+        setCurrentSample(pct * totalSamples);
         bMoveToSample = true;
+    }
+    
+    
+    float getCurrentPercent()
+    {
+        return gotoCurrentSample / (float)totalSamples;
+        
     }
     
     void setCurrentSample(unsigned long sample)
     {
+        
+        if((gotoCurrentSample-frameSize) == sample)
+        {
+            
+            sample += ((rand() % 128) - 64);
+        }
+        
         gotoCurrentSample = MIN(MAX(0,sample),totalSamples);
         bMoveToSample = true;
     }
@@ -456,8 +487,10 @@ public:
         
     }
     
-    bool mouseDragged(int px, int py)
+    bool mouseDragged(int px, int py, int button = 0)
     {
+        guiOverview->mouseDragged(px, py, button);
+        
         if (bScrubbing) {
             setCurrentSampleFromMouse(px);
             return true;
@@ -466,8 +499,10 @@ public:
             return false;
     }
     
-    bool mousePressed(int px, int py)
+    bool mousePressed(int px, int py, int button = 0)
     {
+        guiOverview->mousePressed(px, py, button);
+        
         if(py > y && py < (y + height + gui_bar_height))
         {
             if(py < (y + gui_bar_height))
@@ -485,6 +520,8 @@ public:
     
     bool mouseMoved(int px, int py)
     {
+        guiOverview->mouseMoved(px, py);
+        
         if(py > y && py < (y + height + gui_bar_height))
         {
             if(py < (y + gui_bar_height))
@@ -511,13 +548,16 @@ public:
         }
     }
     
-    void mouseReleased(int px = 0, int py = 0)
+    void mouseReleased(int px = 0, int py = 0, int button = 0)
     {
+        guiOverview->mouseReleased(px, py, button);
+        
         bScrubbing = false;
     }
     
     void guiEvent(ofxUIEventArgs &e)
     {
+        cout << "GOT EVENT" << endl;
         string name = e.widget->getName();
         
         if (name == "Time") {
@@ -777,7 +817,8 @@ private:
                                 bLoopRegion, 
                                 bRezooming, 
                                 bMoveToSample, 
-                                bScrubbing;
+                                bScrubbing,
+                                bSetupGraphics;
 };
 
 
@@ -786,6 +827,180 @@ private:
 
 #ifdef USE_NSWINDOW_APP
 #include "ofxNSWindowApp.h"
+#include "ofxTimeline.h"
+
+class pkmTimelineApp : public ofxNSWindowApp
+{
+private:
+    ofxTimeline timeline;
+    
+public:
+    //--------------------------------------------------------------
+    void setup()
+    {
+        bAllocatedAudio = false;
+        
+        ofSetWindowShape(1280, 250);
+        
+        width = 1280;
+        height = 250;
+        
+        ofSetVerticalSync(true);
+        ofEnableSmoothing();
+        
+        bVisualizeAudio = false;
+        bPlaybackAudio = false;
+        
+        timeline.setup();
+        
+    }
+    //--------------------------------------------------------------
+    
+    void setupAudio()
+    {
+        frameSize = 1024;
+        pkmAudioWindow::initializeWindow(128);
+        ofSoundStreamSetup(1, 0, (ofBaseApp *)this, 44100, frameSize, 4);
+    }
+    
+    void addVideo(string videoFile)
+    {
+        timeline.addVideoTrack("video", videoFile);
+        timeline.setDurationInSeconds(timeline.getVideoTrack("video")->getDuration());
+    }
+    
+    void addAudio(string audioFile, bool bVisualize = true, bool bPlayback = true)
+    {
+        if( bAllocatedAudio )
+        {
+            bVisualizeAudio = false;
+            bPlaybackAudio = false;
+            bAllocatedAudio = false;
+            
+            if(audioWaveform != NULL)
+                delete audioWaveform;
+        }
+        
+        bVisualizeAudio = bVisualize;
+        if(bVisualizeAudio)
+        {
+            timeline.addAudioTrack("audio", audioFile);
+            timeline.setDurationInSeconds(timeline.getAudioTrack("audio")->getDuration());
+        }
+        
+        bPlaybackAudio = bPlayback;
+        if(bPlaybackAudio)
+        {
+            audioWaveform = new pkmAudioWaveform();
+            audioWaveform->setupAudio(frameSize);
+            audioWaveform->loadFile(audioFile);
+        }
+        
+        bAllocatedAudio = true;
+    }
+    
+    void setSize(int w, int h)
+    {
+        width = w;
+        height = h;
+        ofSetWindowShape(width, height);
+        timeline.setWidth(width);
+        timeline.setHeight(height - 48);
+    }
+    
+    void play()
+    {
+        timeline.play();
+        timeline.setFrameBased(true);
+    }
+    
+    float getCurrentTime()
+    {
+        return timeline.getInTimeInSeconds();
+    }
+    
+    void setCurrentTime(float seconds)
+    {
+        timeline.setCurrentTimeSeconds(seconds);
+        if(bPlaybackAudio)
+            audioWaveform->setCurrentPercent(timeline.getPercentComplete());
+    }
+    
+    //--------------------------------------------------------------
+    void update()
+    {
+        
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void draw()
+    {
+        ofBackground(0);
+        timeline.draw();
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void audioOut(float *buffer, int bufferSize, int nChannels) {
+        if(!bPlaybackAudio)
+            return;
+        
+        audioWaveform->readFrameAndIncrement(buffer);
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void mouseMoved(int x, int y) {
+        ofMouseEventArgs args;
+        args.type = ofMouseEventArgs::Moved;
+        args.x = x;
+        args.y = y;
+        timeline.mouseMoved(args);
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void mouseDragged(int x, int y, int button) {
+        
+        ofMouseEventArgs args;
+        args.type = ofMouseEventArgs::Dragged;
+        args.x = x;
+        args.y = y;
+        args.button = button;
+        timeline.mouseDragged(args);
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void mousePressed(int x, int y, int button) {
+        
+        ofMouseEventArgs args;
+        args.type = ofMouseEventArgs::Pressed;
+        args.x = x;
+        args.y = y;
+        args.button = button;
+        timeline.mousePressed(args);
+    }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void mouseReleased() {
+        
+        ofMouseEventArgs args;
+        args.type = ofMouseEventArgs::Released;
+        timeline.mouseReleased(args);
+    }
+    //--------------------------------------------------------------
+    
+private:
+    int width, height;
+    int frameSize;
+    pkmAudioWaveform *audioWaveform;
+    bool bAllocatedAudio;
+    bool bVisualizeAudio, bPlaybackAudio;
+};
+
 
 class pkmAudioWaveformApp : public ofxNSWindowApp
 {
@@ -793,22 +1008,31 @@ public:
     //--------------------------------------------------------------
     void setup()
     {
+        
         bAllocated = false;
-        frameSize = 512;
+        frameSize = 1024;
         pkmAudioWindow::initializeWindow(128);
         ofSoundStreamSetup(1, 0, (ofBaseApp *)this, 44100, frameSize, 4);
-
-        ofSetWindowShape(1000, 150);
+        
+        ofSetWindowShape(1280, 150);
     }
     //--------------------------------------------------------------
     
     //--------------------------------------------------------------
-    void allocate(string audioURL, float *audioPlaybackPtr)
+    void allocate(string audioURL, int width, int height, float *audioPlaybackPtr)
     {
+        if(bAllocated)
+        {
+            bAllocated = false;
+            delete audioWaveform;
+        }
+        
         audioWaveform = new pkmAudioWaveform();
-        audioWaveform->setup(0, 5, ofGetWidth(), ofGetHeight()-20, frameSize);
+        audioWaveform->setup(0, 5, width, height-25, frameSize);
         audioWaveform->loadFile(audioURL);
         this->audioPlaybackPtr = audioPlaybackPtr;
+        
+        ofSetWindowShape(width, height);
         
         bAllocated = true;
     }
@@ -820,7 +1044,7 @@ public:
         if(!bAllocated)
             return;
         
-        audioWaveform->setCurrentSample(*audioPlaybackPtr);
+        audioWaveform->setCurrentPercent(*audioPlaybackPtr);
     }
     //--------------------------------------------------------------
     
@@ -860,6 +1084,7 @@ public:
             return;
         
         audioWaveform->mouseMoved(x, y);
+        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
     }
     //--------------------------------------------------------------
     
@@ -868,7 +1093,8 @@ public:
         if(!bAllocated)
             return;
         
-        audioWaveform->mouseDragged(x, y);
+        audioWaveform->mouseDragged(x, y, button);
+        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
     }
     //--------------------------------------------------------------
     
@@ -877,7 +1103,8 @@ public:
         if(!bAllocated)
             return;
         
-        audioWaveform->mousePressed(x, y);
+        audioWaveform->mousePressed(x, y, button);
+        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
     }
     //--------------------------------------------------------------
     
@@ -887,6 +1114,7 @@ public:
             return;
         
         audioWaveform->mouseReleased(0, 0);
+        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
     }
     //--------------------------------------------------------------
     

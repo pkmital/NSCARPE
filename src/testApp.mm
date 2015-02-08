@@ -90,10 +90,14 @@ _a < _b ? _a : _b; })
 //--------------------------------------------------------------
 void testApp::setup() {
 
+    ofSetWindowPosition(20, 20);
+
     bSetup = false;
     bPaused = false;
     bShowDetail = false;
     bNeedsUpdate = false;
+    
+    timelinePtr = NULL;
     
     ofSetLogLevel(OF_LOG_NOTICE);
     ofEnableArbTex();
@@ -116,11 +120,11 @@ void testApp::close() {
     {
         recorder.flushToFile();
         
-        if(audioTrack != "")
+        if(bSaveAudio)
         {
-            recorder.loadAudioTrack(audioTrack.c_str());
+            recorder.loadAudioTrack(audioURL.c_str());
             recorder.addAudioTrack(saveFilename.c_str());
-            audioTrack = "";
+            bSaveAudio = false;
         }
         
         recorder.releaseRecording();
@@ -165,11 +169,11 @@ void testApp::update() {
         {
             recorder.flushToFile();
             
-            if(audioTrack != "")
+            if(bSaveAudio)
             {
-                recorder.loadAudioTrack(audioTrack.c_str());
+                recorder.loadAudioTrack(audioURL.c_str());
                 recorder.addAudioTrack(saveFilename.c_str());
-                audioTrack = "";
+                bSaveAudio = false;
             }
             
             recorder.releaseRecording();
@@ -209,13 +213,16 @@ void testApp::update() {
             flow.computeHistogramOfOrientedMotionGradients();
         }
 
-        
         if(!bPaused)
+        {
             movieFrameNumber+=frameIncrement;
+            if(timelinePtr != NULL)
+            {
+                timelinePtr->setCurrentTime(movieFrameNumber / (float)movieFrameRate);
+            }
+        }
         
-        audioPlaybackPtr[0] = (float)(movieFrameNumber / (float)movieTotalFrames);
-        
-        ofLog(OF_LOG_NOTICE, "Processing Frame %f/%f", movieFrameNumber, movieTotalFrames);
+        ofLog(OF_LOG_NOTICE, "Processing Frame %4.0f/%4.0f", movieFrameNumber, movieTotalFrames);
         
     }
     
@@ -359,6 +366,7 @@ void testApp::loadUserSettings() {
     {
         settings.pushTag("show");
         {
+            bAutoStart = ofToLower(settings.getValue("autostart", "true")) == "true";
             bAutoQuitAfterProcessing = ofToLower(settings.getValue("autoquit", "true")) == "true";
             bShowRealTime = ofToLower(settings.getValue("realtime", "false")) == "true";
             bShowClustering = ofToLower(settings.getValue("clustering", "false")) == "true";
@@ -379,8 +387,6 @@ void testApp::loadUserSettings() {
             bShowHistogram = ofToLower(settings.getValue("histogram", "false")) == "true";
             bShowSaccades = ofToLower(settings.getValue("saccades", "false")) == "true";
             bShowSubjectNames = ofToLower(settings.getValue("subjectnames", "false")) == "true";
-            audioURL = settings.getValue("audiotrack", "");
-            audioPlaybackPtr = new float[1];
         }
         settings.popTag();
         settings.pushTag("save");
@@ -389,7 +395,6 @@ void testApp::loadUserSettings() {
             bSaveMovie = ofToLower(settings.getValue("movie", "true")) == "true";
             bSaveMovieImages = ofToLower(settings.getValue("images", "false")) == "true";
             bExportMotionDescriptorsToHDF = ofToLower(settings.getValue("motiondescriptors", "true")) == "true";
-            audioTrack = settings.getValue("audiotrack", "");
         }
         settings.popTag();
     }
@@ -405,7 +410,7 @@ void testApp::loadUserSettings() {
     initializeExperiment();
     initializeVisualSaliency();
     if(bSaveMovie)
-        initializeRecording(saveMovieURL, audioTrack);
+        initializeRecording(saveMovieURL);
     
 }
 
@@ -432,7 +437,6 @@ void testApp::initializeExperiment() {
             }
             settings.popTag();
             
-            string movieURL;
             settings.pushTag("movie");
             {
                 movieFrameRate = settings.getValue("framerate", 30.0f);
@@ -442,6 +446,14 @@ void testApp::initializeExperiment() {
             }
             settings.popTag();
             initializeMovie(movieURL);
+            
+            settings.pushTag("audio");
+            {
+                audioURL = settings.getValue("file", "");
+                bPlayAudio = ofToLower(settings.getValue("playback", "false")) == "true";
+                bSaveAudio = ofToLower(settings.getValue("save", "false")) == "true";
+            }
+            settings.popTag();
             
             settings.pushTag("eyemovements");
             {
@@ -518,7 +530,7 @@ void testApp::initializeMovie(string movieURL)
 }
 
 //--------------------------------------------------------------
-void testApp::initializeRecording(string location, string audioTrack)
+void testApp::initializeRecording(string location)
 {
 	//////////////////////////////////////////////////////
     // set codec

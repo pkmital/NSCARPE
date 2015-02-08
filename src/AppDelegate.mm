@@ -95,6 +95,7 @@
 
 // PLAYBACK menu
 @synthesize playbackMenu;
+@synthesize playbackMenu_RealTimePlayback;
 
 #pragma mark APPLICATION
 
@@ -124,12 +125,22 @@
     ofxNSWindower::instance()->addWindow(appPtr, "C.A.R.P.E.: Stimulus Display", NSTitledWindowMask, 0);
     
     string audioURL = appPtr->getAudioURL();
-    if(audioURL != "")
+    string videoURL = appPtr->getMovieURL();
+    
+    if(videoURL != "")
     {
-        waveformPtr = new pkmAudioWaveformApp();
-        ofxNSWindower::instance()->addWindow(waveformPtr, "Audio Controller", NSTitledWindowMask, 10);
-        waveformPtr->allocate(audioURL, appPtr->getAudioPlaybackPoint());
+        timelinePtr = new pkmTimelineApp();
+        ofxNSWindower::instance()->addWindow(timelinePtr, "Timeline Controller", NSTitledWindowMask, 0);
+        timelinePtr->addVideo(videoURL);
+        if(audioURL != "")
+        {
+            timelinePtr->setupAudio();
+            timelinePtr->addAudio(audioURL, appPtr->shouldVisualizeAudio(), appPtr->shouldPlayAudio());
+        }
+        timelinePtr->setSize(appPtr->getWidth(), appPtr->getWidth() * 0.2);
     }
+    
+    appPtr->setTimelinePtr(timelinePtr);
     
     //    [exportMotionDescriptorsToHDF5Item setEnabled:true];
     [openStudyMenuItem setEnabled:false];
@@ -146,6 +157,8 @@
     [viewMenu_Clustering setState:appPtr->isClusteringEnabled()];
     [viewMenu_MotionMagnitude setState:appPtr->isFlowMagnitudeEnabled()];
     [viewMenu_MotionDirection setState:appPtr->isFlowDirectionEnabled()];
+    
+    [playbackMenu_RealTimePlayback setState:appPtr->isRealTimePlayback()];
     
     bAllocated = true;
 }
@@ -195,5 +208,9 @@
     [sender setState:appPtr->toggleFlowDirection()];
 }
 
+#pragma mark PLAY_MENU
+- (IBAction)toggleRealTimePlayback:(id)sender {
+    [sender setState:appPtr->toggleRealTimePlayback()];
+}
 
 @end

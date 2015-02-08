@@ -633,7 +633,7 @@ public:
         if(bNormalize)
         {
             maxValue = reduction.getMaximumCPU(posteriorMapFBO.getTextureReference());
-            cout << "max value: " << maxValue << endl;
+//            cout << "max value: " << maxValue << endl;
         }
         else
         {

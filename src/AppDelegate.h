@@ -80,6 +80,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     testApp *appPtr;
     pkmAudioWaveformApp *waveformPtr;
+    pkmTimelineApp *timelinePtr;
     bool bAllocated;
     
     NSMenuItem *exportMotionDescriptorsToHDF5Item;
@@ -96,6 +97,7 @@
     NSMenuItem *viewMenu_MotionDirection;
     NSMenuItem *viewMenu_Normalization;
     NSMenuItem *playbackMenu;
+    NSMenuItem *playbackMenu_RealTimePlayback;
     NSMenuItem *openStudyMenuItem;
 }
 
@@ -126,6 +128,7 @@
 
 // PLAYBACK ITEMS:
 @property (assign) IBOutlet NSMenuItem *playbackMenu;
+@property (assign) IBOutlet NSMenuItem *playbackMenu_RealTimePlayback;
 
 // PLAYBACK ACTIONS:
 

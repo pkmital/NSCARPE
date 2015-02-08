@@ -103,7 +103,7 @@ public:
     //--------------------------------------------------------------
     void initializeVisualSaliency();
     void initializeMovie(string movieURL);
-    void initializeRecording(string saveURL, string audioTrack = "");
+    void initializeRecording(string saveURL);
     void initializeEyeTrackingData(vector<string> paths);
     void initializeExperiment();
     void initializeAudio();
@@ -140,6 +140,7 @@ public:
     bool isHeatmapEnabled() {
         return bShowHeatmap;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
     bool toggleClustering() {
@@ -148,6 +149,7 @@ public:
     bool isClusteringEnabled() {
         return bShowClustering;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
     bool toggleEyes() {
@@ -156,6 +158,7 @@ public:
     bool isEyesEnabled() {
         return bShowEyes;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
     bool toggleSaccades() {
@@ -164,6 +167,7 @@ public:
     bool isSaccadesEnabled() {
         return bShowSaccades;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
     bool toggleDifferenceHeatmap() {
@@ -172,6 +176,7 @@ public:
     bool isDifferenceHeatmapEnabled() {
         return bShowDifferenceHeatmap;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
     bool toggleNormalization() {
@@ -180,6 +185,7 @@ public:
     bool isNormalizationEnabled() {
         return bShowNormalized;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
     bool toggleFlow() {
@@ -188,6 +194,7 @@ public:
     bool isFlowEnabled() {
         return bShowFlow;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
     bool toggleFlowMagnitude() {
@@ -201,6 +208,7 @@ public:
     bool isFlowMagnitudeEnabled() {
         return bShowFlowMagnitude;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
     bool toggleFlowDirection() {
@@ -214,6 +222,28 @@ public:
     bool isFlowDirectionEnabled() {
         return bShowFlowDirection;
     }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    bool toggleRealTimePlayback() {
+        bShowRealTime = !bShowRealTime;
+        if(bShowRealTime) {
+            if(moviePlayer != NULL) {
+                moviePlayer->play();
+            }
+        }
+        else {
+            if(moviePlayer != NULL) {
+                moviePlayer->stop();
+            }
+        }
+        return bShowRealTime;
+    }
+    bool isRealTimePlayback() {
+        return bShowRealTime;
+    }
+    //--------------------------------------------------------------
+    
     
     //--------------------------------------------------------------
     bool toggleMovie() {
@@ -222,24 +252,49 @@ public:
     bool isMovieEnabled() {
         return bShowMovie;
     }
+    //--------------------------------------------------------------
     
     //--------------------------------------------------------------
-    string getAudioURL()
-    {
+    string getAudioURL() {
         return audioURL;
     }
-    
-    float* getAudioPlaybackPoint()
-    {
-        return audioPlaybackPtr;
+    string getMovieURL() {
+        return movieURL;
     }
+    //--------------------------------------------------------------
+    
+    //--------------------------------------------------------------
+    void setTimelinePtr(pkmTimelineApp* ptr) {
+        timelinePtr = ptr;
+    }
+    
+    //--------------------------------------------------------------
+    int getWidth() {
+        return movieWidth;
+    }
+    int getHeight() {
+        return movieHeight;
+    }
+    //--------------------------------------------------------------
+    
+    
+    //--------------------------------------------------------------
+    bool shouldVisualizeAudio() {
+        return (bPlayAudio || bSaveAudio);
+    }
+    bool shouldPlayAudio() {
+        return bPlayAudio;
+    }
+    //--------------------------------------------------------------
 	
 private:
     //--------------------------------------------------------------
+    // Controller
+    pkmTimelineApp                  *timelinePtr;
+    
+    //--------------------------------------------------------------
     // Movie 
     ofQTKitPlayer                   *moviePlayer;
-    pkmAudioWaveform                *audioWaveform;
-    float                           *audioPlaybackPtr;
     string                          movieURL, movieName, audioURL;
     float                           movieFrameNumber, movieTotalFrames, movieMSPerFrame, frameIncrement;
     int                             movieWidth, movieHeight;
@@ -252,7 +307,7 @@ private:
     ofxQTKitRecorder                recorder;
     bool                            bDoneRecording;
     ofFbo                           recorderFbo;
-    string                          saveMovieURL, saveFilename, audioTrack;
+    string                          saveMovieURL, saveFilename;
     
     
     //--------------------------------------------------------------
@@ -302,6 +357,8 @@ private:
                                     bShowDifferenceHeatmap,
                                     bShowMeanBinocular,
                                     bShowMovie,
+                                    bPlayAudio,
+                                    bSaveAudio,
                                     bShowFlow,
                                     bShowFlowMagnitude,
                                     bShowFlowDirection,
@@ -313,6 +370,7 @@ private:
                                     bShowSubjectNames,
                                     bCalculateMovieOffset,
                                     bLoadArringtonResearchFormat,
+                                    bAutoStart,
                                     bAutoQuitAfterProcessing,
                                     bExportMotionDescriptorsToHDF,
                                     bPaused,

@@ -146,8 +146,11 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Playback" id="Lab-g7-U1c">
                         <items>
-                            <menuItem title="Real-Time Playback" id="L4L-aI-OuG">
+                            <menuItem title="Real-Time Playback" state="on" id="L4L-aI-OuG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleRealTimePlayback:" target="811" id="axe-cS-cjf"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -172,6 +175,7 @@
                 <outlet property="exportMotionDescriptorsToHDF5Item" destination="XpW-Yr-pDw" id="H0Q-na-YaG"/>
                 <outlet property="openStudyMenuItem" destination="72" id="8HJ-Ja-5c3"/>
                 <outlet property="playbackMenu" destination="n4R-lX-lsy" id="tAM-ou-vKg"/>
+                <outlet property="playbackMenu_RealTimePlayback" destination="L4L-aI-OuG" id="m0R-cB-gp7"/>
                 <outlet property="viewMenu" destination="295" id="ZPd-Ww-wcB"/>
                 <outlet property="viewMenu_Clustering" destination="298" id="PMo-hA-eV1"/>
                 <outlet property="viewMenu_DifferenceHeatmap" destination="ewK-hw-6Rd" id="tih-ht-h3q"/>
