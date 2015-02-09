@@ -102,11 +102,11 @@ public:
     
     //--------------------------------------------------------------
     void initializeVisualSaliency();
-    void initializeMovie(string movieURL);
+    void initializeMovie();
     void initializeRecording(string saveURL);
     void initializeEyeTrackingData(vector<string> paths);
     void initializeExperiment();
-    void initializeAudio();
+    void initializeTimeline();
     //--------------------------------------------------------------
     
     //--------------------------------------------------------------

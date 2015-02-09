@@ -120,27 +120,15 @@
         delete appPtr;
         bAllocated = false;
     }
-    appPtr = new testApp();
     
+    appPtr = new testApp();
     ofxNSWindower::instance()->addWindow(appPtr, "C.A.R.P.E.: Stimulus Display", NSTitledWindowMask, 0);
     
-    string audioURL = appPtr->getAudioURL();
-    string videoURL = appPtr->getMovieURL();
-    
-    if(videoURL != "")
-    {
-        timelinePtr = new pkmTimelineApp();
-        ofxNSWindower::instance()->addWindow(timelinePtr, "Timeline Controller", NSTitledWindowMask, 0);
-        timelinePtr->addVideo(videoURL);
-        if(audioURL != "")
-        {
-            timelinePtr->setupAudio();
-            timelinePtr->addAudio(audioURL, appPtr->shouldVisualizeAudio(), appPtr->shouldPlayAudio());
-        }
-        timelinePtr->setSize(appPtr->getWidth(), appPtr->getWidth() * 0.2);
-    }
+    timelinePtr = new pkmTimelineApp();
+    ofxNSWindower::instance()->addWindow(timelinePtr, "Timeline Controller", NSTitledWindowMask, 0);
     
     appPtr->setTimelinePtr(timelinePtr);
+    appPtr->loadUserSettings();
     
     //    [exportMotionDescriptorsToHDF5Item setEnabled:true];
     [openStudyMenuItem setEnabled:false];

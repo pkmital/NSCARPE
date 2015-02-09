@@ -13,6 +13,7 @@
 #include "pkmEXTAudioFileReader.h"
 #include "ofxUI.h"
 #include "pkmAudioWindow.h"
+#include "ofAppRunner.h"
 
 //#define USE_MAXIMILIAN
 #define USE_NSWINDOW_APP
@@ -68,7 +69,13 @@ public:
     
     ~pkmAudioWaveform() 
     {
-        delete guiOverview;
+        if(bSetupGraphics)
+        {
+            delete guiOverview;
+            delete slider;
+            
+            bSetupGraphics = false;
+        }
         free(buffer);
     }
     
@@ -828,6 +835,8 @@ private:
 #ifdef USE_NSWINDOW_APP
 #include "ofxNSWindowApp.h"
 #include "ofxTimeline.h"
+#include "ofAppRunner.h"
+#include "ofxNSWindow.h"
 
 class pkmTimelineApp : public ofxNSWindowApp
 {
@@ -838,9 +847,15 @@ public:
     //--------------------------------------------------------------
     void setup()
     {
+        bSetupAudio = false;
         bAllocatedAudio = false;
+        bShouldPlay = false;
         
-        ofSetWindowShape(1280, 250);
+        currentAudioStimulus = 0;
+        currentVideoStimulus = 0;
+        
+        ofSetAppWindow(ofxNSWindower::instance()->getWindowPtr("Timeline Controller"));
+        ofSetWindowShape(1, 1);
         
         width = 1280;
         height = 250;
@@ -858,13 +873,19 @@ public:
     
     void setupAudio()
     {
+        if(bSetupAudio)
+            return;
+        
         frameSize = 1024;
         pkmAudioWindow::initializeWindow(128);
         ofSoundStreamSetup(1, 0, (ofBaseApp *)this, 44100, frameSize, 4);
+        bSetupAudio = true;
     }
     
     void addVideo(string videoFile)
     {
+        if(timeline.hasTrack("video"))
+            timeline.removeTrack("video");
         timeline.addVideoTrack("video", videoFile);
         timeline.setDurationInSeconds(timeline.getVideoTrack("video")->getDuration());
     }
@@ -884,8 +905,14 @@ public:
         bVisualizeAudio = bVisualize;
         if(bVisualizeAudio)
         {
-            timeline.addAudioTrack("audio", audioFile);
-            timeline.setDurationInSeconds(timeline.getAudioTrack("audio")->getDuration());
+            currentAudioStimulus++;
+            timeline.addAudioTrack("audio" + ofToString(currentAudioStimulus), audioFile);
+            timeline.setDurationInSeconds(timeline.getAudioTrack("audio" + ofToString(currentAudioStimulus))->getDuration());
+            if(timeline.hasTrack("audio" + ofToString(currentAudioStimulus-1)))
+                timeline.removeTrack("audio" + ofToString(currentAudioStimulus-1));
+            
+            timeline.setWidth(width);
+            timeline.setHeight(height - 48);
         }
         
         bPlaybackAudio = bPlayback;
@@ -899,19 +926,28 @@ public:
         bAllocatedAudio = true;
     }
     
+    void removeAllTracks()
+    {
+        
+    }
+    
     void setSize(int w, int h)
     {
         width = w;
         height = h;
+        
+        ofSetAppWindow(ofxNSWindower::instance()->getWindowPtr("Timeline Controller"));
         ofSetWindowShape(width, height);
+        
         timeline.setWidth(width);
         timeline.setHeight(height - 48);
     }
     
     void play()
     {
-        timeline.play();
-        timeline.setFrameBased(true);
+//        timeline.play();
+//        timeline.setFrameBased(true);
+        bShouldPlay = true;
     }
     
     float getCurrentTime()
@@ -943,7 +979,7 @@ public:
     
     //--------------------------------------------------------------
     void audioOut(float *buffer, int bufferSize, int nChannels) {
-        if(!bPlaybackAudio)
+        if(!bPlaybackAudio || !bShouldPlay)
             return;
         
         audioWaveform->readFrameAndIncrement(buffer);
@@ -996,134 +1032,138 @@ public:
 private:
     int width, height;
     int frameSize;
+    int currentAudioStimulus, currentVideoStimulus;
     pkmAudioWaveform *audioWaveform;
-    bool bAllocatedAudio;
-    bool bVisualizeAudio, bPlaybackAudio;
+    bool            bSetupAudio,            // have initialized the sound card
+                    bAllocatedAudio,        // have initialized the pkmAudioWaveform obj for playback/scrubbing
+                    bVisualizeAudio,        // should show the timeline audio
+                    bPlaybackAudio,         // should playback the audio
+                    bShouldPlay;            // other apps are ready for us to playback audio
 };
 
 
-class pkmAudioWaveformApp : public ofxNSWindowApp
-{
-public:
-    //--------------------------------------------------------------
-    void setup()
-    {
-        
-        bAllocated = false;
-        frameSize = 1024;
-        pkmAudioWindow::initializeWindow(128);
-        ofSoundStreamSetup(1, 0, (ofBaseApp *)this, 44100, frameSize, 4);
-        
-        ofSetWindowShape(1280, 150);
-    }
-    //--------------------------------------------------------------
-    
-    //--------------------------------------------------------------
-    void allocate(string audioURL, int width, int height, float *audioPlaybackPtr)
-    {
-        if(bAllocated)
-        {
-            bAllocated = false;
-            delete audioWaveform;
-        }
-        
-        audioWaveform = new pkmAudioWaveform();
-        audioWaveform->setup(0, 5, width, height-25, frameSize);
-        audioWaveform->loadFile(audioURL);
-        this->audioPlaybackPtr = audioPlaybackPtr;
-        
-        ofSetWindowShape(width, height);
-        
-        bAllocated = true;
-    }
-    //--------------------------------------------------------------
-    
-    //--------------------------------------------------------------
-    void update()
-    {
-        if(!bAllocated)
-            return;
-        
-        audioWaveform->setCurrentPercent(*audioPlaybackPtr);
-    }
-    //--------------------------------------------------------------
-    
-    //--------------------------------------------------------------
-    void draw()
-    {
-        if(!bAllocated)
-            return;
-        
-        ofBackground(0);
-        
-        audioWaveform->draw();
-    }
-    //--------------------------------------------------------------
-    
-    //--------------------------------------------------------------
-    void audioOut(float *buffer, int bufferSize, int nChannels) {
-        if(!bAllocated)
-            return;
-        
-        audioWaveform->readFrameAndIncrement(buffer);
-        
-//        vDSP_vmul(buffer, 1,
-//                  pkmAudioWindow::rampInBuffer, 1,
-//                  buffer, 1, pkmAudioWindow::rampInLength);
+//class pkmAudioWaveformApp : public ofxNSWindowApp
+//{
+//public:
+//    //--------------------------------------------------------------
+//    void setup()
+//    {
 //        
-//        vDSP_vmul(buffer + (frameSize - pkmAudioWindow::rampOutLength), 1,
-//                  pkmAudioWindow::rampOutBuffer, 1,
-//                  buffer + (frameSize - pkmAudioWindow::rampOutLength), 1, pkmAudioWindow::rampOutLength);
-
-    }
-    //--------------------------------------------------------------
-    
-    //--------------------------------------------------------------
-    void mouseMoved(int x, int y) {
-        if(!bAllocated)
-            return;
-        
-        audioWaveform->mouseMoved(x, y);
-        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
-    }
-    //--------------------------------------------------------------
-    
-    //--------------------------------------------------------------
-    void mouseDragged(int x, int y, int button) {
-        if(!bAllocated)
-            return;
-        
-        audioWaveform->mouseDragged(x, y, button);
-        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
-    }
-    //--------------------------------------------------------------
-    
-    //--------------------------------------------------------------
-    void mousePressed(int x, int y, int button) {
-        if(!bAllocated)
-            return;
-        
-        audioWaveform->mousePressed(x, y, button);
-        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
-    }
-    //--------------------------------------------------------------
-    
-    //--------------------------------------------------------------
-    void mouseReleased() {
-        if(!bAllocated)
-            return;
-        
-        audioWaveform->mouseReleased(0, 0);
-        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
-    }
-    //--------------------------------------------------------------
-    
-private:
-    pkmAudioWaveform *audioWaveform;
-    float *audioPlaybackPtr;
-    int frameSize;
-    bool bAllocated;
-};
+//        bAllocated = false;
+//        frameSize = 1024;
+//        pkmAudioWindow::initializeWindow(128);
+//        ofSoundStreamSetup(1, 0, (ofBaseApp *)this, 44100, frameSize, 4);
+//        
+//        ofSetWindowShape(1280, 150);
+//    }
+//    //--------------------------------------------------------------
+//    
+//    //--------------------------------------------------------------
+//    void allocate(string audioURL, int width, int height, float *audioPlaybackPtr)
+//    {
+//        if(bAllocated)
+//        {
+//            bAllocated = false;
+//            delete audioWaveform;
+//        }
+//        
+//        audioWaveform = new pkmAudioWaveform();
+//        audioWaveform->setup(0, 5, width, height-25, frameSize);
+//        audioWaveform->loadFile(audioURL);
+//        this->audioPlaybackPtr = audioPlaybackPtr;
+//        
+//        ofSetWindowShape(width, height);
+//        
+//        bAllocated = true;
+//    }
+//    //--------------------------------------------------------------
+//    
+//    //--------------------------------------------------------------
+//    void update()
+//    {
+//        if(!bAllocated)
+//            return;
+//        
+//        audioWaveform->setCurrentPercent(*audioPlaybackPtr);
+//    }
+//    //--------------------------------------------------------------
+//    
+//    //--------------------------------------------------------------
+//    void draw()
+//    {
+//        if(!bAllocated)
+//            return;
+//        
+//        ofBackground(0);
+//        
+//        audioWaveform->draw();
+//    }
+//    //--------------------------------------------------------------
+//    
+//    //--------------------------------------------------------------
+//    void audioOut(float *buffer, int bufferSize, int nChannels) {
+//        if(!bAllocated)
+//            return;
+//        
+//        audioWaveform->readFrameAndIncrement(buffer);
+//        
+////        vDSP_vmul(buffer, 1,
+////                  pkmAudioWindow::rampInBuffer, 1,
+////                  buffer, 1, pkmAudioWindow::rampInLength);
+////        
+////        vDSP_vmul(buffer + (frameSize - pkmAudioWindow::rampOutLength), 1,
+////                  pkmAudioWindow::rampOutBuffer, 1,
+////                  buffer + (frameSize - pkmAudioWindow::rampOutLength), 1, pkmAudioWindow::rampOutLength);
+//
+//    }
+//    //--------------------------------------------------------------
+//    
+//    //--------------------------------------------------------------
+//    void mouseMoved(int x, int y) {
+//        if(!bAllocated)
+//            return;
+//        
+//        audioWaveform->mouseMoved(x, y);
+//        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
+//    }
+//    //--------------------------------------------------------------
+//    
+//    //--------------------------------------------------------------
+//    void mouseDragged(int x, int y, int button) {
+//        if(!bAllocated)
+//            return;
+//        
+//        audioWaveform->mouseDragged(x, y, button);
+//        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
+//    }
+//    //--------------------------------------------------------------
+//    
+//    //--------------------------------------------------------------
+//    void mousePressed(int x, int y, int button) {
+//        if(!bAllocated)
+//            return;
+//        
+//        audioWaveform->mousePressed(x, y, button);
+//        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
+//    }
+//    //--------------------------------------------------------------
+//    
+//    //--------------------------------------------------------------
+//    void mouseReleased() {
+//        if(!bAllocated)
+//            return;
+//        
+//        audioWaveform->mouseReleased(0, 0);
+//        *audioPlaybackPtr = audioWaveform->getCurrentPercent();
+//    }
+//    //--------------------------------------------------------------
+//    
+//private:
+//    pkmAudioWaveform *audioWaveform;
+//    float *audioPlaybackPtr;
+//    int frameSize;
+//    bool bAllocated;
+//};
 
 #endif
 

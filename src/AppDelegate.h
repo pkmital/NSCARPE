@@ -79,7 +79,6 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     testApp *appPtr;
-    pkmAudioWaveformApp *waveformPtr;
     pkmTimelineApp *timelinePtr;
     bool bAllocated;
     

@@ -74,7 +74,7 @@
 
 #include "testApp.h"
 #include "ofxFileDialogOSX.h"
-
+#include "ofAppRunner.h"
 
 #define max(a,b) \
 ({ __typeof__ (a) _a = (a); \
@@ -90,8 +90,6 @@ _a < _b ? _a : _b; })
 //--------------------------------------------------------------
 void testApp::setup() {
 
-    ofSetWindowPosition(20, 20);
-
     bSetup = false;
     bPaused = false;
     bShowDetail = false;
@@ -105,11 +103,6 @@ void testApp::setup() {
     ofEnableDataPath();
     
     ofSetCircleResolution(20);
-    
-    loadUserSettings();
-    
-	ofSetWindowShape(movieWidth, movieHeight);
-    bSetup = true;
 }
 
 //--------------------------------------------------------------
@@ -133,11 +126,13 @@ void testApp::close() {
     if (moviePlayer != NULL) {
         moviePlayer->closeMovie();
         delete moviePlayer;
+        moviePlayer = NULL;
     }
     
     if (eyeMovements != NULL)
     {
         delete eyeMovements;
+        eyeMovements = NULL;
     }
 
 }
@@ -156,11 +151,13 @@ void testApp::update() {
         if (moviePlayer != NULL) {
             moviePlayer->closeMovie();
             delete moviePlayer;
+            moviePlayer = NULL;
         }
         
         if (eyeMovements != NULL)
         {
             delete eyeMovements;
+            eyeMovements = NULL;
         }
         
         currentExperiment++;
@@ -263,7 +260,15 @@ void testApp::draw() {
     
     ofSetColor(255,255,255,255);
     
-    eyeMovements->draw(bShowMeanBinocular, bShowEyes, bShowSaccades, bShowHeatmap, bShowDifferenceHeatmap, bShowDetail, bShowNormalized, bShowClustering, bPaused);
+    eyeMovements->draw(bShowMeanBinocular,
+                       bShowEyes,
+                       bShowSaccades,
+                       bShowHeatmap,
+                       bShowDifferenceHeatmap,
+                       bShowDetail,
+                       bShowNormalized,
+                       bShowClustering,
+                       bPaused);
     ofDisableAlphaBlending();
     recorderFbo.end();
         
@@ -287,9 +292,14 @@ void testApp::draw() {
 //--------------------------------------------------------------
 void testApp::keyPressed(int key) { 
     if(key == 'n')
+    {
         movieFrameNumber = movieTotalFrames;
+        timelinePtr->setCurrentTime(moviePlayer->getDuration());
+    }
     else if(key == ' ')
+    {
         bPaused = !bPaused;
+    }
     else if(key == 'd')
         bShowDetail = !bShowDetail;
     else if(key == '[')
@@ -366,6 +376,10 @@ void testApp::loadUserSettings() {
     {
         settings.pushTag("show");
         {
+            string logFile = settings.getValue("logfile", "");
+            if(logFile != "")
+                ofLogToFile(logFile);
+            
             bAutoStart = ofToLower(settings.getValue("autostart", "true")) == "true";
             bAutoQuitAfterProcessing = ofToLower(settings.getValue("autoquit", "true")) == "true";
             bShowRealTime = ofToLower(settings.getValue("realtime", "false")) == "true";
@@ -415,12 +429,9 @@ void testApp::loadUserSettings() {
 }
 
 //--------------------------------------------------------------
-void testApp::initializeAudio() {
-
-}
-
-//--------------------------------------------------------------
 void testApp::initializeExperiment() {
+    
+    bSetup = false;
     
     settings.pushTag("stimuli");
     {
@@ -445,7 +456,7 @@ void testApp::initializeExperiment() {
                 ofLog(OF_LOG_NOTICE, "Reading %s", movieURL.c_str());
             }
             settings.popTag();
-            initializeMovie(movieURL);
+            initializeMovie();
             
             settings.pushTag("audio");
             {
@@ -479,6 +490,23 @@ void testApp::initializeExperiment() {
     }
     settings.popTag();
     
+    
+    if(movieURL != "")
+    {
+        timelinePtr->setSize(getWidth(), getWidth() * 0.2);
+        timelinePtr->addVideo(movieURL);
+    }
+    if(audioURL != "")
+    {
+        timelinePtr->setupAudio();
+        timelinePtr->addAudio(audioURL, shouldVisualizeAudio(), shouldPlayAudio());
+    }
+    
+    timelinePtr->play();
+    ofSetAppWindow(ofxNSWindower::instance()->getWindowPtr("C.A.R.P.E.: Stimulus Display"));
+    ofSetWindowShape(movieWidth, movieHeight);
+    bSetup = true;
+    
 }
 
 
@@ -489,7 +517,7 @@ void testApp::initializeVisualSaliency()
 }
 
 //--------------------------------------------------------------
-void testApp::initializeMovie(string movieURL)
+void testApp::initializeMovie()
 {
     moviePlayer = new ofQTKitPlayer();
     
@@ -616,6 +644,11 @@ void testApp::initializeEyeTrackingData(vector<string> paths)
             else
                 eyeMovements->loadFiles(paths[i], bLoadBinocular, bLoadMillisecondFormat, bLoadClassifiedData, i, heatmapType);
     }
+}
+
+void testApp::initializeTimeline()
+{
+    
 }
 
 //--------------------------------------------------------------
