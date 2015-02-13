@@ -100,7 +100,7 @@ void testApp::setup() {
     ofSetLogLevel(OF_LOG_NOTICE);
     ofEnableArbTex();
     ofEnableSmoothing();
-    ofEnableDataPath();
+    ofDisableDataPath();
     
     ofSetCircleResolution(20);
 }
@@ -148,17 +148,19 @@ void testApp::update() {
     {
         ofLog(OF_LOG_NOTICE, "Reached end of movie at %f seconds.", movieFrameNumber / (float)movieFrameRate);
         
-        if (moviePlayer != NULL) {
+        if (bLoadedMovie && moviePlayer != NULL) {
             moviePlayer->closeMovie();
             delete moviePlayer;
             moviePlayer = NULL;
         }
         
-        if (eyeMovements != NULL)
+        if (bLoadedEyeMovements && eyeMovements != NULL)
         {
             delete eyeMovements;
             eyeMovements = NULL;
         }
+        
+        
         
         currentExperiment++;
         
@@ -196,13 +198,19 @@ void testApp::update() {
     {
         
         if (bShowRealTime) {
-            moviePlayer->update();
-            movieFrameNumber = moviePlayer->getCurrentFrame();
-            eyeMovements->setTime(movieFrameNumber / (float)movieFrameRate);
+            if(bLoadedMovie)
+            {
+                moviePlayer->update();
+                movieFrameNumber = moviePlayer->getCurrentFrame();
+            }
+            if(bLoadedEyeMovements)
+                eyeMovements->setTime(movieFrameNumber / (float)movieFrameRate);
         }
         else {
-            moviePlayer->setFrame(movieFrameNumber);
-            eyeMovements->setTime(movieFrameNumber / (float)movieFrameRate);
+            if(bLoadedMovie)
+                moviePlayer->setFrame(movieFrameNumber);
+            if(bLoadedEyeMovements)
+                eyeMovements->setTime(movieFrameNumber / (float)movieFrameRate);
         }
         
         if (bShowFlow) {
@@ -236,14 +244,14 @@ void testApp::draw() {
 
     recorderFbo.begin();
     
-    if (bShowMovie)
+    if (bLoadedMovie && bShowMovie)
     {
         moviePlayer->draw(0, 0);
     }
     else
     {
         ofSetColor(0);
-        ofRect(0, 0, moviePlayer->getWidth(), moviePlayer->getHeight());
+        ofRect(0, 0, movieWidth, movieHeight);
         ofSetColor(255);
     }
     
@@ -252,23 +260,24 @@ void testApp::draw() {
     if (bShowFlow) {
         ofSetColor(255,255,255,150);
         if (bShowFlowMagnitude) {
-            flow.drawMagnitude(0, 0, moviePlayer->getWidth(), moviePlayer->getHeight());
+            flow.drawMagnitude(0, 0, movieWidth, movieHeight);
         }
         else if (bShowFlowDirection)
-            flow.drawColorFlow(0, 0, moviePlayer->getWidth(), moviePlayer->getHeight());
+            flow.drawColorFlow(0, 0, movieWidth, movieHeight);
     }
     
     ofSetColor(255,255,255,255);
     
-    eyeMovements->draw(bShowMeanBinocular,
-                       bShowEyes,
-                       bShowSaccades,
-                       bShowHeatmap,
-                       bShowDifferenceHeatmap,
-                       bShowDetail,
-                       bShowNormalized,
-                       bShowClustering,
-                       bPaused);
+    if(bLoadedEyeMovements)
+        eyeMovements->draw(bShowMeanBinocular,
+                           bShowEyes,
+                           bShowSaccades,
+                           bShowHeatmap,
+                           bShowDifferenceHeatmap,
+                           bShowDetail,
+                           bShowNormalized,
+                           bShowClustering,
+                           bPaused);
     ofDisableAlphaBlending();
     recorderFbo.end();
         
@@ -438,35 +447,62 @@ void testApp::initializeExperiment() {
         settings.pushTag("stimulus", currentExperiment);
         {
             movieName = settings.getValue("name", ofToString(currentExperiment));
-            settings.pushTag("presentation");
+            if(settings.pushTag("presentation"))
             {
                 screenWidth = settings.getValue("screenwidth", 800);
                 screenHeight = settings.getValue("screenheight", 600);
+                
+                settings.popTag();
+            }
+            
+            bLoadedMovie = false;
+            if(settings.pushTag("movie"))
+            {
                 bCalculateMovieOffset = ofToLower(settings.getValue("centermovie", "true")) == "true";
                 movieOffsetX = settings.getValue("movieoffsetx", 0);
                 movieOffsetY = settings.getValue("movieoffsety", 0);
-            }
-            settings.popTag();
-            
-            settings.pushTag("movie");
-            {
+                
+                movieWidth = settings.getValue("moviewidth", 0);
+                movieHeight = settings.getValue("movieheight", 0);
+                
                 movieFrameRate = settings.getValue("framerate", 30.0f);
                 frameIncrement = 1.0;//movieFrameRate / frameIncrement;
                 movieURL = settings.getValue("file", "");
                 ofLog(OF_LOG_NOTICE, "Reading %s", movieURL.c_str());
+                
+                settings.popTag();
+                
+                if(movieURL != "")
+                {
+                    initializeMovie();
+                    
+                    timelinePtr->setSize(getWidth(), getWidth() * 0.2);
+                    timelinePtr->addVideo(movieURL);
+                    
+                    bLoadedMovie = true;
+                }
             }
-            settings.popTag();
-            initializeMovie();
             
-            settings.pushTag("audio");
+            bLoadedAudio = false;
+            if(settings.pushTag("audio"))
             {
                 audioURL = settings.getValue("file", "");
                 bPlayAudio = ofToLower(settings.getValue("playback", "false")) == "true";
                 bSaveAudio = ofToLower(settings.getValue("save", "false")) == "true";
+                
+                settings.popTag();
+                
+                if(audioURL != "")
+                {
+                    timelinePtr->setupAudio();
+                    timelinePtr->addAudio(audioURL, shouldVisualizeAudio(), shouldPlayAudio());
+                    
+                    bLoadedAudio = true;
+                }
             }
-            settings.popTag();
             
-            settings.pushTag("eyemovements");
+            bLoadedEyeMovements = false;
+            if(settings.pushTag("eyemovements"))
             {
                 bLoadBinocular = ofToLower(settings.getValue("binocular", "true")) == "true";
                 bLoadMillisecondFormat = ofToLower(settings.getValue("millisecond", "false")) == "true";
@@ -483,26 +519,16 @@ void testApp::initializeExperiment() {
                 eyeMovements->setFrameRate(eyeMovementFrameRate);
                 eyeMovements->setSigma(settings.getValue("sigma", 50.0));
                 
+                settings.popTag();
+                bLoadedEyeMovements = true;
             }
-            settings.popTag();
         }
         settings.popTag();
     }
     settings.popTag();
     
-    
-    if(movieURL != "")
-    {
-        timelinePtr->setSize(getWidth(), getWidth() * 0.2);
-        timelinePtr->addVideo(movieURL);
-    }
-    if(audioURL != "")
-    {
-        timelinePtr->setupAudio();
-        timelinePtr->addAudio(audioURL, shouldVisualizeAudio(), shouldPlayAudio());
-    }
-    
     timelinePtr->play();
+    
     ofSetAppWindow(ofxNSWindower::instance()->getWindowPtr("C.A.R.P.E.: Stimulus Display"));
     ofSetWindowShape(movieWidth, movieHeight);
     bSetup = true;
@@ -544,8 +570,11 @@ void testApp::initializeMovie()
     {
         cout << "[WARNING] User XML Settings declared movie frame rate as " << movieFrameRate << " though detected in movie file as " << movieTotalFrames / (float) moviePlayer->getDuration() << ".  Defaulting to user setting." << endl;
     }
-    movieWidth = moviePlayer->getWidth();
-    movieHeight = moviePlayer->getHeight();
+    if(movieWidth != 0 || movieHeight != 0)
+    {
+        movieWidth = moviePlayer->getWidth();
+        movieHeight = moviePlayer->getHeight();
+    }
     movieMSPerFrame = 1.0 / movieFrameRate * 1000.0;
     cout << "[OK]: Loaded movie with " << movieTotalFrames << " frames at " << movieFrameRate << " fps and " << movieWidth << "x" << movieHeight << " resolution." << endl;
     
@@ -604,21 +633,22 @@ void testApp::initializeRecording(string location)
     
 	//////////////////////////////////////////////////////
     // setup asynchronous readback
-    asyncReadingIndex = 0;
-    asyncCopyingIndex = 1;
-    pboIds = new GLuint[2];
-    pboIds[0] = 0; pboIds[1] = 0;
-    const int DATA_SIZE = movieWidth * movieHeight * 4;
-    const int PBO_COUNT = 2;
-    glGenBuffersARB(PBO_COUNT, pboIds);
-    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, pboIds[0]);
-    glBufferDataARB(GL_PIXEL_PACK_BUFFER_ARB, DATA_SIZE, 0, GL_STREAM_READ_ARB);
-    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, pboIds[1]);
-    glBufferDataARB(GL_PIXEL_PACK_BUFFER_ARB, DATA_SIZE, 0, GL_STREAM_READ_ARB);
-    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, 0);
+//    asyncReadingIndex = 0;
+//    asyncCopyingIndex = 1;
+//    pboIds = new GLuint[2];
+//    pboIds[0] = 0; pboIds[1] = 0;
+//    const int DATA_SIZE = movieWidth * movieHeight * 4;
+//    const int PBO_COUNT = 2;
+//    glGenBuffersARB(PBO_COUNT, pboIds);
+//    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, pboIds[0]);
+//    glBufferDataARB(GL_PIXEL_PACK_BUFFER_ARB, DATA_SIZE, 0, GL_STREAM_READ_ARB);
+//    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, pboIds[1]);
+//    glBufferDataARB(GL_PIXEL_PACK_BUFFER_ARB, DATA_SIZE, 0, GL_STREAM_READ_ARB);
+//    glBindBufferARB(GL_PIXEL_PACK_BUFFER_ARB, 0);
+//    
+//    const int buffersize = movieWidth * movieHeight * 3;
+//    readbackPixelsBuffer = new unsigned char[buffersize];
     
-    const int buffersize = movieWidth * movieHeight * 3;
-    readbackPixelsBuffer = new unsigned char[buffersize];
     readbackPixels.allocate(movieWidth, movieHeight, 3);
     readbackPixels.setImageType(OF_IMAGE_COLOR);
     

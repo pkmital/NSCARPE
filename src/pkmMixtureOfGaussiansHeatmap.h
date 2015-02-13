@@ -228,7 +228,7 @@ public:
     {
         
         ofLog(OF_LOG_NOTICE, "Loading Reduction Shader...");
-        reductionShader.load(ofToDataPath("maxreduction", true));
+        reductionShader.load("data/maxreduction");
         
         width = w;
         height = h;
@@ -371,7 +371,7 @@ public:
         bNeedsUpdate = true;
         bNormalize = true;
         ofLog(OF_LOG_NOTICE, "Loading Mixture Model Shader...");
-        posteriorMap.load(ofToDataPath("gaussianMixtureModel"));
+        posteriorMap.load("data/gaussianMixtureModel");
         setColorMap(heatmap_jet);
         maxValue = 1.0f;
     }
@@ -426,18 +426,18 @@ public:
     {
         if (c == heatmap_jet) {
             ofLog(OF_LOG_NOTICE, "Loading Jetmap Shader");
-            colormap.load(ofToDataPath("jetmap", true));
+            colormap.load("data/jetmap");
         }
         else if (c == heatmap_hot) {
-            colormap.load(ofToDataPath("hotmap", true));
+            colormap.load("data/hotmap");
             ofLog(OF_LOG_NOTICE, "Loading Hot Shader");
         }
         else if (c == heatmap_cool) {
-            colormap.load(ofToDataPath("coolmap", true));
+            colormap.load("data/coolmap");
             ofLog(OF_LOG_NOTICE, "Loading Cool Shader");
         }
         else if (c == heatmap_gray) {
-            colormap.load(ofToDataPath("graymap", true));
+            colormap.load("data/graymap");
             ofLog(OF_LOG_NOTICE, "Loading Gray Shader");
         }
         

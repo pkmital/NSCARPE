@@ -116,49 +116,6 @@
 		89AA39AB1A86D02400BBCDF0 /* ofxTextInputField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 89AA383D1A86D02400BBCDF0 /* ofxTextInputField.cpp */; };
 		89AA39B81A86D02400BBCDF0 /* ofxMSATimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 89AA38571A86D02400BBCDF0 /* ofxMSATimer.cpp */; };
 		89EA8C891A84F5D200F66FDA /* pkmMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 89EA8C781A84F5D200F66FDA /* pkmMatrix.cpp */; };
-		89EA8CC11A85369E00F66FDA /* gaussianMixtureModel.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C961A85369E00F66FDA /* gaussianMixtureModel.frag */; };
-		89EA8CC21A85369E00F66FDA /* mix.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C971A85369E00F66FDA /* mix.frag */; };
-		89EA8CC31A85369E00F66FDA /* diffheatmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C981A85369E00F66FDA /* diffheatmap.frag */; };
-		89EA8CC41A85369E00F66FDA /* homg.ppm in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C991A85369E00F66FDA /* homg.ppm */; };
-		89EA8CC51A85369E00F66FDA /* homg.h5 in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9A1A85369E00F66FDA /* homg.h5 */; };
-		89EA8CC61A85369E00F66FDA /* add.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9B1A85369E00F66FDA /* add.frag */; };
-		89EA8CC71A85369E00F66FDA /* add.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9C1A85369E00F66FDA /* add.vert */; };
-		89EA8CC81A85369E00F66FDA /* cp.gaussian.2p.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9D1A85369E00F66FDA /* cp.gaussian.2p.frag */; };
-		89EA8CC91A85369E00F66FDA /* cp.gaussian.2p.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9E1A85369E00F66FDA /* cp.gaussian.2p.vert */; };
-		89EA8CCA1A85369E00F66FDA /* diffheatmap 2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8C9F1A85369E00F66FDA /* diffheatmap 2.frag */; };
-		89EA8CCB1A85369E00F66FDA /* diffheatmap 2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA01A85369E00F66FDA /* diffheatmap 2.vert */; };
-		89EA8CCC1A85369E00F66FDA /* diffheatmap2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA11A85369E00F66FDA /* diffheatmap2.frag */; };
-		89EA8CCD1A85369E00F66FDA /* diffheatmap2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA21A85369E00F66FDA /* diffheatmap2.vert */; };
-		89EA8CCE1A85369E00F66FDA /* doh.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA31A85369E00F66FDA /* doh.frag */; };
-		89EA8CCF1A85369E00F66FDA /* doh.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA41A85369E00F66FDA /* doh.vert */; };
-		89EA8CD01A85369E00F66FDA /* gaussianMixtureModel.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA51A85369E00F66FDA /* gaussianMixtureModel.vert */; };
-		89EA8CD11A85369E00F66FDA /* gaussianMixtureModel3D.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA61A85369E00F66FDA /* gaussianMixtureModel3D.frag */; };
-		89EA8CD21A85369E00F66FDA /* gaussianMixtureModel3D.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA71A85369E00F66FDA /* gaussianMixtureModel3D.vert */; };
-		89EA8CD31A85369E00F66FDA /* gaussianSlow.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA81A85369E00F66FDA /* gaussianSlow.frag */; };
-		89EA8CD41A85369E00F66FDA /* gaussianSlow.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CA91A85369E00F66FDA /* gaussianSlow.vert */; };
-		89EA8CD51A85369E00F66FDA /* graymap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAA1A85369E00F66FDA /* graymap.frag */; };
-		89EA8CD61A85369E00F66FDA /* graymap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAB1A85369E00F66FDA /* graymap.vert */; };
-		89EA8CD71A85369E00F66FDA /* heatmap1.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAC1A85369E00F66FDA /* heatmap1.frag */; };
-		89EA8CD81A85369E00F66FDA /* heatmap1.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAD1A85369E00F66FDA /* heatmap1.vert */; };
-		89EA8CD91A85369E00F66FDA /* heatmap2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAE1A85369E00F66FDA /* heatmap2.frag */; };
-		89EA8CDA1A85369E00F66FDA /* heatmap2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CAF1A85369E00F66FDA /* heatmap2.vert */; };
-		89EA8CDB1A85369E00F66FDA /* jetmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB01A85369E00F66FDA /* jetmap.frag */; };
-		89EA8CDC1A85369E00F66FDA /* jetmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB11A85369E00F66FDA /* jetmap.vert */; };
-		89EA8CDD1A85369E00F66FDA /* maxreduction.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB21A85369E00F66FDA /* maxreduction.frag */; };
-		89EA8CDE1A85369E00F66FDA /* maxreduction.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB31A85369E00F66FDA /* maxreduction.vert */; };
-		89EA8CDF1A85369E00F66FDA /* mix 2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB41A85369E00F66FDA /* mix 2.frag */; };
-		89EA8CE01A85369E00F66FDA /* mix 2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB51A85369E00F66FDA /* mix 2.vert */; };
-		89EA8CE11A85369E00F66FDA /* mix.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB61A85369E00F66FDA /* mix.vert */; };
-		89EA8CE21A85369E00F66FDA /* norm.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB71A85369E00F66FDA /* norm.frag */; };
-		89EA8CE31A85369E00F66FDA /* norm.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB81A85369E00F66FDA /* norm.vert */; };
-		89EA8CE41A85369E00F66FDA /* usersettings.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CB91A85369E00F66FDA /* usersettings.xml */; };
-		89EA8CE51A85369E00F66FDA /* subtract.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBA1A85369E00F66FDA /* subtract.frag */; };
-		89EA8CE61A85369E00F66FDA /* hotmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBB1A85369E00F66FDA /* hotmap.frag */; };
-		89EA8CE71A85369E00F66FDA /* coolmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBC1A85369E00F66FDA /* coolmap.frag */; };
-		89EA8CE81A85369E00F66FDA /* diffheatmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBD1A85369E00F66FDA /* diffheatmap.vert */; };
-		89EA8CE91A85369E00F66FDA /* subtract.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBE1A85369E00F66FDA /* subtract.vert */; };
-		89EA8CEA1A85369E00F66FDA /* coolmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CBF1A85369E00F66FDA /* coolmap.vert */; };
-		89EA8CEB1A85369E00F66FDA /* hotmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CC01A85369E00F66FDA /* hotmap.vert */; };
 		89EA8D141A85DE7400F66FDA /* license in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8CED1A85DE7400F66FDA /* license */; };
 		89EA8D251A85DE7400F66FDA /* pkmAudioWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 89EA8D0F1A85DE7400F66FDA /* pkmAudioWindow.cpp */; };
 		89EA8D271A85DE7400F66FDA /* README in Resources */ = {isa = PBXBuildFile; fileRef = 89EA8D131A85DE7400F66FDA /* README */; };
@@ -597,49 +554,6 @@
 		89AA38581A86D02400BBCDF0 /* ofxMSATimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMSATimer.h; sourceTree = "<group>"; };
 		89EA8C781A84F5D200F66FDA /* pkmMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pkmMatrix.cpp; sourceTree = "<group>"; };
 		89EA8C791A84F5D200F66FDA /* pkmMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkmMatrix.h; sourceTree = "<group>"; };
-		89EA8C961A85369E00F66FDA /* gaussianMixtureModel.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel.frag; path = ../../data/gaussianMixtureModel.frag; sourceTree = "<group>"; };
-		89EA8C971A85369E00F66FDA /* mix.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = mix.frag; path = ../../data/mix.frag; sourceTree = "<group>"; };
-		89EA8C981A85369E00F66FDA /* diffheatmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap.frag; path = ../../data/diffheatmap.frag; sourceTree = "<group>"; };
-		89EA8C991A85369E00F66FDA /* homg.ppm */ = {isa = PBXFileReference; lastKnownFileType = file; name = homg.ppm; path = ../../data/homg.ppm; sourceTree = "<group>"; };
-		89EA8C9A1A85369E00F66FDA /* homg.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; name = homg.h5; path = ../../data/homg.h5; sourceTree = "<group>"; };
-		89EA8C9B1A85369E00F66FDA /* add.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = add.frag; path = ../../data/add.frag; sourceTree = "<group>"; };
-		89EA8C9C1A85369E00F66FDA /* add.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = add.vert; path = ../../data/add.vert; sourceTree = "<group>"; };
-		89EA8C9D1A85369E00F66FDA /* cp.gaussian.2p.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = cp.gaussian.2p.frag; path = ../../data/cp.gaussian.2p.frag; sourceTree = "<group>"; };
-		89EA8C9E1A85369E00F66FDA /* cp.gaussian.2p.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = cp.gaussian.2p.vert; path = ../../data/cp.gaussian.2p.vert; sourceTree = "<group>"; };
-		89EA8C9F1A85369E00F66FDA /* diffheatmap 2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = "diffheatmap 2.frag"; path = "../../data/diffheatmap 2.frag"; sourceTree = "<group>"; };
-		89EA8CA01A85369E00F66FDA /* diffheatmap 2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = "diffheatmap 2.vert"; path = "../../data/diffheatmap 2.vert"; sourceTree = "<group>"; };
-		89EA8CA11A85369E00F66FDA /* diffheatmap2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap2.frag; path = ../../data/diffheatmap2.frag; sourceTree = "<group>"; };
-		89EA8CA21A85369E00F66FDA /* diffheatmap2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap2.vert; path = ../../data/diffheatmap2.vert; sourceTree = "<group>"; };
-		89EA8CA31A85369E00F66FDA /* doh.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = doh.frag; path = ../../data/doh.frag; sourceTree = "<group>"; };
-		89EA8CA41A85369E00F66FDA /* doh.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = doh.vert; path = ../../data/doh.vert; sourceTree = "<group>"; };
-		89EA8CA51A85369E00F66FDA /* gaussianMixtureModel.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel.vert; path = ../../data/gaussianMixtureModel.vert; sourceTree = "<group>"; };
-		89EA8CA61A85369E00F66FDA /* gaussianMixtureModel3D.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel3D.frag; path = ../../data/gaussianMixtureModel3D.frag; sourceTree = "<group>"; };
-		89EA8CA71A85369E00F66FDA /* gaussianMixtureModel3D.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianMixtureModel3D.vert; path = ../../data/gaussianMixtureModel3D.vert; sourceTree = "<group>"; };
-		89EA8CA81A85369E00F66FDA /* gaussianSlow.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianSlow.frag; path = ../../data/gaussianSlow.frag; sourceTree = "<group>"; };
-		89EA8CA91A85369E00F66FDA /* gaussianSlow.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gaussianSlow.vert; path = ../../data/gaussianSlow.vert; sourceTree = "<group>"; };
-		89EA8CAA1A85369E00F66FDA /* graymap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = graymap.frag; path = ../../data/graymap.frag; sourceTree = "<group>"; };
-		89EA8CAB1A85369E00F66FDA /* graymap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = graymap.vert; path = ../../data/graymap.vert; sourceTree = "<group>"; };
-		89EA8CAC1A85369E00F66FDA /* heatmap1.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap1.frag; path = ../../data/heatmap1.frag; sourceTree = "<group>"; };
-		89EA8CAD1A85369E00F66FDA /* heatmap1.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap1.vert; path = ../../data/heatmap1.vert; sourceTree = "<group>"; };
-		89EA8CAE1A85369E00F66FDA /* heatmap2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap2.frag; path = ../../data/heatmap2.frag; sourceTree = "<group>"; };
-		89EA8CAF1A85369E00F66FDA /* heatmap2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = heatmap2.vert; path = ../../data/heatmap2.vert; sourceTree = "<group>"; };
-		89EA8CB01A85369E00F66FDA /* jetmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = jetmap.frag; path = ../../data/jetmap.frag; sourceTree = "<group>"; };
-		89EA8CB11A85369E00F66FDA /* jetmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = jetmap.vert; path = ../../data/jetmap.vert; sourceTree = "<group>"; };
-		89EA8CB21A85369E00F66FDA /* maxreduction.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = maxreduction.frag; path = ../../data/maxreduction.frag; sourceTree = "<group>"; };
-		89EA8CB31A85369E00F66FDA /* maxreduction.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = maxreduction.vert; path = ../../data/maxreduction.vert; sourceTree = "<group>"; };
-		89EA8CB41A85369E00F66FDA /* mix 2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = "mix 2.frag"; path = "../../data/mix 2.frag"; sourceTree = "<group>"; };
-		89EA8CB51A85369E00F66FDA /* mix 2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = "mix 2.vert"; path = "../../data/mix 2.vert"; sourceTree = "<group>"; };
-		89EA8CB61A85369E00F66FDA /* mix.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = mix.vert; path = ../../data/mix.vert; sourceTree = "<group>"; };
-		89EA8CB71A85369E00F66FDA /* norm.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = norm.frag; path = ../../data/norm.frag; sourceTree = "<group>"; };
-		89EA8CB81A85369E00F66FDA /* norm.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = norm.vert; path = ../../data/norm.vert; sourceTree = "<group>"; };
-		89EA8CB91A85369E00F66FDA /* usersettings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = usersettings.xml; path = ../../data/usersettings.xml; sourceTree = "<group>"; };
-		89EA8CBA1A85369E00F66FDA /* subtract.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = subtract.frag; path = ../../data/subtract.frag; sourceTree = "<group>"; };
-		89EA8CBB1A85369E00F66FDA /* hotmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = hotmap.frag; path = ../../data/hotmap.frag; sourceTree = "<group>"; };
-		89EA8CBC1A85369E00F66FDA /* coolmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = coolmap.frag; path = ../../data/coolmap.frag; sourceTree = "<group>"; };
-		89EA8CBD1A85369E00F66FDA /* diffheatmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = diffheatmap.vert; path = ../../data/diffheatmap.vert; sourceTree = "<group>"; };
-		89EA8CBE1A85369E00F66FDA /* subtract.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = subtract.vert; path = ../../data/subtract.vert; sourceTree = "<group>"; };
-		89EA8CBF1A85369E00F66FDA /* coolmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = coolmap.vert; path = ../../data/coolmap.vert; sourceTree = "<group>"; };
-		89EA8CC01A85369E00F66FDA /* hotmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = hotmap.vert; path = ../../data/hotmap.vert; sourceTree = "<group>"; };
 		89EA8CED1A85DE7400F66FDA /* license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license; sourceTree = "<group>"; };
 		89EA8D0F1A85DE7400F66FDA /* pkmAudioWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pkmAudioWindow.cpp; sourceTree = "<group>"; };
 		89EA8D101A85DE7400F66FDA /* pkmAudioWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkmAudioWindow.h; sourceTree = "<group>"; };
@@ -1264,56 +1178,6 @@
 			);
 			name = pkmOpticalFlow;
 			path = ../../../../pkm/pkmOpticalFlow;
-			sourceTree = "<group>";
-		};
-		8928C6D3163AB0DF00222F56 /* data */ = {
-			isa = PBXGroup;
-			children = (
-				89EA8C981A85369E00F66FDA /* diffheatmap.frag */,
-				89EA8C991A85369E00F66FDA /* homg.ppm */,
-				89EA8C9A1A85369E00F66FDA /* homg.h5 */,
-				89EA8C9B1A85369E00F66FDA /* add.frag */,
-				89EA8C9C1A85369E00F66FDA /* add.vert */,
-				89EA8C9D1A85369E00F66FDA /* cp.gaussian.2p.frag */,
-				89EA8C9E1A85369E00F66FDA /* cp.gaussian.2p.vert */,
-				89EA8C9F1A85369E00F66FDA /* diffheatmap 2.frag */,
-				89EA8CA01A85369E00F66FDA /* diffheatmap 2.vert */,
-				89EA8CA11A85369E00F66FDA /* diffheatmap2.frag */,
-				89EA8CA21A85369E00F66FDA /* diffheatmap2.vert */,
-				89EA8CA31A85369E00F66FDA /* doh.frag */,
-				89EA8CA41A85369E00F66FDA /* doh.vert */,
-				89EA8C961A85369E00F66FDA /* gaussianMixtureModel.frag */,
-				89EA8CA51A85369E00F66FDA /* gaussianMixtureModel.vert */,
-				89EA8CA61A85369E00F66FDA /* gaussianMixtureModel3D.frag */,
-				89EA8CA71A85369E00F66FDA /* gaussianMixtureModel3D.vert */,
-				89EA8CA81A85369E00F66FDA /* gaussianSlow.frag */,
-				89EA8CA91A85369E00F66FDA /* gaussianSlow.vert */,
-				89EA8CAA1A85369E00F66FDA /* graymap.frag */,
-				89EA8CAB1A85369E00F66FDA /* graymap.vert */,
-				89EA8CAC1A85369E00F66FDA /* heatmap1.frag */,
-				89EA8CAD1A85369E00F66FDA /* heatmap1.vert */,
-				89EA8CAE1A85369E00F66FDA /* heatmap2.frag */,
-				89EA8CAF1A85369E00F66FDA /* heatmap2.vert */,
-				89EA8CB01A85369E00F66FDA /* jetmap.frag */,
-				89EA8CB11A85369E00F66FDA /* jetmap.vert */,
-				89EA8CB21A85369E00F66FDA /* maxreduction.frag */,
-				89EA8CB31A85369E00F66FDA /* maxreduction.vert */,
-				89EA8CB41A85369E00F66FDA /* mix 2.frag */,
-				89EA8CB51A85369E00F66FDA /* mix 2.vert */,
-				89EA8C971A85369E00F66FDA /* mix.frag */,
-				89EA8CB61A85369E00F66FDA /* mix.vert */,
-				89EA8CB71A85369E00F66FDA /* norm.frag */,
-				89EA8CB81A85369E00F66FDA /* norm.vert */,
-				89EA8CB91A85369E00F66FDA /* usersettings.xml */,
-				89EA8CBA1A85369E00F66FDA /* subtract.frag */,
-				89EA8CBB1A85369E00F66FDA /* hotmap.frag */,
-				89EA8CBC1A85369E00F66FDA /* coolmap.frag */,
-				89EA8CBD1A85369E00F66FDA /* diffheatmap.vert */,
-				89EA8CBE1A85369E00F66FDA /* subtract.vert */,
-				89EA8CBF1A85369E00F66FDA /* coolmap.vert */,
-				89EA8CC01A85369E00F66FDA /* hotmap.vert */,
-			);
-			name = data;
 			sourceTree = "<group>";
 		};
 		8928C778163AB21500222F56 /* ofxXmlSettings */ = {
@@ -1991,7 +1855,6 @@
 				8908684B1961AE9B00462E97 /* libz.dylib */,
 				890866DD19619B9200462E97 /* Accelerate.framework */,
 				890866DB19619B7700462E97 /* QTKit.framework */,
-				8928C6D3163AB0DF00222F56 /* data */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				EE672F011541E9AD00229B52 /* resources */,
@@ -2143,63 +2006,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				8908683D1961A90900462E97 /* README.md in Resources */,
-				89EA8CE51A85369E00F66FDA /* subtract.frag in Resources */,
-				89EA8CCE1A85369E00F66FDA /* doh.frag in Resources */,
-				89EA8CD51A85369E00F66FDA /* graymap.frag in Resources */,
-				89EA8CE21A85369E00F66FDA /* norm.frag in Resources */,
 				89EA8D4D1A85DEB000F66FDA /* uh in Resources */,
-				89EA8CD41A85369E00F66FDA /* gaussianSlow.vert in Resources */,
 				8908683B1961A90900462E97 /* cv.py in Resources */,
-				89EA8CCC1A85369E00F66FDA /* diffheatmap2.frag in Resources */,
-				89EA8CCF1A85369E00F66FDA /* doh.vert in Resources */,
 				8908683A1961A90900462E97 /* opencv.pc in Resources */,
-				89EA8CE61A85369E00F66FDA /* hotmap.frag in Resources */,
-				89EA8CD61A85369E00F66FDA /* graymap.vert in Resources */,
-				89EA8CD81A85369E00F66FDA /* heatmap1.vert in Resources */,
-				89EA8CE41A85369E00F66FDA /* usersettings.xml in Resources */,
-				89EA8CE71A85369E00F66FDA /* coolmap.frag in Resources */,
-				89EA8CC11A85369E00F66FDA /* gaussianMixtureModel.frag in Resources */,
-				89EA8CC21A85369E00F66FDA /* mix.frag in Resources */,
-				89EA8CCB1A85369E00F66FDA /* diffheatmap 2.vert in Resources */,
 				890868561961B36F00462E97 /* license in Resources */,
 				89EA8D4C1A85DEB000F66FDA /* README in Resources */,
-				89EA8CDA1A85369E00F66FDA /* heatmap2.vert in Resources */,
-				89EA8CE31A85369E00F66FDA /* norm.vert in Resources */,
 				89AA385E1A86D02400BBCDF0 /* NewMedia Fett.ttf in Resources */,
-				89EA8CD91A85369E00F66FDA /* heatmap2.frag in Resources */,
-				89EA8CC91A85369E00F66FDA /* cp.gaussian.2p.vert in Resources */,
-				89EA8CC41A85369E00F66FDA /* homg.ppm in Resources */,
 				89EA8D4B1A85DEB000F66FDA /* .gitignore in Resources */,
-				89EA8CC61A85369E00F66FDA /* add.frag in Resources */,
-				89EA8CE11A85369E00F66FDA /* mix.vert in Resources */,
-				89EA8CD11A85369E00F66FDA /* gaussianMixtureModel3D.frag in Resources */,
-				89EA8CD31A85369E00F66FDA /* gaussianSlow.frag in Resources */,
-				89EA8CE81A85369E00F66FDA /* diffheatmap.vert in Resources */,
-				89EA8CD71A85369E00F66FDA /* heatmap1.frag in Resources */,
 				89EA8D141A85DE7400F66FDA /* license in Resources */,
-				89EA8CCD1A85369E00F66FDA /* diffheatmap2.vert in Resources */,
-				89EA8CE01A85369E00F66FDA /* mix 2.vert in Resources */,
-				89EA8CEB1A85369E00F66FDA /* hotmap.vert in Resources */,
-				89EA8CDE1A85369E00F66FDA /* maxreduction.vert in Resources */,
-				89EA8CDB1A85369E00F66FDA /* jetmap.frag in Resources */,
-				89EA8CC31A85369E00F66FDA /* diffheatmap.frag in Resources */,
 				EE672EE31541E8D200229B52 /* MainMenu.xib in Resources */,
-				89EA8CCA1A85369E00F66FDA /* diffheatmap 2.frag in Resources */,
-				89EA8CC51A85369E00F66FDA /* homg.h5 in Resources */,
-				89EA8CEA1A85369E00F66FDA /* coolmap.vert in Resources */,
-				89EA8CDF1A85369E00F66FDA /* mix 2.frag in Resources */,
 				89EA8D271A85DE7400F66FDA /* README in Resources */,
 				89AA385C1A86D02400BBCDF0 /* defaultColorPalette.png in Resources */,
 				89AA39531A86D02400BBCDF0 /* libsndfile-1.dll in Resources */,
-				89EA8CD21A85369E00F66FDA /* gaussianMixtureModel3D.vert in Resources */,
 				89AA398F1A86D02400BBCDF0 /* easing_terms_of_use.html in Resources */,
-				89EA8CDD1A85369E00F66FDA /* maxreduction.frag in Resources */,
-				89EA8CE91A85369E00F66FDA /* subtract.vert in Resources */,
-				89EA8CDC1A85369E00F66FDA /* jetmap.vert in Resources */,
-				89EA8CC71A85369E00F66FDA /* add.vert in Resources */,
 				890868261961A90900462E97 /* install.xml in Resources */,
-				89EA8CD01A85369E00F66FDA /* gaussianMixtureModel.vert in Resources */,
-				89EA8CC81A85369E00F66FDA /* cp.gaussian.2p.frag in Resources */,
 				89AA385D1A86D02400BBCDF0 /* defaultColors.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2218,7 +2038,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";";
+			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\";\ninstall_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\ncp -rf \"$TARGET_BUILD_DIR/data\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\";\ncp -rf \"$TARGET_BUILD_DIR/GUI\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\";";
 		};
 /* End PBXShellScriptBuildPhase section */
 

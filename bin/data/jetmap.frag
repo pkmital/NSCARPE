@@ -1,13 +1,13 @@
 uniform sampler2DRect image;
 uniform float maxValue;
 varying vec2 texcoordM;
-const float PI = 3.14159265;
+//const float PI = 3.14159265;
 const float c1 = 0.0;
 const float colorMax = 1.0;
 
 void main() {
     float max4 = 1.0 / 4.0;
-    float dist = clamp(texture2DRect(image, texcoordM).r / maxValue, 0.1, 1.0);
+    float dist = clamp(texture2DRect(image, texcoordM).r / maxValue, 0.01, 1.0);
     
     if(dist <= 0.0)
     {
@@ -42,5 +42,5 @@ void main() {
         gl_FragColor.gb = vec2(0.0, 0.0);
     }
     
-    gl_FragColor.a = dist;
+    gl_FragColor.a = clamp(dist * 3.0, 0.0, 0.85);
 }

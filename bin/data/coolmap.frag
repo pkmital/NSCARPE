@@ -23,5 +23,5 @@ void main() {
         gl_FragColor.g = dist / max;
         gl_FragColor.b = 1.0 - gl_FragColor.r;
     }
-    gl_FragColor.a = dist;
+    gl_FragColor.a = clamp(abs(dist), 0.0, 0.85);
 }

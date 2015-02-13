@@ -854,6 +854,8 @@ public:
         currentAudioStimulus = 0;
         currentVideoStimulus = 0;
         
+        ofDisableDataPath();
+        
         ofSetAppWindow(ofxNSWindower::instance()->getWindowPtr("Timeline Controller"));
         ofSetWindowShape(1, 1);
         

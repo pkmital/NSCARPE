@@ -1,5 +1,23 @@
 /*
  
+ CHANGELOG:
+ ----------
+ 
+ * 0.11: Timeline, audio, and bug fixes
+ 
+ - Changes to XML file format.  Please see new XML file example for how this might effect your XML files.
+ - All new Timeline, shows the course of the entire video and audio (must be told the path to audio in the XML, as it is not read from the video)
+ - Audio can be saved to the output
+ - Audio can be played back in sync with the video
+ - Bug fixes with fonts not loading
+ - Menu item for selecting between realtime/non-realtime playback
+ 
+ *  0.1:  Initial release
+
+ 
+ 
+/*
+ 
  © Parag K Mital, parag@pkmital.com
  
  The Software is and remains the property of Parag K Mital
@@ -328,10 +346,10 @@ private:
     
     //--------------------------------------------------------------
 	// readback
-	GLuint                          *pboIds;				// IDs of PBOs
+//	GLuint                          *pboIds;				// IDs of PBOs
     ofPixels                        readbackPixels;
-    unsigned char                   *readbackPixelsBuffer;
-    int                             asyncReadingIndex, asyncCopyingIndex;
+//    unsigned char                   *readbackPixelsBuffer;
+//    int                             asyncReadingIndex, asyncCopyingIndex;
     
     
     //--------------------------------------------------------------
@@ -376,6 +394,7 @@ private:
                                     bPaused,
                                     bShowDetail,
                                     bNeedsUpdate,
+                                    bLoadedMovie, bLoadedEyeMovements, bLoadedAudio,
                                     bSetup;
     //--------------------------------------------------------------
 	

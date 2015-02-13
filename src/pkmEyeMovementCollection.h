@@ -130,7 +130,7 @@ public:
         
         
         bMultipleHeatmaps       = false;
-        bNeedsUpdate            = false;
+        bNeedsUpdate            = true;
     }
     //--------------------------------------------------------------
     
@@ -187,17 +187,17 @@ public:
         heatmap2.end();
         
         ofLog(OF_LOG_NOTICE, "Loading Mix Shader");
-        mixShader.load(ofToDataPath("mix 2", true));
+        mixShader.load("data/mix 2");
         ofLog(OF_LOG_NOTICE, "Loading Difference of Heatmap Shader");
-        diffShader.load(ofToDataPath("diffheatmap", true));
+        diffShader.load("data/diffheatmap");
         ofLog(OF_LOG_NOTICE, "Loading Norm Shader");
-        normShader.load(ofToDataPath("norm", true));
+        normShader.load("data/norm");
         ofLog(OF_LOG_NOTICE, "Loading Add Shader");
-        addShader.load(ofToDataPath("add", true));
+        addShader.load("data/add");
         ofLog(OF_LOG_NOTICE, "Loading Subtract Shader");
-        subtractShader.load(ofToDataPath("subtract", true));
+        subtractShader.load("data/subtract");
         ofLog(OF_LOG_NOTICE, "Loading Jet Shader");
-        jetShader.load(ofToDataPath("jetmap", true));
+        jetShader.load("data/jetmap");
         
         bNeedsUpdate = true;
     }

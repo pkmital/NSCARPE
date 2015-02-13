@@ -121,6 +121,7 @@
         bAllocated = false;
     }
     
+    
     appPtr = new testApp();
     ofxNSWindower::instance()->addWindow(appPtr, "C.A.R.P.E.: Stimulus Display", NSTitledWindowMask, 0);
     

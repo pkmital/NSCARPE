@@ -8,7 +8,8 @@ uniform float maxValue2;
 void main (void)
 {
     
-    float dist = (texture2DRect(img1, texcoordM).a - texture2DRect(img2, texcoordM).a) / (min(maxValue1,maxValue2) / 2.0);
+	float maxValue = max(maxValue1, maxValue2);
+    float dist = ((texture2DRect(img1, texcoordM).a / maxValue) - (texture2DRect(img2, texcoordM).a / maxValue));
     float max2 = 1.0 / 2.0;
     
     if(dist < (-1.0 * max2))
@@ -45,5 +46,5 @@ void main (void)
 //        gl_FragColor.r = 1.0;
 //    }
     
-    gl_FragColor.a = clamp(abs(dist), 0.0, 0.95);
+    gl_FragColor.a = clamp(abs(dist), 0.01, 0.85);
 }
