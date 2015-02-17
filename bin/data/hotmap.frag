@@ -28,5 +28,5 @@ void main() {
 //        gl_FragColor.r = 1.0;
 //    }
     
-    gl_FragColor.a = clamp(abs(dist), 0.0, 0.85);
+    gl_FragColor.a = clamp(abs(dist), 0.05, 1.00);
 }

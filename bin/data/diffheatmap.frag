@@ -18,13 +18,13 @@ void main (void)
         gl_FragColor.g = ((-1.0 * dist) - max2) / max2;
         gl_FragColor.b = 1.0;
     }
-    else if(dist < 0.0)
+    else if(dist < -0.01)
     {
     	gl_FragColor.r = 0.0;
         gl_FragColor.b = (-1.0 * dist) / max2;
         gl_FragColor.g = 0.0;
     }
-    else if(dist == 0.0)
+    else if(dist < 0.01)
     {
         gl_FragColor.rgb = vec3(0.0,0.0,0.0);
     }
@@ -46,5 +46,5 @@ void main (void)
 //        gl_FragColor.r = 1.0;
 //    }
     
-    gl_FragColor.a = clamp(abs(dist), 0.01, 0.85);
+    gl_FragColor.a = clamp(abs(dist), 0.05, 1.00);
 }

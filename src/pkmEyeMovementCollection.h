@@ -104,10 +104,11 @@ public:
     vector<int>         classification;
     vector<bool>        bFixation;
     //    vector<int>         frameNumber;
-    map<int,vector<int> >        msLookUp;
+    map<int,vector<unsigned long> >        msLookUp;
     vector<ofVec2f>     previousEye;
     string              subjectName;
     float               radius;
+    float               mx, my, lx, ly, rx, ry;
 };
 //--------------------------------------------------------------
 
@@ -364,8 +365,8 @@ public:
             if(idx2 > idx1)
                 subjects[conditionNumber][subject_i].subjectName = filename.substr(idx1 + 1, idx2 - idx1 - 1);
             
-            int frameCounter = 0;
-            int msCounter = 0;
+            long frameCounter = 0;
+            long msCounter = 0;
             while (!eyeFile.eof())
             {
                 try
@@ -398,10 +399,13 @@ public:
                                                                                                 (y + y2) / 2.0));
                         //                    subjects[conditionNumber][i].binocularMeanDilation.push_back((dil + dil2) / 2.0);
                         subjects[conditionNumber][subject_i].bFixation.push_back(right_event == 1 && left_event == 1);
-                        if(bLoadMillisecondData)
-                            subjects[conditionNumber][subject_i].msLookUp[frameCounter].push_back(msCounter);
-                        else
+//                        if(bLoadMillisecondData)
+//                            subjects[conditionNumber][subject_i].msLookUp[frameCounter].push_back(msCounter);
+//                        else
                             subjects[conditionNumber][subject_i].msLookUp[frameCounter].push_back(subjects[conditionNumber][subject_i].binocularLEye.size());
+//                        cout << "frame: " << frameCounter << " range (size: " << subjects[conditionNumber][subject_i].msLookUp[frameCounter].size() << "): " << *(subjects[conditionNumber][subject_i].msLookUp[frameCounter].begin()) << "-" << subjects[conditionNumber][subject_i].msLookUp[frameCounter].back() << endl;
+                        
+//                        cout <<" frame: " << frameCounter << " ms data: " << subjects[conditionNumber][subject_i].binocularLEye.size() << endl;
                         
                     }
                     else
@@ -464,16 +468,20 @@ public:
     
     //--------------------------------------------------------------
     // can draw all ms data for a single frame? as path?
-    void draw(int numFrames, bool bDrawMeanEye, bool bDrawEyes, bool bDrawSaccades, bool bDrawHeatmaps, bool bDrawDifferenceHeatmap, bool bDrawDetail, bool bShowNormalized, bool bDrawClustering, bool bPaused)
+    void draw(int numFrames, bool bDrawMeanEye, bool bDrawEyes, bool bDrawSaccades, bool bDrawHeatmaps, bool bDrawDifferenceHeatmap, bool bDrawDetail, bool bShowNormalized, bool bDrawClustering, bool bPaused, bool bComputeTemporalMean)
     {
         if (bNeedsUpdate)
         {
             assert(subjects.size() == multipleHeatmaps.size());
             
             ofNoFill();
+            
             for(int condition_i = 0; condition_i < subjects.size(); condition_i++)
             {
-                ofSetColor(condition_i*255, 255 * (1 - condition_i), 0.0);
+                if(condition_i == 1)
+                    ofSetColor(0, 255, 255, 100);
+                else
+                    ofSetColor(255, 255, 0, 100);
                 
                 // reset heatmap
                 multipleHeatmaps[condition_i]->resetMixture();
@@ -488,85 +496,161 @@ public:
                 {
                     if (subject->msLookUp.find(currentFrame) != subject->msLookUp.end())
                     {
-                        for(vector<int>::iterator frame_it = subject->msLookUp[currentFrame].begin();
-                            frame_it != subject->msLookUp[currentFrame].end() &&
-                            subject->bFixation[*frame_it];
+//                        cout << currentFrame << ": loading indices: " << *(subject->msLookUp[currentFrame].begin()) << " - " <<  subject->msLookUp[currentFrame].back() << endl;
+                        
+                        float lx = 0, rx = 0, ly = 0, ry = 0, mx = 0, my = 0;
+                        int num_frames = 0;
+                        
+                        for(vector<unsigned long>::iterator frame_it = subject->msLookUp[currentFrame].begin();
+                            frame_it != subject->msLookUp[currentFrame].end();
                             frame_it++)
                         {
-                            int subjectFrameIdx = *frame_it;
-                            
-                            if (bDrawMeanEye)
+                            if(subject->bFixation[*frame_it])
                             {
-                                multipleHeatmaps[condition_i]->addPoint(ofVec2f(subject->binocularMeanEye[subjectFrameIdx].x - offsetX,
-                                                                                subject->binocularMeanEye[subjectFrameIdx].y - offsetY),
+                                num_frames++;
+                                unsigned long subjectFrameIdx = *frame_it;
+//                                cout << "loading idx: " << subjectFrameIdx << endl;
+                                
+                                if (bDrawMeanEye)
+                                {
+                                    if(!bComputeTemporalMean)
+                                    {
+                                        multipleHeatmaps[condition_i]->addPoint(ofVec2f(subject->binocularMeanEye[subjectFrameIdx].x - offsetX,
+                                                                                        subject->binocularMeanEye[subjectFrameIdx].y - offsetY),
+                                                                                sigma,
+                                                                                weight);
+                                        
+                                    }
+                                    else
+                                    {
+                                        mx += (subject->binocularMeanEye[subjectFrameIdx].x - offsetX);
+                                        my += (subject->binocularMeanEye[subjectFrameIdx].y - offsetY);
+                                    }
+                                    
+                                    if (bDrawSaccades && subjectFrameIdx > 2) {
+                                        ofLine(subject->binocularMeanEye[subjectFrameIdx].x - offsetX,
+                                               subject->binocularMeanEye[subjectFrameIdx].y - offsetY,
+                                               subject->binocularMeanEye[subjectFrameIdx-1].x - offsetX,
+                                               subject->binocularMeanEye[subjectFrameIdx-1].y - offsetY);
+                                        ofLine(subject->binocularMeanEye[subjectFrameIdx-2].x - offsetX,
+                                               subject->binocularMeanEye[subjectFrameIdx-2].y - offsetY,
+                                               subject->binocularMeanEye[subjectFrameIdx-1].x - offsetX,
+                                               subject->binocularMeanEye[subjectFrameIdx-1].y - offsetY);
+                                    }
+                                    
+                                    
+                                }
+                                else
+                                {
+                                    if(!bComputeTemporalMean)
+                                    {
+                                        
+                                        multipleHeatmaps[condition_i]->addPoint(ofVec2f(subject->binocularREye[subjectFrameIdx].x - offsetX,
+                                                                                        subject->binocularREye[subjectFrameIdx].y - offsetY),
+                                                                                sigma,
+                                                                                weight);
+                                        
+                                        multipleHeatmaps[condition_i]->addPoint(ofVec2f(subject->binocularLEye[subjectFrameIdx].x - offsetX,
+                                                                                        subject->binocularLEye[subjectFrameIdx].y - offsetY),
+                                                                                sigma,
+                                                                                weight);
+                                    }
+                                    else
+                                    {
+                                        lx += (subject->binocularLEye[subjectFrameIdx].x - offsetX);
+                                        ly += (subject->binocularLEye[subjectFrameIdx].y - offsetY);
+                                        
+                                        rx += (subject->binocularREye[subjectFrameIdx].x - offsetX);
+                                        ry += (subject->binocularREye[subjectFrameIdx].y - offsetY);
+                                    }
+                                    
+
+                                }
+                            }
+                        }
+                        
+                        if(bComputeTemporalMean && num_frames > 0)
+                        {
+                            if(bDrawMeanEye)
+                            {
+                                mx /= (float) num_frames;
+                                my /= (float) num_frames;
+                                multipleHeatmaps[condition_i]->addPoint(ofVec2f(mx,my),
                                                                         sigma,
                                                                         weight);
                                 
                                 if(!bPaused)
                                 {
-                                    if (subjectFrameIdx > 0 &&
-                                        ofDist(subject->binocularMeanEye[subjectFrameIdx].x,
-                                               subject->binocularMeanEye[subjectFrameIdx].y,
-                                               subject->binocularMeanEye[subjectFrameIdx-1].x,
-                                               subject->binocularMeanEye[subjectFrameIdx-1].y) < (sigmaInPixels * 0.25))
+                                    if (currentFrame > 0 &&
+                                        ofDist(subject->mx, subject->my, mx, my) < (sigmaInPixels * 0.25))
                                         subject->radius += 0.5;
                                     else
                                         subject->radius = 5;
                                 }
                                 
-                                if (bDrawSaccades && subjectFrameIdx > 2) {
-                                    ofLine(subject->binocularMeanEye[subjectFrameIdx].x - offsetX,
-                                           subject->binocularMeanEye[subjectFrameIdx].y - offsetY,
-                                           subject->binocularMeanEye[subjectFrameIdx-1].x - offsetX,
-                                           subject->binocularMeanEye[subjectFrameIdx-1].y - offsetY);
-                                    ofLine(subject->binocularMeanEye[subjectFrameIdx-2].x - offsetX,
-                                           subject->binocularMeanEye[subjectFrameIdx-2].y - offsetY,
-                                           subject->binocularMeanEye[subjectFrameIdx-1].x - offsetX,
-                                           subject->binocularMeanEye[subjectFrameIdx-1].y - offsetY);
-                                }
+                                subject->mx = mx;
+                                subject->my = my;
                                 
                                 if(bDrawEyes)
                                 {
                                     ofFill();
-                                    ofCircle(subject->binocularMeanEye[subjectFrameIdx].x - offsetX,
-                                             subject->binocularMeanEye[subjectFrameIdx].y - offsetY,
+                                    ofCircle(mx, my,
                                              subject->radius);
                                     ofNoFill();
-                                    ofCircle(subject->binocularMeanEye[subjectFrameIdx].x - offsetX,
-                                             subject->binocularMeanEye[subjectFrameIdx].y - offsetY,
+                                    ofCircle(mx, my,
                                              subject->radius);
                                     
                                     
                                 }
-                                
-                                if(bDrawDetail)
-                                {
-                                    
-                                    ofDrawBitmapString(ofToString((int)subject->binocularMeanEye[subjectFrameIdx].x - offsetX) + "," + ofToString((int)subject->binocularMeanEye[subjectFrameIdx].y - offsetY),
-                                                       subject->binocularMeanEye[subjectFrameIdx].x - offsetX,
-                                                       subject->binocularMeanEye[subjectFrameIdx].y - offsetY);
-                                }
-                                
+                            
                             }
                             else
                             {
-                                multipleHeatmaps[condition_i]->addPoint(ofVec2f(subject->binocularLEye[subjectFrameIdx].x - offsetX,
-                                                                                subject->binocularLEye[subjectFrameIdx].y - offsetY),
+                                
+                                lx /= (float) num_frames;
+                                ly /= (float) num_frames;
+                                
+                                rx /= (float) num_frames;
+                                ry /= (float) num_frames;
+                                
+                                multipleHeatmaps[condition_i]->addPoint(ofVec2f(lx, ly),
+                                                                        sigma,
+                                                                        weight);
+                                multipleHeatmaps[condition_i]->addPoint(ofVec2f(rx, ry),
                                                                         sigma,
                                                                         weight);
                                 
-                                ofCircle(subject->binocularLEye[subjectFrameIdx].x - offsetX,
-                                         subject->binocularLEye[subjectFrameIdx].y - offsetY,
-                                         sigmaInPixels);
+                                if(!bPaused)
+                                {
+                                    if (currentFrame > 0 &&
+                                        ofDist(subject->lx, subject->ly, lx, ly) < (sigmaInPixels * 0.25))
+                                        subject->radius += 0.5;
+                                    else
+                                        subject->radius = 5;
+                                }
                                 
-                                multipleHeatmaps[condition_i]->addPoint(ofVec2f(subject->binocularREye[subjectFrameIdx].x - offsetX,
-                                                                                subject->binocularREye[subjectFrameIdx].y - offsetY),
-                                                                        sigma,
-                                                                        weight);
+                                subject->lx = lx; subject->rx = rx;
+                                subject->ly = ly; subject->ry = ry;
                                 
-                                ofCircle(subject->binocularREye[subjectFrameIdx].x - offsetX,
-                                         subject->binocularREye[subjectFrameIdx].y - offsetY,
-                                         sigmaInPixels);
+                                if(bDrawEyes)
+                                {
+                                    ofFill();
+                                    
+                                    ofCircle(lx, ly,
+                                             subject->radius);
+                                    
+                                    ofCircle(rx, ry,
+                                             subject->radius);
+                                    
+                                    
+                                    ofNoFill();
+                                    
+                                    ofCircle(lx, ly,
+                                             subject->radius);
+                                    
+                                    ofCircle(rx, ry,
+                                             subject->radius);
+                                }
                             }
                         }
                     }
@@ -578,22 +662,9 @@ public:
             ofSetColor(255);
             ofFill();
             
-
-//            multipleHeatmaps[0]->buildMixture();
-//            multipleHeatmaps[0]->update();
-//            multipleHeatmaps[1]->buildMixture();
-//            multipleHeatmaps[1]->update();
-//            
-//            heatmapFBO.begin();
-//            glClear(GL_COLOR_BUFFER_BIT);
-//            multipleHeatmaps[0]->draw();
-//            multipleHeatmaps[1]->draw();
-//            heatmapFBO.end();
-//            heatmapFBO.draw(0, 0);
-
-
             if(bDrawHeatmaps)
             {
+                
                 multipleHeatmaps[0]->buildMixture();
                 if(bShowNormalized)
                     multipleHeatmaps[0]->normalizeHeatmap();
@@ -612,11 +683,11 @@ public:
                     {
                         diffShader.begin();
                         diffShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
-                        diffShader.setUniform1f("maxValue1", multipleHeatmaps[0]->getMaxValue());
-
+                        diffShader.setUniform1f("maxValue1", 1.0);
+                        
                         diffShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
-                        diffShader.setUniform1f("maxValue2", multipleHeatmaps[1]->getMaxValue());
-
+                        diffShader.setUniform1f("maxValue2", 1.0);
+                        
                         multipleHeatmaps[0]->draw();
                         diffShader.end();
                     }
@@ -624,11 +695,11 @@ public:
                     {
                         mixShader.begin();
                         mixShader.setUniformTexture("img1", multipleHeatmaps[0]->getTextureReference(), 0);
-                        mixShader.setUniform1f("maxValue1", multipleHeatmaps[0]->getMaxValue());
-
+                        mixShader.setUniform1f("maxValue1", 1.0);
+                        
                         mixShader.setUniformTexture("img2", multipleHeatmaps[1]->getTextureReference(), 1);
-                        mixShader.setUniform1f("maxValue2", multipleHeatmaps[1]->getMaxValue());
-
+                        mixShader.setUniform1f("maxValue2", 1.0);
+                        
                         multipleHeatmaps[0]->draw();
                         mixShader.end();
                     }
@@ -648,7 +719,7 @@ public:
         }
         
         if(bDrawHeatmaps)
-            heatmap2.draw(0,0);
+            heatmapFBO.draw(0,0);
 
     }
     //--------------------------------------------------------------

@@ -517,6 +517,7 @@ public:
     void buildMixture()
     {
         int totalGaussians = means.size();
+
         if(totalGaussians > 0)
         {
             mixture.setGaussians(means, sigmas, weights);

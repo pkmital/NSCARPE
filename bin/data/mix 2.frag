@@ -97,6 +97,6 @@ void main (void)
 //
 //    gl_FragColor.rgb = clamp(Lab2RGB(vec3(resultl, resulta, resultb)), 0.0, 1.0); //mix(base, blend, 0.5);
 //    gl_FragColor.a = 1.0;
-    
+
     gl_FragColor = texture2DRect(img1, texcoordM) + texture2DRect(img2, texcoordM);
 }

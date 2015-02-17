@@ -2,6 +2,11 @@
  
  CHANGELOG:
  ----------
+ * 0.12: Data agnostic, XML changes
+ 
+ - Changes to XML file format.  Please see new XML file example as some fields have moved around.
+ - No longer dependent on loading movie/eye-movements.  E.g. if only audio is loaded, then the app will still be able to process your data.  Or similarly, for only some set of streams including eye-movements, movie, audio, the app should still function.  This is in preparation for including other types of experiments which may not have collected certain data streams.
+ 
  
  * 0.11: Timeline, audio, and bug fixes
  
@@ -12,11 +17,10 @@
  - Bug fixes with fonts not loading
  - Menu item for selecting between realtime/non-realtime playback
  
+ 
  *  0.1:  Initial release
-
  
- 
-/*
+ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
  
  © Parag K Mital, parag@pkmital.com
  
@@ -393,7 +397,7 @@ private:
                                     bExportMotionDescriptorsToHDF,
                                     bPaused,
                                     bShowDetail,
-                                    bNeedsUpdate,
+                                    bNeedsUpdate, bComputeTemporalMean,
                                     bLoadedMovie, bLoadedEyeMovements, bLoadedAudio,
                                     bSetup;
     //--------------------------------------------------------------

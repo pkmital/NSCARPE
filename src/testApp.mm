@@ -100,9 +100,10 @@ void testApp::setup() {
     ofSetLogLevel(OF_LOG_NOTICE);
     ofEnableArbTex();
     ofEnableSmoothing();
+    ofEnableAntiAliasing();
     ofDisableDataPath();
     
-    ofSetCircleResolution(20);
+    ofSetCircleResolution(50);
 }
 
 //--------------------------------------------------------------
@@ -266,18 +267,32 @@ void testApp::draw() {
             flow.drawColorFlow(0, 0, movieWidth, movieHeight);
     }
     
-    ofSetColor(255,255,255,255);
-    
     if(bLoadedEyeMovements)
-        eyeMovements->draw(bShowMeanBinocular,
-                           bShowEyes,
-                           bShowSaccades,
-                           bShowHeatmap,
-                           bShowDifferenceHeatmap,
-                           bShowDetail,
-                           bShowNormalized,
-                           bShowClustering,
-                           bPaused);
+//        if(bLoadMillisecondFormat)
+//        {
+            eyeMovements->draw(1, bShowMeanBinocular,
+                               bShowEyes,
+                               bShowSaccades,
+                               bShowHeatmap,
+                               bShowDifferenceHeatmap,
+                               bShowDetail,
+                               bShowNormalized,
+                               bShowClustering,
+                               bPaused,
+                               bComputeTemporalMean);
+//        }
+//        else
+//        {
+//            eyeMovements->draw(bShowMeanBinocular,
+//                               bShowEyes,
+//                               bShowSaccades,
+//                               bShowHeatmap,
+//                               bShowDifferenceHeatmap,
+//                               bShowDetail,
+//                               bShowNormalized,
+//                               bShowClustering,
+//                               bPaused);
+//        }
     ofDisableAlphaBlending();
     recorderFbo.end();
         
@@ -401,6 +416,7 @@ void testApp::loadUserSettings() {
             heatmapType = std::max<int>(0, std::min<int>(4, settings.getValue("heatmaptype", 4)));
             bShowDifferenceHeatmap = ofToLower(settings.getValue("differenceheatmap", "true")) == "true";
             bShowMeanBinocular = ofToLower(settings.getValue("meanbinocular", "true")) == "true";
+            bComputeTemporalMean = ofToLower(settings.getValue("meantemporal", "true")) == "true";
             bShowMovie = ofToLower(settings.getValue("movie", "true")) == "true";
             bShowFlow = ofToLower(settings.getValue("visualsaliency", "true")) == "true";
             bShowFlowMagnitude = ofToLower(settings.getValue("visualsaliencymagnitude", "true")) == "true";
@@ -516,7 +532,7 @@ void testApp::initializeExperiment() {
                 }
                 initializeEyeTrackingData(paths);
                 eyeMovementFrameRate = settings.getValue("framerate", 1000.0f);
-                eyeMovements->setFrameRate(eyeMovementFrameRate);
+                eyeMovements->setFrameRate(movieFrameRate);
                 eyeMovements->setSigma(settings.getValue("sigma", 50.0));
                 
                 settings.popTag();
